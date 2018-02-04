@@ -1,57 +1,49 @@
-﻿//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Text;
-//using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
-//namespace Raygun.Druid4Net
-//{
-//  public class SelectQueryDescriptor : QueryDescriptor, ISelectQueryDescriptor
-//  {
-//    internal string _queryType = "select";
+namespace Raygun.Druid4Net
+{
+  public class SelectQueryDescriptor : QueryDescriptor, ISelectQueryDescriptor
+  {
+    internal string QueryType => "select";
 
-//    internal IEnumerable<string> _dimensions;
+    internal PagingSpec PagingSpecValue;
 
-//    internal IEnumerable<string> _metrics;
+    internal bool DescendingValue;
 
-//    internal PagingSpec _pagingSpec;
+    internal IEnumerable<string> MetricsValue;
 
-//    internal bool _descending;
+    internal IEnumerable<string> DimensionsValue;
 
-//    public override ISelectQueryDescriptor DimensionsForSelect(IEnumerable<string> dimensions)
-//    {
-//      _dimensions = dimensions;
+    public ISelectQueryDescriptor Metrics(IEnumerable<string> metrics)
+    {
+      MetricsValue = metrics;
+      return this;
+    }
 
-//      return this;
-//    }
+    public ISelectQueryDescriptor Dimensions(IEnumerable<string> dimensions)
+    {
+      DimensionsValue = dimensions;
+      return this;
+    }
 
-//    public override ISelectQueryDescriptor Metrics(IEnumerable<string> metrics)
-//    {
-//      _metrics = metrics;
+    public ISelectQueryDescriptor Paging(PagingSpec pagingSpec)
+    {
+      PagingSpecValue = pagingSpec;
+      return this;
+    }
 
-//      return this;
-//    }
+    public ISelectQueryDescriptor Descending(bool descending)
+    {
+      DescendingValue = descending;
+      return this;
+    }
 
-//    public override ISelectQueryDescriptor Paging(PagingSpec pagingSpec)
-//    {
-//      _pagingSpec = pagingSpec;
+    internal override IDruidRequest Generate()
+    {
+      var request = new SelectRequest();
+      request.Build(this);
 
-//      return this;
-//    }
-
-//    public override ISelectQueryDescriptor DescendingForSelect(bool descending)
-//    {
-//      _descending = descending;
-
-//      return this;
-//    }
-
-//    internal override IDruidRequest Finalize()
-//    {
-//      var request = new SelectRequest();
-//      request.Build(this);
-
-//      return request;
-//    }
-//  }
-//}
+      return request;
+    }
+  }
+}

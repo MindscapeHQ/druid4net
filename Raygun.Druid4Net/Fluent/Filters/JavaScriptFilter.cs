@@ -1,6 +1,6 @@
 ﻿namespace Raygun.Druid4Net
 {
-  public class JavaScriptFilter : IFilter
+  public class JavaScriptFilter : IFilterSpec
   {
     public string Type => "javascript";
 

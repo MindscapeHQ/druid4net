@@ -2,13 +2,13 @@
 
 namespace Raygun.Druid4Net
 {
-  public class NotFilter : IFilter
+  public class NotFilter : IFilterSpec
   {
     public string Type => "not";
 
-    public IFilter Field;
+    public IFilterSpec Field;
 
-    public NotFilter(IFilter filter)
+    public NotFilter(IFilterSpec filter)
     {
       Field = filter;
     }

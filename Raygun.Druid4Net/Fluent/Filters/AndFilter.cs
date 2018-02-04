@@ -2,13 +2,13 @@
 
 namespace Raygun.Druid4Net
 {
-  public class AndFilter : IFilter
+  public class AndFilter : IFilterSpec
   {
     public string Type => "and";
 
-    public IEnumerable<IFilter> Fields;
+    public IEnumerable<IFilterSpec> Fields;
 
-    public AndFilter(IEnumerable<IFilter> filters)
+    public AndFilter(IEnumerable<IFilterSpec> filters)
     {
       Fields = filters;
     }

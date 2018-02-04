@@ -1,6 +1,6 @@
 ﻿namespace Raygun.Druid4Net
 {
-  public class SelectorFilter<T> : IFilter where T : struct
+  public class SelectorFilter<T> : IFilterSpec where T : struct
   {
     public string Type => "selector";
 

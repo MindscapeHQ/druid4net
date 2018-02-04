@@ -2,13 +2,13 @@
 
 namespace Raygun.Druid4Net
 {
-  public class OrFilter : IFilter
+  public class OrFilter : IFilterSpec
   {
     public string Type => "or";
 
-    public IEnumerable<IFilter> Fields;
+    public IEnumerable<IFilterSpec> Fields;
 
-    public OrFilter(IEnumerable<IFilter> filters)
+    public OrFilter(IEnumerable<IFilterSpec> filters)
     {
       Fields = filters;
     }

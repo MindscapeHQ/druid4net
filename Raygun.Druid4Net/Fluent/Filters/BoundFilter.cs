@@ -1,7 +1,7 @@
 ﻿
 namespace Raygun.Druid4Net
 {
-  public class BoundFilter<T> : IFilter where T : struct
+  public class BoundFilter<T> : IFilterSpec where T : struct
   {
     public string Type => "bound";
 

@@ -1,6 +1,6 @@
 ﻿namespace Raygun.Druid4Net
 {
-  public class LikeFilter : IFilter
+  public class LikeFilter : IFilterSpec
   {
     public string Type => "like";
 

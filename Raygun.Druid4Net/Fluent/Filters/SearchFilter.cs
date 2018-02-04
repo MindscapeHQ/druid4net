@@ -1,6 +1,6 @@
 ﻿namespace Raygun.Druid4Net
 {
-  public class SearchFilter : IFilter
+  public class SearchFilter : IFilterSpec
   {
     public string Type => "search";
 

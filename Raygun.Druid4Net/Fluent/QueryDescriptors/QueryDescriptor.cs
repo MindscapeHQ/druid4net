@@ -1,158 +1,155 @@
-﻿//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Text;
-//using System.Threading.Tasks;
+﻿using System;
+using System.Collections.Generic;
 
-//namespace Raygun.Druid4Net
-//{
-//  public abstract class QueryDescriptor : IQueryDescriptor, ITopNQueryDescriptor
-//  {
-//    internal string _intervals;
+namespace Raygun.Druid4Net
+{
+  public abstract class QueryDescriptor : IQueryDescriptor
+  {
+    internal List<string> IntervalsValue;
 
-//    internal string _dataSource;
+    internal string DataSourceValue;
 
-//    internal string _granularity = "all";
+    internal object GranularityValue = "all";
 
-//    internal FilterSpec _filterSpec;
+    internal IFilterSpec FilterValue;
 
-//    internal IEnumerable<AggregationSpec> _aggregations;
+    internal ContextSpec ContextValue;
 
-//    internal IEnumerable<PostAggregationSpec> _postAggregations;
+    protected QueryDescriptor()
+    {
+      ContextValue = new ContextSpec();
+      IntervalsValue = new List<string>();
+    }
 
-//    internal ContextSpec _contextSpec;
+    public IQueryDescriptor Intervals(DateTime dateFrom, DateTime dateTo)
+    {
+      if (dateTo < dateFrom)
+      {
+        dateTo = dateFrom;
+      }
 
-//    internal GranularitySpec _granularitySpec;
+      IntervalsValue.Add($"{dateFrom:yyyy-MM-ddTHH:mm:ssZ}/{dateTo:yyyy-MM-ddTHH:mm:ssZ}");
 
-//    protected QueryDescriptor()
-//    {
-//      _contextSpec = new ContextSpec();
-//    }
+      return this;
+    }
 
-//    public IQueryDescriptor Intervals(DateTime dateFrom, DateTime dateTo)
-//    {
-//      if (dateTo < dateFrom)
-//      {
-//        dateTo = dateFrom;
-//      }
+    public IQueryDescriptor DataSource(string dataSource)
+    {
+      DataSourceValue = dataSource;
 
-//      _intervals = $"{dateFrom:yyyy-MM-ddTHH:mm:ss}/{dateTo:yyyy-MM-ddTHH:mm:ss}";
+      return this;
+    }
 
-//      return this;
-//    }
+    public IQueryDescriptor Granularity(Granularities granularity)
+    {
+      switch (granularity)
+      {
+        case Granularities.All:
+          GranularityValue = "all";
+          break;
+        case Granularities.None:
+          GranularityValue = "none";
+          break;
+        case Granularities.Second:
+          GranularityValue = "second";
+          break;
+        case Granularities.Minute:
+          GranularityValue = "minute";
+          break;
+        case Granularities.FifteenMinute:
+          GranularityValue = "fifteen_minute";
+          break;
+        case Granularities.ThirtyMinute:
+          GranularityValue = "thirty_minute";
+          break;
+        case Granularities.Hour:
+          GranularityValue = "hour";
+          break;
+        case Granularities.Day:
+          GranularityValue = "day";
+          break;
+        case Granularities.Week:
+          GranularityValue = "week";
+          break;
+        case Granularities.Month:
+          GranularityValue = "month";
+          break;
+        case Granularities.Quarter:
+          GranularityValue = "quarter";
+          break;
+        case Granularities.Year:
+          GranularityValue = "year";
+          break;
+      }
 
-//    public IQueryDescriptor DataSource(string dataSource)
-//    {
-//      _dataSource = dataSource;
+      return this;
+    }
 
-//      return this;
-//    }
+    public IQueryDescriptor Granularity(IGranularitySpec granularitySpec)
+    {
+      GranularityValue = granularitySpec;
 
-//    public IQueryDescriptor Granularity(Granularities granularity)
-//    {
-//      switch (granularity)
-//      {
-//        case Granularities.All:
-//          _granularity = "all";
-//          break;
-//        case Granularities.Day:
-//          _granularity = "day";
-//          break;
-//        case Granularities.Hour:
-//          _granularity = "hour";
-//          break;
-//        case Granularities.FifteenMinute:
-//          _granularity = "fifteen_minute";
-//          break;
-//        case Granularities.Second:
-//          _granularity = "second";
-//          break;
-//        case Granularities.None:
-//          _granularity = "none";
-//          break;
-//      }
+      return this;
+    }
 
-//      return this;
-//    }
 
-//    public IQueryDescriptor Granularity(GranularitySpec granularitySpec)
-//    {
-//      _granularitySpec = granularitySpec;
+    public IQueryDescriptor Filter(IFilterSpec filterSpec)
+    {
+      FilterValue = filterSpec;
 
-//      return this;
-//    }
+      return this;
+    }
 
-//    public IQueryDescriptor Aggregations(IEnumerable<AggregationSpec> aggregationsSpec)
-//    {
-//      _aggregations = aggregationsSpec;
+    //public IQueryDescriptor Context(bool skipEmptyBuckets)
+    //{
+    //  _contextSpec.skipEmptyBuckets = skipEmptyBuckets;
 
-//      return this;
-//    }
+    //  return this;
+    //}
 
-//    public IQueryDescriptor PostAggregations(IEnumerable<PostAggregationSpec> postAggregationsSpec)
-//    {
-//      _postAggregations = postAggregationsSpec;
+    //public IQueryDescriptor Context(string groupByStrategy, long maxOnDiskStorage)
+    //{
+    //  _contextSpec.groupByStrategy = groupByStrategy;
+    //  _contextSpec.maxOnDiskStorage = maxOnDiskStorage;
 
-//      return this;
-//    }
+    //  return this;
+    //}
 
-//    public IQueryDescriptor Filter(FilterSpec filterSpec)
-//    {
-//      _filterSpec = filterSpec;
+    //public IQueryDescriptor Context(int timeout, int? priority = null)
+    //{
+    //  if (timeout <= 0)
+    //  {
+    //    timeout = ContextSpec.DefaultTimeout;
+    //  }
 
-//      return this;
-//    }
+    //  _contextSpec.timeout = timeout;
+    //  _contextSpec.priority = priority;
 
-//    public IQueryDescriptor Context(bool skipEmptyBuckets)
-//    {
-//      _contextSpec.skipEmptyBuckets = skipEmptyBuckets;
+    //  return this;
+    //}
 
-//      return this;
-//    }
+    internal abstract IDruidRequest Generate();
 
-//    public IQueryDescriptor Context(string groupByStrategy, long maxOnDiskStorage)
-//    {
-//      _contextSpec.groupByStrategy = groupByStrategy;
-//      _contextSpec.maxOnDiskStorage = maxOnDiskStorage;
+    //public virtual ITopNQueryDescriptor Dimension(string dimension) { throw new NotImplementedException(); }
 
-//      return this;
-//    }
+    //public virtual ITopNQueryDescriptor Metric(TopNMetricSpec metricSpec) { throw new NotImplementedException(); }
 
-//    public IQueryDescriptor Context(int timeout, int? priority = null)
-//    {
-//      if (timeout <= 0)
-//      {
-//        timeout = ContextSpec.DefaultTimeout;
-//      }
+    //public virtual ITopNQueryDescriptor Threshold(long threshold) { throw new NotImplementedException(); }
 
-//      _contextSpec.timeout = timeout;
-//      _contextSpec.priority = priority;
+    //public virtual ITimeseriesQueryDescriptor Descending(bool descending) { throw new NotImplementedException(); }
 
-//      return this;
-//    }
+    //public virtual IGroupByQueryDescriptor Having(HavingSpec havingSpec) { throw new NotImplementedException(); }
 
-//    internal abstract IDruidRequest Finalize();
+    //public virtual IGroupByQueryDescriptor Dimensions(IEnumerable<string> dimensions) { throw new NotImplementedException(); }
 
-//    public virtual ITopNQueryDescriptor Dimension(string dimension) { throw new NotImplementedException(); }
+    //public virtual IGroupByQueryDescriptor Limit(LimitSpec limitSpec) { throw new NotImplementedException(); }
 
-//    public virtual ITopNQueryDescriptor Metric(TopNMetricSpec metricSpec) { throw new NotImplementedException(); }
+    //public virtual ISelectQueryDescriptor DimensionsForSelect(IEnumerable<string> dimensions) { throw new NotImplementedException(); }
 
-//    public virtual ITopNQueryDescriptor Threshold(long threshold) { throw new NotImplementedException(); }
+    //public virtual ISelectQueryDescriptor Metrics(IEnumerable<string> metrics) { throw new NotImplementedException(); }
 
-//    public virtual ITimeseriesQueryDescriptor Descending(bool descending) { throw new NotImplementedException(); }
+    //public virtual ISelectQueryDescriptor Paging(PagingSpec pagingSpec) { throw new NotImplementedException(); }
 
-//    public virtual IGroupByQueryDescriptor Having(HavingSpec havingSpec) { throw new NotImplementedException(); }
-
-//    public virtual IGroupByQueryDescriptor Dimensions(IEnumerable<string> dimensions) { throw new NotImplementedException(); }
-
-//    public virtual IGroupByQueryDescriptor Limit(LimitSpec limitSpec) { throw new NotImplementedException(); }
-
-//    public virtual ISelectQueryDescriptor DimensionsForSelect(IEnumerable<string> dimensions) { throw new NotImplementedException(); }
-
-//    public virtual ISelectQueryDescriptor Metrics(IEnumerable<string> metrics) { throw new NotImplementedException(); }
-
-//    public virtual ISelectQueryDescriptor Paging(PagingSpec pagingSpec) { throw new NotImplementedException(); }
-
-//    public virtual ISelectQueryDescriptor DescendingForSelect(bool descending) { throw new NotImplementedException(); }
-//  }
-//}
+    //public virtual ISelectQueryDescriptor DescendingForSelect(bool descending) { throw new NotImplementedException(); }
+  }
+}

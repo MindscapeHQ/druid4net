@@ -1,26 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Raygun.Druid4Net
+﻿namespace Raygun.Druid4Net
 {
   public class PagingSpec
   {
-    internal dynamic pagingIdentifiers;
+    public dynamic PagingIdentifiers { get; }
 
-    internal long threshold;
+    public long Threshold { get; }
 
     public PagingSpec(long threshold)
     {
-      this.threshold = threshold;
+      Threshold = threshold;
     }
 
     public PagingSpec(long threshold, dynamic pagingIdentifiers)
     {
-      this.threshold = threshold;
-      this.pagingIdentifiers = pagingIdentifiers;
+      Threshold = threshold;
+      PagingIdentifiers = pagingIdentifiers;
     }
   }
 }

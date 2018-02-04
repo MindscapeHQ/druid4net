@@ -1,6 +1,6 @@
 ﻿namespace Raygun.Druid4Net
 {
-  public class RegexFilter : IFilter
+  public class RegexFilter : IFilterSpec
   {
     public string Type => "regex";
 

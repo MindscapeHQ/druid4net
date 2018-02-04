@@ -2,7 +2,7 @@
 
 namespace Raygun.Druid4Net
 {
-  public class InFilter<T> : IFilter where T : struct
+  public class InFilter<T> : IFilterSpec where T : struct
   {
     public string Type => "in";
 

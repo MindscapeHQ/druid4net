@@ -1,6 +1,6 @@
 ﻿namespace Raygun.Druid4Net
 {
-  public interface IFilter
+  public interface IFilterSpec
   {
     string Type { get; }
   }

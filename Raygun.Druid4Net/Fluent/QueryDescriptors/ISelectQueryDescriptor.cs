@@ -2,14 +2,14 @@
 
 namespace Raygun.Druid4Net
 {
-  public interface ISelectQueryDescriptor
+  public interface ISelectQueryDescriptor : IQueryDescriptor
   {
     ISelectQueryDescriptor Metrics(IEnumerable<string> metrics);
 
-    ISelectQueryDescriptor DimensionsForSelect(IEnumerable<string> dimensions);
+    ISelectQueryDescriptor Dimensions(IEnumerable<string> dimensions);
 
     ISelectQueryDescriptor Paging(PagingSpec pagingSpec);
 
-    ISelectQueryDescriptor DescendingForSelect(bool descending);
+    ISelectQueryDescriptor Descending(bool descending);
   }
 }
