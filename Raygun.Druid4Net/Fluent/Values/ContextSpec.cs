@@ -1,6 +1,4 @@
-﻿using System.Runtime.Serialization;
-
-namespace Raygun.Druid4Net
+﻿namespace Raygun.Druid4Net
 {
   public class ContextSpec
   {
@@ -27,7 +25,6 @@ namespace Raygun.Druid4Net
     /// Query timeout in milliseconds, beyond which unfinished queries will be cancelled.
     /// </summary>
     /// <remarks>0 is no timeout</remarks>
-    [DataMember(Name = "timeout")]
     public int Timeout { get; }
 
     /// <summary>

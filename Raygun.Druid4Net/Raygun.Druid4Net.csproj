@@ -72,7 +72,8 @@
     <Compile Include="Fluent\PostAggregations\IPostAggregationSpec.cs" />
     <Compile Include="Fluent\QueryDescriptors\IAggregatableQueryDescriptor.cs" />
     <Compile Include="Fluent\QueryDescriptors\AggregatableQueryDescriptor.cs" />
-    <Compile Include="Fluent\Requests\SelectQuery.cs" />
+    <Compile Include="Fluent\Requests\SelectRequestData.cs" />
+    <Compile Include="Fluent\Requests\TopNRequestData.cs" />
     <Compile Include="Fluent\Values\FilterSpecTypes.cs" />
     <Compile Include="Fluent\Values\IGranularitySpec.cs" />
     <Compile Include="Fluent\Values\PeriodGranularity.cs" />

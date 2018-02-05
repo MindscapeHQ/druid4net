@@ -1,13 +1,9 @@
-﻿using System.Runtime.Serialization;
-
-namespace Raygun.Druid4Net.Fluent.Metrics
+﻿namespace Raygun.Druid4Net
 {
   public class NumericTopNMetricSpec : ITopNMetricSpec
   {
-    [DataMember(Name = "type")]
     public string Type => "numeric";
 
-    [DataMember(Name = "metric")]
     public string Metric;
 
     public NumericTopNMetricSpec(string metric)

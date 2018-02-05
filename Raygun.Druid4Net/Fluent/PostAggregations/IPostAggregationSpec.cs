@@ -1,4 +1,4 @@
-﻿namespace Raygun.Druid4Net.Fluent.PostAggreations
+﻿namespace Raygun.Druid4Net
 {
   public interface IPostAggregationSpec
   {

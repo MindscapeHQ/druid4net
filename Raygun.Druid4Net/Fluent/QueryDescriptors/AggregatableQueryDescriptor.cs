@@ -1,10 +1,8 @@
 ﻿using System.Collections.Generic;
-using Raygun.Druid4Net.Fluent.Aggregations;
-using Raygun.Druid4Net.Fluent.PostAggreations;
 
 namespace Raygun.Druid4Net
 {
-  public abstract class AggregatableQueryDescriptor : QueryDescriptor, IAggregatableQueryDescriptor
+  public abstract class AggregatableQueryDescriptor<TResponse> : QueryDescriptor<TResponse>, IAggregatableQueryDescriptor where TResponse : class
   {
     internal IEnumerable<IAggregationSpec> AggregationSpecsValue;
 

@@ -1,8 +1,6 @@
-﻿using Raygun.Druid4Net.Fluent.Metrics;
-
-namespace Raygun.Druid4Net
+﻿namespace Raygun.Druid4Net
 {
-  public class TopNQueryDescriptor : AggregatableQueryDescriptor, ITopNQueryDescriptor
+  public class TopNQueryDescriptor : AggregatableQueryDescriptor<TopNRequestData>, ITopNQueryDescriptor
   {
     public string QueryType => "topN";
 
@@ -33,7 +31,7 @@ namespace Raygun.Druid4Net
       return this;
     }
 
-    internal override IDruidRequest Generate()
+    internal override IDruidRequest<TopNRequestData> Generate()
     {
       var request = new TopNRequest();
       request.Build(this);

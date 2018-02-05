@@ -1,6 +1,4 @@
-﻿using Raygun.Druid4Net.Fluent.Metrics;
-
-namespace Raygun.Druid4Net
+﻿namespace Raygun.Druid4Net
 {
   public interface ITopNQueryDescriptor : IAggregatableQueryDescriptor
   {

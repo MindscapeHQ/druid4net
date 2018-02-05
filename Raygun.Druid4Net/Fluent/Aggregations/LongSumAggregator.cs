@@ -1,4 +1,4 @@
-﻿namespace Raygun.Druid4Net.Fluent.Aggregations
+﻿namespace Raygun.Druid4Net
 {
   public class LongSumAggregator : SumAggregator
   {

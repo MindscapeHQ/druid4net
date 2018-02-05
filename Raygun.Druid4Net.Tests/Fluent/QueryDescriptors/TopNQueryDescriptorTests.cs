@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using NUnit.Framework;
-using Raygun.Druid4Net.Fluent.Aggregations;
-using Raygun.Druid4Net.Fluent.Metrics;
 
 namespace Raygun.Druid4Net.Tests.Fluent.QueryDescriptors
 {
@@ -14,8 +13,7 @@ namespace Raygun.Druid4Net.Tests.Fluent.QueryDescriptors
     {
       var request = ((TopNQueryDescriptor) new TopNQueryDescriptor().DataSource("test_datasource")).Generate();
 
-      const string expectedBody = "{\"threshold\":0,\"granularity\":\"all\",\"intervals\":[],\"context\":{\"timeout\":60000},\"dataSource\":\"test_datasource\",\"queryType\":\"topN\"}";
-      Assert.AreEqual(expectedBody, request.Body);
+      Assert.That(request.RequestData.DataSource, Is.EqualTo("test_datasource"));
     }
 
     [Test]
@@ -25,8 +23,7 @@ namespace Raygun.Druid4Net.Tests.Fluent.QueryDescriptors
       var toDate = DateTime.Parse("2017-10-02T10:35:21.345");
       var request = ((TopNQueryDescriptor) new TopNQueryDescriptor().Intervals(fromDate, toDate)).Generate();
 
-      const string expectedBody = "{\"threshold\":0,\"granularity\":\"all\",\"intervals\":[\"2017-10-01T14:45:22Z/2017-10-02T10:35:21Z\"],\"context\":{\"timeout\":60000},\"queryType\":\"topN\"}";
-      Assert.AreEqual(expectedBody, request.Body);
+      Assert.That(request.RequestData.Intervals.First(), Is.EqualTo("2017-10-01T14:45:22Z/2017-10-02T10:35:21Z"));
     }
 
     [Test]
@@ -34,8 +31,7 @@ namespace Raygun.Druid4Net.Tests.Fluent.QueryDescriptors
     {
       var request = ((TopNQueryDescriptor)new TopNQueryDescriptor().Granularity(Granularities.Day)).Generate();
 
-      const string expectedBody = "{\"threshold\":0,\"granularity\":\"day\",\"intervals\":[],\"context\":{\"timeout\":60000},\"queryType\":\"topN\"}";
-      Assert.AreEqual(expectedBody, request.Body);
+      Assert.That(request.RequestData.Granularity, Is.EqualTo("day"));
     }
 
     [Test]
@@ -43,8 +39,7 @@ namespace Raygun.Druid4Net.Tests.Fluent.QueryDescriptors
     {
       var request = ((TopNQueryDescriptor) new TopNQueryDescriptor().Dimension("test_dim")).Generate();
 
-      const string expectedBody = "{\"threshold\":0,\"granularity\":\"all\",\"intervals\":[],\"context\":{\"timeout\":60000},\"dimension\":\"test_dim\",\"queryType\":\"topN\"}";
-      Assert.AreEqual(expectedBody, request.Body);
+      Assert.That(request.RequestData.Dimension, Is.EqualTo("test_dim"));
     }
 
     [Test]
@@ -52,8 +47,11 @@ namespace Raygun.Druid4Net.Tests.Fluent.QueryDescriptors
     {
       var request = ((TopNQueryDescriptor) new TopNQueryDescriptor().Metric(new NumericTopNMetricSpec("test_metric"))).Generate();
 
-      const string expectedBody = "{\"threshold\":0,\"metric\":{\"type\":\"numeric\",\"metric\":\"test_metric\"},\"granularity\":\"all\",\"intervals\":[],\"context\":{\"timeout\":60000},\"queryType\":\"topN\"}";
-      Assert.AreEqual(expectedBody, request.Body);
+      var metric = request.RequestData.Metric as NumericTopNMetricSpec;
+
+      Assert.IsNotNull(metric);
+      Assert.That(metric.Type, Is.EqualTo("numeric"));
+      Assert.That(metric.Metric, Is.EqualTo("test_metric"));
     }
 
     [Test]
@@ -61,18 +59,26 @@ namespace Raygun.Druid4Net.Tests.Fluent.QueryDescriptors
     {
       var request = ((TopNQueryDescriptor) new TopNQueryDescriptor().Filter(new SelectorFilter("test_dim", "test_value"))).Generate();
 
-      const string expectedBody = "{\"queryType\":\"topN\",\"granularity\":\"all\",\"threshold\":0,\"filter\":{\"type\":\"selector\",\"dimension\":\"test_dim\",\"value\":\"test_value\"},\"context\":{\"timeout\":60000}}";
-      Assert.AreEqual(expectedBody, request.Body);
+      var filter = request.RequestData.Filter as SelectorFilter;
+
+      Assert.IsNotNull(filter);
+      Assert.That(filter.Type, Is.EqualTo("selector"));
+      Assert.That(filter.Dimension, Is.EqualTo("test_dim"));
+      Assert.That(filter.Value, Is.EqualTo("test_value"));
     }
 
     [Test]
     public void SumAggregationIsSet_SetsAggregationInBody()
     {
-      var aggregations = new List<IAggregationSpec> {new LongSumAggregator("count", "sum_count")};
+      var aggregations = new List<IAggregationSpec> {new LongSumAggregator("sum_count", "count")};
       var request = ((TopNQueryDescriptor) new TopNQueryDescriptor().Aggregations(aggregations)).Generate();
 
-      const string expectedBody = "{\"queryType\":\"topN\",\"granularity\":\"all\",\"threshold\":0,\"aggregations\":[{\"type\":\"longSum\",\"name\":\"sum_count\",\"fieldName\":\"count\"}],\"context\":{\"timeout\":60000}}";
-      Assert.AreEqual(expectedBody, request.Body);
+      var agg = request.RequestData.Aggregations.First() as LongSumAggregator;
+
+      Assert.IsNotNull(agg);
+      Assert.That(agg.Type, Is.EqualTo("longSum"));
+      Assert.That(agg.Name, Is.EqualTo("sum_count"));
+      Assert.That(agg.FieldName, Is.EqualTo("count"));
     }
 
     [Test]
@@ -80,8 +86,7 @@ namespace Raygun.Druid4Net.Tests.Fluent.QueryDescriptors
     {
       var request = ((TopNQueryDescriptor) new TopNQueryDescriptor().Threshold(10)).Generate();
 
-      const string expectedBody = "{\"queryType\":\"topN\",\"granularity\":\"all\",\"threshold\":10,\"context\":{\"timeout\":60000}}";
-      Assert.AreEqual(expectedBody, request.Body);
+      Assert.That(request.RequestData.Threshold, Is.EqualTo(10));
     }
 
     //[Test]

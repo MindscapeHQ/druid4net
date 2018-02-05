@@ -1,4 +1,4 @@
-﻿namespace Raygun.Druid4Net.Fluent.Metrics
+﻿namespace Raygun.Druid4Net
 {
   public interface ITopNMetricSpec
   {

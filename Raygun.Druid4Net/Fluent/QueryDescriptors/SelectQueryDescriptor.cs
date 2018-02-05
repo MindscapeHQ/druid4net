@@ -2,7 +2,7 @@
 
 namespace Raygun.Druid4Net
 {
-  public class SelectQueryDescriptor : QueryDescriptor, ISelectQueryDescriptor
+  public class SelectQueryDescriptor : QueryDescriptor<SelectRequestData>, ISelectQueryDescriptor
   {
     internal string QueryType => "select";
 
@@ -38,7 +38,7 @@ namespace Raygun.Druid4Net
       return this;
     }
 
-    internal override IDruidRequest Generate()
+    internal override IDruidRequest<SelectRequestData> Generate()
     {
       var request = new SelectRequest();
       request.Build(this);

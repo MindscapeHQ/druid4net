@@ -4,7 +4,7 @@ using Jil;
 
 namespace Raygun.Druid4Net
 {
-  public abstract class QueryDescriptor : IQueryDescriptor
+  public abstract class QueryDescriptor<TResponse> : IQueryDescriptor where TResponse : class
   {
     internal List<string> IntervalsValue;
 
@@ -23,7 +23,7 @@ namespace Raygun.Druid4Net
       ContextValue = new ContextSpec();
       IntervalsValue = new List<string>();
 
-      JSON.SetDefaultOptions(new Options(prettyPrint: false, excludeNulls: true, dateFormat: DateTimeFormat.ISO8601, unspecifiedDateTimeKindBehavior: UnspecifiedDateTimeKindBehavior.IsUTC));
+      JSON.SetDefaultOptions(new Options(prettyPrint: false, excludeNulls: true, includeInherited: true, serializationNameFormat: SerializationNameFormat.CamelCase));
     }
 
     public IQueryDescriptor Intervals(DateTime dateFrom, DateTime dateTo)
@@ -133,7 +133,7 @@ namespace Raygun.Druid4Net
     //  return this;
     //}
 
-    internal abstract IDruidRequest Generate();
+    internal abstract IDruidRequest<TResponse> Generate();
 
     //public virtual ITopNQueryDescriptor Dimension(string dimension) { throw new NotImplementedException(); }
 

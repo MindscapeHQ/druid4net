@@ -2,28 +2,19 @@
 
 namespace Raygun.Druid4Net
 {
-  public class TopNRequest : IDruidRequest
+  internal class TopNRequest : IDruidRequest<TopNRequestData>
   {
+    public TopNRequestData RequestData { get; private set; }
+
     public string Body { get; private set; }
 
-    public void Build<T>(T queryDescriptor) where T : ITopNQueryDescriptor
+    public void Build<TQueryType>(TQueryType queryDescriptor) where TQueryType : ITopNQueryDescriptor
     {
       var qd = queryDescriptor as TopNQueryDescriptor;
 
-      Body = JSON.SerializeDynamic(new
-      {
-        queryType = qd.QueryType,
-        dataSource = qd.DataSourceValue,
-        dimension = qd.DimensionValue,
-        metric = qd.MetricSpecValue,
-        granularity = qd.GranularityValue,
-        threshold = qd.ThresholdValue,
-        intervals = qd.IntervalsValue,
-        filter = qd.FilterValue,
-        aggregations = qd.AggregationSpecsValue,
-        postAggregations = qd.PostAggregationSpecsValue,
-        context = qd.ContextValue
-      }, new Options(prettyPrint: false, excludeNulls: true, includeInherited: true));
+      RequestData = new TopNRequestData(qd.QueryType, qd.DataSourceValue, qd.DimensionValue, qd.MetricSpecValue, qd.GranularityValue, qd.ThresholdValue, qd.IntervalsValue, qd.FilterValue, qd.AggregationSpecsValue, qd.PostAggregationSpecsValue, qd.ContextValue);
+
+      Body = JSON.SerializeDynamic(RequestData);
     }
   }
 }
