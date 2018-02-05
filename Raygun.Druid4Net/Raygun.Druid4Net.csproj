@@ -104,7 +104,6 @@
     <Compile Include="Fluent\Requests\SelectRequest.cs" />
     <Compile Include="Fluent\Requests\TimeseriesRequest.cs" />
     <Compile Include="Fluent\Requests\TopNRequest.cs" />
-    <Compile Include="Fluent\Values\AggregationSpec.cs" />
     <Compile Include="Fluent\Values\ContextSpec.cs" />
     <Compile Include="Fluent\Values\FilterSpec.cs" />
     <Compile Include="Fluent\Values\Granularities.cs" />
@@ -114,7 +113,6 @@
     <Compile Include="Fluent\Values\OrderByColumnSpec.cs" />
     <Compile Include="Fluent\Values\PagingSpec.cs" />
     <Compile Include="Fluent\Values\PostAggregationSpec.cs" />
-    <Compile Include="Fluent\Values\TopNMetricSpec.cs" />
     <Compile Include="IDruidClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Query\Requester.cs" />

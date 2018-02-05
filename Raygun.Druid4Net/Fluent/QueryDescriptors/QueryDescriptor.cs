@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Jil;
 
 namespace Raygun.Druid4Net
 {
@@ -12,8 +11,6 @@ namespace Raygun.Druid4Net
 
     internal object GranularityValue = "all";
 
-    //internal IGranularitySpec GranularitySpecValue;
-
     internal IFilterSpec FilterValue;
 
     internal ContextSpec ContextValue;
@@ -22,8 +19,6 @@ namespace Raygun.Druid4Net
     {
       ContextValue = new ContextSpec();
       IntervalsValue = new List<string>();
-
-      JSON.SetDefaultOptions(new Options(prettyPrint: false, excludeNulls: true, includeInherited: true, serializationNameFormat: SerializationNameFormat.CamelCase));
     }
 
     public IQueryDescriptor Intervals(DateTime dateFrom, DateTime dateTo)

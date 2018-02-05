@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Jil;
 
 namespace Raygun.Druid4Net
 {
@@ -13,6 +14,8 @@ namespace Raygun.Druid4Net
     {
       _requester = new Requester(hostName, port);
       _apiEndpoint = apiEndpoint;
+
+      JSON.SetDefaultOptions(new Options(prettyPrint: false, excludeNulls: true, includeInherited: true, serializationNameFormat: SerializationNameFormat.CamelCase));
     }
 
     public IQueryResponse<T> TopN<T>(Func<IQueryDescriptor, ITopNQueryDescriptor> selector) where T : class
@@ -77,7 +80,9 @@ namespace Raygun.Druid4Net
       where TResponse : class 
       where TRequest : class
     {
-      return await _requester.PostAsync<TResponse>(endpoint, request.Body);
+      var query = JSON.SerializeDynamic(request.RequestData);
+
+      return await _requester.PostAsync<TResponse>(endpoint, query);
     }
   }
 }
