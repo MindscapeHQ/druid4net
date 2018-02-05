@@ -1,14 +1,14 @@
 ﻿namespace Raygun.Druid4Net
 {
-  public class SelectorFilter<T> : IFilterSpec where T : struct
+  public class SelectorFilter : IFilterSpec
   {
     public string Type => "selector";
 
     public string Dimension { get; }
 
-    public T Value { get; }
+    public string Value { get; }
 
-    public SelectorFilter(string dimension, T value)
+    public SelectorFilter(string dimension, string value)
     {
       Dimension = dimension;
       Value = value;

@@ -1,48 +1,44 @@
-﻿//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Text;
-//using System.Threading.Tasks;
+﻿using Raygun.Druid4Net.Fluent.Metrics;
 
-//namespace Raygun.Druid4Net
-//{
-//  public class TopNQueryDescriptor : QueryDescriptor, ITopNQueryDescriptor, IQueryDescriptor
-//  {
-//    internal string _queryType = "topN";
+namespace Raygun.Druid4Net
+{
+  public class TopNQueryDescriptor : AggregatableQueryDescriptor, ITopNQueryDescriptor
+  {
+    public string QueryType => "topN";
 
-//    internal string _dimension;
+    internal string DimensionValue;
 
-//    internal TopNMetricSpec _metricSpec;
+    internal ITopNMetricSpec MetricSpecValue;
 
-//    internal long _threshold;
+    internal long ThresholdValue;
 
-//    public override ITopNQueryDescriptor Dimension(string dimension)
-//    {
-//      _dimension = dimension;
+    public ITopNQueryDescriptor Dimension(string dimension)
+    {
+      DimensionValue = dimension;
 
-//      return this;
-//    }
+      return this;
+    }
 
-//    public override ITopNQueryDescriptor Metric(TopNMetricSpec metricSpec)
-//    {
-//      _metricSpec = metricSpec;
+    public ITopNQueryDescriptor Metric(ITopNMetricSpec metricSpec)
+    {
+      MetricSpecValue = metricSpec;
 
-//      return this;
-//    }
+      return this;
+    }
 
-//    public override ITopNQueryDescriptor Threshold(long threshold)
-//    {
-//      _threshold = threshold;
+    public ITopNQueryDescriptor Threshold(long threshold)
+    {
+      ThresholdValue = threshold;
 
-//      return this;
-//    }
+      return this;
+    }
 
-//    internal override IDruidRequest Finalize()
-//    {
-//      var request = new TopNRequest();
-//      request.Build(this);
+    internal override IDruidRequest Generate()
+    {
+      var request = new TopNRequest();
+      request.Build(this);
 
-//      return request;
-//    }
-//  }
-//}
+      return request;
+    }
+  }
+}

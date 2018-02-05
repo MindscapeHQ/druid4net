@@ -14,8 +14,6 @@ namespace Raygun.Druid4Net
     {
       _requester = new Requester(hostName, port);
       _apiEndpoint = apiEndpoint;
-
-      JSON.SetDefaultOptions(new Options(prettyPrint: false, excludeNulls: true, dateFormat: DateTimeFormat.ISO8601, unspecifiedDateTimeKindBehavior: UnspecifiedDateTimeKindBehavior.IsUTC));
     }
 
     public IQueryResponse<T> TopN<T>(Func<IQueryDescriptor, ITopNQueryDescriptor> selector) where T : class

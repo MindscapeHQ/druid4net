@@ -1,55 +1,55 @@
 ﻿namespace Raygun.Druid4Net
 {
-  public class AggregationSpec
-  {
-    internal string type;
+  //public class AggregationSpec
+  //{
+  //  public string type;
 
-    internal string name;
+  //  public string name;
 
-    internal string fieldName;
+  //  public string fieldName;
 
-    internal FilterSpec filter;
+  //  public IFilterSpec filter;
 
-    internal AggregationSpec aggregator;
+  //  public AggregationSpec aggregator;
 
-    internal int? resolution;
+  //  public int? resolution;
 
-    internal float? lowerLimit;
+  //  public float? lowerLimit;
 
-    internal float? upperLimit;
+  //  public float? upperLimit;
 
-    public AggregationSpec(AggregationTypes type, string fieldName, string outputName)
-    {
-      this.type = type.ToString();
-      this.fieldName = fieldName;
-      this.name = outputName;
-    }
+  //  public AggregationSpec(AggregationTypes type, string fieldName, string outputName)
+  //  {
+  //    this.type = type.ToString();
+  //    this.fieldName = fieldName;
+  //    this.name = outputName;
+  //  }
 
-    public AggregationSpec(AggregationTypes type, string fieldName, string outputName, int resolution)
-    {
-      this.type = type.ToString();
-      this.fieldName = fieldName;
-      this.name = outputName;
-      this.resolution = resolution;
-    }
+  //  public AggregationSpec(AggregationTypes type, string fieldName, string outputName, int resolution)
+  //  {
+  //    this.type = type.ToString();
+  //    this.fieldName = fieldName;
+  //    this.name = outputName;
+  //    this.resolution = resolution;
+  //  }
 
-    public AggregationSpec(AggregationTypes type, string fieldName, string outputName, int resolution, float? lowerLimit, float? upperLimit)
-    {
-      this.type = type.ToString();
-      this.fieldName = fieldName;
-      this.name = outputName;
-      this.resolution = resolution;
-      this.lowerLimit = lowerLimit;
-      this.upperLimit = upperLimit;
-    }
+  //  public AggregationSpec(AggregationTypes type, string fieldName, string outputName, int resolution, float? lowerLimit, float? upperLimit)
+  //  {
+  //    this.type = type.ToString();
+  //    this.fieldName = fieldName;
+  //    this.name = outputName;
+  //    this.resolution = resolution;
+  //    this.lowerLimit = lowerLimit;
+  //    this.upperLimit = upperLimit;
+  //  }
 
-    public AggregationSpec(AggregationTypes type, FilterSpec filterSpec, AggregationSpec aggregationSpec)
-    {
-      this.type = type.ToString();
-      this.filter = filterSpec;
-      aggregator = aggregationSpec;
-    }
-  }
+  //  public AggregationSpec(AggregationTypes type, FilterSpec filterSpec, AggregationSpec aggregationSpec)
+  //  {
+  //    this.type = type.ToString();
+  //    this.filter = filterSpec;
+  //    aggregator = aggregationSpec;
+  //  }
+  //}
 
   public enum AggregationTypes
   {

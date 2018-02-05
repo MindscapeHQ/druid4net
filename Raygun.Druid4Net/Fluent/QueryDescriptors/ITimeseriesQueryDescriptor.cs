@@ -2,6 +2,6 @@
 {
   public interface ITimeseriesQueryDescriptor
   {
-    ITimeseriesQueryDescriptor Descending(bool descending);
+    //ITimeseriesQueryDescriptor Descending(bool descending);
   }
 }
