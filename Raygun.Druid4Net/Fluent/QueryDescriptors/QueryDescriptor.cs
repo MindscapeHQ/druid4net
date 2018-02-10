@@ -100,33 +100,27 @@ namespace Raygun.Druid4Net
       return this;
     }
 
-    //public IQueryDescriptor Context(bool skipEmptyBuckets)
-    //{
-    //  _contextSpec.skipEmptyBuckets = skipEmptyBuckets;
+    public IQueryDescriptor Context(int? timeout = null, long? maxScatterGatherBytes = null, int? priority = null, string queryId = null, bool? useCache = null, bool? populateCache = null, bool? bySegment = null, bool? finalize = null, string chunkPeriod = null, bool? serializeDateTimeAsLong = null, bool? serializeDateTimeAsLongInner = null)
+    {
+      SetCommonContextProperties(timeout, maxScatterGatherBytes, priority, queryId, useCache, populateCache, bySegment, finalize, chunkPeriod, serializeDateTimeAsLong, serializeDateTimeAsLongInner);
 
-    //  return this;
-    //}
+      return this;
+    }
 
-    //public IQueryDescriptor Context(string groupByStrategy, long maxOnDiskStorage)
-    //{
-    //  _contextSpec.groupByStrategy = groupByStrategy;
-    //  _contextSpec.maxOnDiskStorage = maxOnDiskStorage;
-
-    //  return this;
-    //}
-
-    //public IQueryDescriptor Context(int timeout, int? priority = null)
-    //{
-    //  if (timeout <= 0)
-    //  {
-    //    timeout = ContextSpec.DefaultTimeout;
-    //  }
-
-    //  _contextSpec.timeout = timeout;
-    //  _contextSpec.priority = priority;
-
-    //  return this;
-    //}
+    protected void SetCommonContextProperties(int? timeout, long? maxScatterGatherBytes, int? priority, string queryId, bool? useCache, bool? populateCache, bool? bySegment, bool? finalize, string chunkPeriod, bool? serializeDateTimeAsLong, bool? serializeDateTimeAsLongInner)
+    {
+      ContextValue.Timeout = timeout;
+      ContextValue.MaxScatterGatherBytes = maxScatterGatherBytes;
+      ContextValue.Priority = priority;
+      ContextValue.QueryId = queryId;
+      ContextValue.UseCache = useCache;
+      ContextValue.PopulateCache = populateCache;
+      ContextValue.BySegment = bySegment;
+      ContextValue.Finalize = finalize;
+      ContextValue.ChunkPeriod = chunkPeriod;
+      ContextValue.SerializeDateTimeAsLong = serializeDateTimeAsLong;
+      ContextValue.SerializeDateTimeAsLongInner = serializeDateTimeAsLongInner;
+    }
 
     internal abstract IDruidRequest<TResponse> Generate();
 

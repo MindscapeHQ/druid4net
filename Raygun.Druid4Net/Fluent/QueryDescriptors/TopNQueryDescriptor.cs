@@ -10,6 +10,13 @@
 
     internal long ThresholdValue;
 
+    internal new TopNContextSpec ContextValue;
+
+    public TopNQueryDescriptor()
+    {
+      ContextValue = new TopNContextSpec();
+    }
+
     public ITopNQueryDescriptor Dimension(string dimension)
     {
       DimensionValue = dimension;
@@ -27,6 +34,15 @@
     public ITopNQueryDescriptor Threshold(long threshold)
     {
       ThresholdValue = threshold;
+
+      return this;
+    }
+
+    public ITopNQueryDescriptor Context(int? timeout = null, long? maxScatterGatherBytes = null, int? priority = null, string queryId = null, bool? useCache = null, bool? populateCache = null, bool? bySegment = null, bool? finalize = null, string chunkPeriod = null, bool? serializeDateTimeAsLong = null, bool? serializeDateTimeAsLongInner = null, int? minTopNThreshold = null)
+    {
+      SetCommonContextProperties(timeout, maxScatterGatherBytes, priority, queryId, useCache, populateCache, bySegment, finalize, chunkPeriod, serializeDateTimeAsLong, serializeDateTimeAsLongInner);
+
+      ContextValue.MinTopNThreshold = minTopNThreshold;
 
       return this;
     }

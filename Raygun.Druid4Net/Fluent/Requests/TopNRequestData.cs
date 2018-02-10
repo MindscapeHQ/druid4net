@@ -14,9 +14,9 @@ namespace Raygun.Druid4Net
     public IFilterSpec Filter { get; }
     public IEnumerable<IAggregationSpec> Aggregations { get; }
     public IEnumerable<IPostAggregationSpec> PostAggregations { get; }
-    public ContextSpec Context { get; }
+    public TopNContextSpec Context { get; }
 
-    public TopNRequestData(string queryType, string dataSource, string dimension, ITopNMetricSpec metric, object granularity, long threshold, List<string> intervals, IFilterSpec filter, IEnumerable<IAggregationSpec> aggregations, IEnumerable<IPostAggregationSpec> postAggregations, ContextSpec context)
+    public TopNRequestData(string queryType, string dataSource, string dimension, ITopNMetricSpec metric, object granularity, long threshold, List<string> intervals, IFilterSpec filter, IEnumerable<IAggregationSpec> aggregations, IEnumerable<IPostAggregationSpec> postAggregations, TopNContextSpec context)
     {
       QueryType = queryType;
       DataSource = dataSource;

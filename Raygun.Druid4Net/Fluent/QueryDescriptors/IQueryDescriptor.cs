@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace Raygun.Druid4Net
 {
@@ -15,32 +14,6 @@ namespace Raygun.Druid4Net
 
     IQueryDescriptor Filter(IFilterSpec filterSpec);
 
-    //IQueryDescriptor Aggregations(IEnumerable<AggregationSpec> aggregationsSpec);
-
-    //IQueryDescriptor PostAggregations(IEnumerable<PostAggregationSpec> postAggregationsSpec);
-
-    //ITopNQueryDescriptor Dimension(string dimension);
-
-    //ITopNQueryDescriptor Metric(TopNMetricSpec metricSpec);
-
-    //ITopNQueryDescriptor Threshold(long threshold);
-
-    //ITimeseriesQueryDescriptor Descending(bool descending);
-
-    //IQueryDescriptor Context(bool skipEmptyBuckets);
-
-    //IQueryDescriptor Context(string groupByStrategy, long maxOnDiskStorage);
-
-    //IQueryDescriptor Context(int timeout, int? priority = null);
-
-    //IGroupByQueryDescriptor Having(HavingSpec havingSpec);
-
-    //IGroupByQueryDescriptor Limit(LimitSpec limitSpec);
-
-    //IGroupByQueryDescriptor Dimensions(IEnumerable<string> dimensions);
-
-    //ISelectQueryDescriptor DimensionsForSelect(IEnumerable<string> dimensions);
-
-    //ISelectQueryDescriptor Metrics(IEnumerable<string> metrics);
+    IQueryDescriptor Context(int? timeout = null, long? maxScatterGatherBytes = null, int? priority = null, string queryId = null, bool? useCache = null, bool? populateCache = null, bool? bySegment = null, bool? finalize = null, string chunkPeriod = null, bool? serializeDateTimeAsLong = null, bool? serializeDateTimeAsLongInner = null);
   }
 }

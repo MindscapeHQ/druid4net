@@ -110,41 +110,19 @@ namespace Raygun.Druid4Net.Tests.Fluent.QueryDescriptors
     }
 
     [Test]
-    public void ThresholdIsSet_SetsThresholdBody()
+    public void ThresholdIsSet_SetsThresholdInBody()
     {
       var request = ((TopNQueryDescriptor) new TopNQueryDescriptor().Threshold(10)).Generate();
 
       Assert.That(request.RequestData.Threshold, Is.EqualTo(10));
     }
 
-    //[Test]
-    //public void ContextTimeoutIsSet_OverridesTimeoutInBody()
-    //{
+    [Test]
+    public void ContextMinTopNThresholdIsSet_SetsMinTopNThresholdInBody()
+    {
+      var request = ((TopNQueryDescriptor)new TopNQueryDescriptor().Context(minTopNThreshold: 500)).Generate();
 
-    //  var request = ((TopNQueryDescriptor) new TopNQueryDescriptor().Context(1000)).Generate();
-
-    //  const string expectedBody = "{\"queryType\":\"topN\",\"granularity\":\"all\",\"threshold\":0,\"context\":{\"timeout\":1000}}";
-    //  Assert.AreEqual(expectedBody, request.Body);
-    //}
-
-    //[Test]
-    //public void ContextPriorityIsSet_SetsPriorityInBody()
-    //{
-
-    //  var request = ((TopNQueryDescriptor) new TopNQueryDescriptor().Context(0, 10)).Generate();
-
-    //  const string expectedBody = "{\"queryType\":\"topN\",\"granularity\":\"all\",\"threshold\":0,\"context\":{\"timeout\":60000,\"priority\":10}}";
-    //  Assert.AreEqual(expectedBody, request.Body);
-    //}
-
-    //[Test]
-    //public void MultipleContextCalls_CombinesAllPropertiesInContext()
-    //{
-
-    //  var request = ((TopNQueryDescriptor)new TopNQueryDescriptor().Context(1000).Context(true).Context("v2", 100)).Generate();
-
-    //  const string expectedBody = "{\"queryType\":\"topN\",\"granularity\":\"all\",\"threshold\":0,\"context\":{\"skipEmptyBuckets\":true,\"groupByStrategy\":\"v2\",\"maxOnDiskStorage\":100,\"timeout\":1000}}";
-    //  Assert.AreEqual(expectedBody, request.Body);
-    //}
+      Assert.That(request.RequestData.Context.MinTopNThreshold, Is.EqualTo(500));
+    }
   }
 }
