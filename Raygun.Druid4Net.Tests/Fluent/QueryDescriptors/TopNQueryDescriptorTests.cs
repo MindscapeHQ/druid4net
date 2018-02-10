@@ -82,6 +82,34 @@ namespace Raygun.Druid4Net.Tests.Fluent.QueryDescriptors
     }
 
     [Test]
+    public void ArithmeticPostAggregataionIsSet_SetsPostAggregationInBody()
+    {
+      var fields = new List<IPostAggregationSpec> {new FieldAccessPostAggregator("loaded", "my_loaded"), new FieldAccessPostAggregator("total", "my_total") };
+      var aggregations = new List<IPostAggregationSpec> {new ArithmeticPostAggregator("average", fields, ArithmeticFunction.Divide) };
+      var request = ((TopNQueryDescriptor) new TopNQueryDescriptor().PostAggregations(aggregations)).Generate();
+
+      var agg = request.RequestData.PostAggregations.First() as ArithmeticPostAggregator;
+
+      Assert.IsNotNull(agg);
+      Assert.That(agg.Type, Is.EqualTo("arithmetic"));
+      Assert.That(agg.Name, Is.EqualTo("average"));
+      Assert.That(agg.Fn, Is.EqualTo("/"));
+
+      var field1 = agg.Fields.First() as FieldAccessPostAggregator;
+
+      Assert.IsNotNull(field1);
+      Assert.That(field1.Type, Is.EqualTo("fieldAccess"));
+      Assert.That(field1.Name, Is.EqualTo("loaded"));
+      Assert.That(field1.FieldName, Is.EqualTo("my_loaded"));
+
+      var field2 = agg.Fields.Last() as FieldAccessPostAggregator;
+      Assert.IsNotNull(field2);
+      Assert.That(field2.Type, Is.EqualTo("fieldAccess"));
+      Assert.That(field2.Name, Is.EqualTo("total"));
+      Assert.That(field2.FieldName, Is.EqualTo("my_total"));
+    }
+
+    [Test]
     public void ThresholdIsSet_SetsThresholdBody()
     {
       var request = ((TopNQueryDescriptor) new TopNQueryDescriptor().Threshold(10)).Generate();
