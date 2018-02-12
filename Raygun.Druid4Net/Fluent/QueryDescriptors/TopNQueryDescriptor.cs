@@ -2,8 +2,6 @@
 {
   public class TopNQueryDescriptor : AggregatableQueryDescriptor<TopNRequestData>, ITopNQueryDescriptor
   {
-    public string QueryType => "topN";
-
     internal string DimensionValue;
 
     internal ITopNMetricSpec MetricSpecValue;

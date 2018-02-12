@@ -2,27 +2,23 @@
 
 namespace Raygun.Druid4Net
 {
-  public class TopNRequestData
+  public class TimeseriesRequestData
   {
-    public string QueryType => "topN";
+    public string QueryType => "timeseries";
     public string DataSource { get; }
-    public string Dimension { get; }
-    public ITopNMetricSpec Metric { get; }
+    public bool Descending { get; }
     public object Granularity { get; }
-    public long Threshold { get; }
     public List<string> Intervals { get; }
     public IFilterSpec Filter { get; }
     public IEnumerable<IAggregationSpec> Aggregations { get; }
     public IEnumerable<IPostAggregationSpec> PostAggregations { get; }
-    public TopNContextSpec Context { get; }
+    public TimeseriesContextSpec Context { get; }
 
-    public TopNRequestData(string dataSource, string dimension, ITopNMetricSpec metric, object granularity, long threshold, List<string> intervals, IFilterSpec filter, IEnumerable<IAggregationSpec> aggregations, IEnumerable<IPostAggregationSpec> postAggregations, TopNContextSpec context)
+    public TimeseriesRequestData(string dataSource, bool descending, object granularity, List<string> intervals, IFilterSpec filter, IEnumerable<IAggregationSpec> aggregations, IEnumerable<IPostAggregationSpec> postAggregations, TimeseriesContextSpec context)
     {
       DataSource = dataSource;
-      Dimension = dimension;
-      Metric = metric;
+      Descending = descending;
       Granularity = granularity;
-      Threshold = threshold;
       Intervals = intervals;
       Filter = filter;
       Aggregations = aggregations;

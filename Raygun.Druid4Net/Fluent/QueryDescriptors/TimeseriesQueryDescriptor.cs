@@ -1,36 +1,38 @@
-﻿//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Text;
-//using System.Threading.Tasks;
+﻿namespace Raygun.Druid4Net
+{
+  public class TimeseriesQueryDescriptor : AggregatableQueryDescriptor<TimeseriesRequestData>, ITimeseriesQueryDescriptor
+  {
+    internal bool DescendingValue;
 
-//namespace Raygun.Druid4Net
-//{
-//  public class TimeseriesQueryDescriptor : QueryDescriptor, ITimeseriesQueryDescriptor, IQueryDescriptor
-//  {
-//    internal string _queryType = "timeseries";
+    internal new TimeseriesContextSpec ContextValue;
 
-//    internal string _dimension;
+    public TimeseriesQueryDescriptor()
+    {
+      ContextValue = new TimeseriesContextSpec();
+    }
 
-//    internal TopNMetricSpec _metricSpec;
+    public ITimeseriesQueryDescriptor Descending(bool descending)
+    {
+      DescendingValue = descending;
 
-//    internal long _threshold;
+      return this;
+    }
 
-//    internal bool _descending;
+    public ITimeseriesQueryDescriptor Context(int? timeout = null, long? maxScatterGatherBytes = null, int? priority = null, string queryId = null, bool? useCache = null, bool? populateCache = null, bool? bySegment = null, bool? finalize = null, string chunkPeriod = null, bool? serializeDateTimeAsLong = null, bool? serializeDateTimeAsLongInner = null, bool? skipEmptyBuckets = null)
+    {
+      SetCommonContextProperties(timeout, maxScatterGatherBytes, priority, queryId, useCache, populateCache, bySegment, finalize, chunkPeriod, serializeDateTimeAsLong, serializeDateTimeAsLongInner);
 
-//    public override ITimeseriesQueryDescriptor Descending(bool descending)
-//    {
-//      _descending = descending;
+      ContextValue.SkipEmptyBuckets = skipEmptyBuckets;
 
-//      return this;
-//    }
+      return this;
+    }
 
-//    internal override IDruidRequest Finalize()
-//    {
-//      var request = new TimeseriesRequest();
-//      request.Build(this);
+    internal override IDruidRequest<TimeseriesRequestData> Generate()
+    {
+      var request = new TimeseriesRequest();
+      request.Build(this);
 
-//      return request;
-//    }
-//  }
-//}
+      return request;
+    }
+  }
+}

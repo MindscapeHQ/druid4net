@@ -123,27 +123,5 @@ namespace Raygun.Druid4Net
     }
 
     internal abstract IDruidRequest<TResponse> Generate();
-
-    //public virtual ITopNQueryDescriptor Dimension(string dimension) { throw new NotImplementedException(); }
-
-    //public virtual ITopNQueryDescriptor Metric(TopNMetricSpec metricSpec) { throw new NotImplementedException(); }
-
-    //public virtual ITopNQueryDescriptor Threshold(long threshold) { throw new NotImplementedException(); }
-
-    //public virtual ITimeseriesQueryDescriptor Descending(bool descending) { throw new NotImplementedException(); }
-
-    //public virtual IGroupByQueryDescriptor Having(HavingSpec havingSpec) { throw new NotImplementedException(); }
-
-    //public virtual IGroupByQueryDescriptor Dimensions(IEnumerable<string> dimensions) { throw new NotImplementedException(); }
-
-    //public virtual IGroupByQueryDescriptor Limit(LimitSpec limitSpec) { throw new NotImplementedException(); }
-
-    //public virtual ISelectQueryDescriptor DimensionsForSelect(IEnumerable<string> dimensions) { throw new NotImplementedException(); }
-
-    //public virtual ISelectQueryDescriptor Metrics(IEnumerable<string> metrics) { throw new NotImplementedException(); }
-
-    //public virtual ISelectQueryDescriptor Paging(PagingSpec pagingSpec) { throw new NotImplementedException(); }
-
-    //public virtual ISelectQueryDescriptor DescendingForSelect(bool descending) { throw new NotImplementedException(); }
   }
 }

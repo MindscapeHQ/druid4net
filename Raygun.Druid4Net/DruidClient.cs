@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-
 namespace Raygun.Druid4Net
 {
   public class DruidClient : IDruidClient
@@ -30,55 +29,52 @@ namespace Raygun.Druid4Net
       return result;
     }
 
-    //public IQueryResponse<T> GroupBy<T>(Func<IQueryDescriptor, IGroupByQueryDescriptor> selector) where T : class
+    //public IQueryResponse<TResponse> GroupBy<TResponse>(Func<IQueryDescriptor, IGroupByQueryDescriptor> selector) where TResponse : class
     //{
     //  return GroupByAsync<T>(selector).Result;
     //}
 
-    //public async Task<IQueryResponse<T>> GroupByAsync<T>(Func<IQueryDescriptor, IGroupByQueryDescriptor> selector) where T : class
+    //public async Task<IQueryResponse<TResponse>> GroupByAsync<TResponse>(Func<IQueryDescriptor, IGroupByQueryDescriptor> selector) where TResponse : class
     //{
-    //  IDruidRequest request = null;
     //  //var request = ((GroupByQueryDescriptor)selector(new GroupByQueryDescriptor())).Generate();
 
-    //  var result = await ExecuteQueryAsync<T>(_apiEndpoint, request);
+    //  var result = await ExecuteQueryAsync<TResponse>(_apiEndpoint, request);
 
     //  return result;
     //}
 
-    //public IQueryResponse<T> Timeseries<T>(Func<IQueryDescriptor, ITimeseriesQueryDescriptor> selector) where T : class
-    //{
-    //  return TimeseriesAsync<T>(selector).Result;
-    //}
+    public IQueryResponse<TResponse> Timeseries<TResponse>(Func<IQueryDescriptor, ITimeseriesQueryDescriptor> selector) where TResponse : class
+    {
+      return TimeseriesAsync<TResponse>(selector).Result;
+    }
 
-    //public async Task<IQueryResponse<T>> TimeseriesAsync<T>(Func<IQueryDescriptor, ITimeseriesQueryDescriptor> selector) where T : class
-    //{
-    //  IDruidRequest request = null;
-    //  //var request = ((TimeseriesQueryDescriptor)selector(new TimeseriesQueryDescriptor())).Generate();
+    public async Task<IQueryResponse<TResponse>> TimeseriesAsync<TResponse>(Func<IQueryDescriptor, ITimeseriesQueryDescriptor> selector) where TResponse : class
+    {
+      var request = ((TimeseriesQueryDescriptor)selector(new TimeseriesQueryDescriptor())).Generate();
 
-    //  var result = await ExecuteQueryAsync<T>(_apiEndpoint, request);
+      var result = await ExecuteQueryAsync<TResponse, TimeseriesRequestData>(_apiEndpoint, request);
 
-    //  return result;
-    //}
+      return result;
+    }
 
-    //public IQueryResponse<T> Select<T>(Func<IQueryDescriptor, ISelectQueryDescriptor> selector) where T : class
-    //{
-    //  return SelectAsync<T>(selector).Result;
-    //}
+    public IQueryResponse<TResponse> Select<TResponse>(Func<IQueryDescriptor, ISelectQueryDescriptor> selector) where TResponse : class
+    {
+      return SelectAsync<TResponse>(selector).Result;
+    }
 
-    //public async Task<IQueryResponse<T>> SelectAsync<T>(Func<IQueryDescriptor, ISelectQueryDescriptor> selector) where T : class
-    //{
-    //  var request = ((SelectQueryDescriptor)selector(new SelectQueryDescriptor())).Generate();
+    public async Task<IQueryResponse<TResponse>> SelectAsync<TResponse>(Func<IQueryDescriptor, ISelectQueryDescriptor> selector) where TResponse : class
+    {
+      var request = ((SelectQueryDescriptor)selector(new SelectQueryDescriptor())).Generate();
 
-    //  var result = await ExecuteQueryAsync<T>(_apiEndpoint, request);
+      var result = await ExecuteQueryAsync<TResponse, SelectRequestData>(_apiEndpoint, request);
 
-    //  return result;
-    //}
+      return result;
+    }
 
     private async Task<IQueryResponse<TResponse>> ExecuteQueryAsync<TResponse, TRequest>(string endpoint, IDruidRequest<TRequest> request) 
       where TResponse : class 
       where TRequest : class
     {
-
       return await _requester.PostAsync<TResponse, TRequest>(endpoint, request);
     }
   }

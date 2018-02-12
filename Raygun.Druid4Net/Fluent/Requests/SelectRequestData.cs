@@ -4,7 +4,7 @@ namespace Raygun.Druid4Net
 {
   public class SelectRequestData
   {
-    public string QueryType { get; }
+    public string QueryType => "select";
     public string DataSource { get; }
     public object Granularity { get; }
     public List<string> Intervals { get; }
@@ -15,9 +15,8 @@ namespace Raygun.Druid4Net
     public PagingSpec PagingSpec { get; }
     public bool Descending { get; }
 
-    public SelectRequestData(string queryType, string dataSource, object granularity, List<string> intervals, IFilterSpec filter, ContextSpec context, IEnumerable<string> dimensions, IEnumerable<string> metrics, PagingSpec pagingSpec, bool descending)
+    public SelectRequestData(string dataSource, object granularity, List<string> intervals, IFilterSpec filter, ContextSpec context, IEnumerable<string> dimensions, IEnumerable<string> metrics, PagingSpec pagingSpec, bool descending)
     {
-      QueryType = queryType;
       DataSource = dataSource;
       Granularity = granularity;
       Intervals = intervals;

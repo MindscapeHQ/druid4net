@@ -8,7 +8,7 @@
     {
       var qd = queryDescriptor as TopNQueryDescriptor;
 
-      RequestData = new TopNRequestData(qd.QueryType, qd.DataSourceValue, qd.DimensionValue, qd.MetricSpecValue, qd.GranularityValue, qd.ThresholdValue, qd.IntervalsValue, qd.FilterValue, qd.AggregationSpecsValue, qd.PostAggregationSpecsValue, qd.ContextValue);
+      RequestData = new TopNRequestData(qd.DataSourceValue, qd.DimensionValue, qd.MetricSpecValue, qd.GranularityValue, qd.ThresholdValue, qd.IntervalsValue, qd.FilterValue, qd.AggregationSpecsValue, qd.PostAggregationSpecsValue, qd.ContextValue);
     }
   }
 }

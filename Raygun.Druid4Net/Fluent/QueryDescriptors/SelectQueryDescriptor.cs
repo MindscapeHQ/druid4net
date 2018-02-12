@@ -4,8 +4,6 @@ namespace Raygun.Druid4Net
 {
   public class SelectQueryDescriptor : QueryDescriptor<SelectRequestData>, ISelectQueryDescriptor
   {
-    internal string QueryType => "select";
-
     internal PagingSpec PagingSpecValue;
 
     internal bool DescendingValue;
