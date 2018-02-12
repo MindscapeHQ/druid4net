@@ -1,6 +1,6 @@
 ﻿namespace Raygun.Druid4Net
 {
-  public class GroupByV2ContextSpec : ContextSpec
+  public class GroupByContextSpec : ContextSpec
   {
     /// <summary>
     /// Overrides the value of druid.query.groupBy.defaultStrategy for this query.

@@ -1,107 +1,68 @@
-﻿//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Text;
-//using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
-//namespace Raygun.Druid4Net
-//{
-//  public class GroupByQueryDescriptor : QueryDescriptor, IGroupByQueryDescriptor
-//  {
-//    internal string _queryType = "groupBy";
+namespace Raygun.Druid4Net
+{
+  public class GroupByQueryDescriptor : AggregatableQueryDescriptor<GroupByRequestData>, IGroupByQueryDescriptor
+  {
+    internal IEnumerable<string> MetricsValue;
 
-//    internal HavingSpec _havingSpec;
+    internal IEnumerable<string> DimensionsValue;
 
-//    internal IEnumerable<string> _dimensions;
+    internal ILimitSpec LimitSpecValue;
 
-//    internal LimitSpec _limitSpec;
+    internal IHavingSpec HavingSpecValue;
 
-//    internal dynamic _innerGroupByDataSource;
+    internal new GroupByContextSpec ContextValue;
 
-//    public override IGroupByQueryDescriptor Having(HavingSpec havingSpec)
-//    {
-//      _havingSpec = havingSpec;
+    public GroupByQueryDescriptor()
+    {
+      ContextValue = new GroupByContextSpec();
+    }
 
-//      return this;
-//    }
+    public IGroupByQueryDescriptor Metrics(IEnumerable<string> metrics)
+    {
+      MetricsValue = metrics;
 
-//    public override IGroupByQueryDescriptor Dimensions(IEnumerable<string> dimensions)
-//    {
-//      _dimensions = dimensions;
+      return this;
+    }
 
-//      return this;
-//    }
+    public IGroupByQueryDescriptor Dimensions(IEnumerable<string> dimensions)
+    {
+      DimensionsValue = dimensions;
 
-//    public override IGroupByQueryDescriptor Limit(LimitSpec limitSpec)
-//    {
-//      _limitSpec = limitSpec;
+      return this;
+    }
 
-//      return this;
-//    }
+    public IGroupByQueryDescriptor Limit(ILimitSpec limitSpec)
+    {
+      LimitSpecValue = limitSpec;
 
-//    internal override IDruidRequest Finalize()
-//    {
-//      var request = new GroupByRequest();
-//      request.Build(this);
+      return this;
+    }
 
-//      return request;
-//    }
+    public IGroupByQueryDescriptor Having(IHavingSpec havingSpec)
+    {
+      HavingSpecValue = havingSpec;
 
-//    IGroupByQueryDescriptor IGroupByQueryDescriptor.DataSource(string dataSource)
-//    {
-//      DataSource(dataSource);
+      return this;
+    }
 
-//      return this;
-//    }
+    public IGroupByQueryDescriptor Context(int? timeout = null, long? maxScatterGatherBytes = null, int? priority = null, string queryId = null, bool? useCache = null, bool? populateCache = null, bool? bySegment = null, bool? finalize = null, string chunkPeriod = null, bool? serializeDateTimeAsLong = null, bool? serializeDateTimeAsLongInner = null, string groupByStrategy = null, long? maxOnDiskStorage = null)
+    {
+      SetCommonContextProperties(timeout, maxScatterGatherBytes, priority, queryId, useCache, populateCache, bySegment, finalize, chunkPeriod, serializeDateTimeAsLong, serializeDateTimeAsLongInner);
 
-//    public IGroupByQueryDescriptor DataSource(Func<IGroupByQueryDescriptor, IGroupByQueryDescriptor> innerGroupByQueryDescriptor)
-//    {
-//      var qd = ((GroupByQueryDescriptor)innerGroupByQueryDescriptor(new GroupByQueryDescriptor()));
+      ContextValue.GroupByStrategy = groupByStrategy;
+      ContextValue.MaxOnDiskStorage = maxOnDiskStorage;
 
-//      var dataSource = new GroupByRequest().BuildDynamic(qd);
+      return this;
+    }
 
-//      _innerGroupByDataSource = new
-//      {
-//        type = "query",
-//        query = dataSource
-//      };
+    internal override IDruidRequest<GroupByRequestData> Generate()
+    {
+      var request = new GroupByRequest();
+      request.Build(this);
 
-//      return this;
-//    }
-
-//    IGroupByQueryDescriptor IGroupByQueryDescriptor.Granularity(Granularities granularity)
-//    {
-//      Granularity(granularity);
-
-//      return this;
-//    }
-
-//    IGroupByQueryDescriptor IGroupByQueryDescriptor.Intervals(DateTime dateFrom, DateTime dateTo)
-//    {
-//      Intervals(dateFrom, dateTo);
-
-//      return this;
-//    }
-
-//    IGroupByQueryDescriptor IGroupByQueryDescriptor.Filter(FilterSpec filterSpec)
-//    {
-//      Filter(filterSpec);
-
-//      return this;
-//    }
-
-//    IGroupByQueryDescriptor IGroupByQueryDescriptor.Aggregations(IEnumerable<AggregationSpec> aggregationsSpec)
-//    {
-//      Aggregations(aggregationsSpec);
-
-//      return this;
-//    }
-
-//    IGroupByQueryDescriptor IGroupByQueryDescriptor.PostAggregations(IEnumerable<PostAggregationSpec> postAggregationsSpec)
-//    {
-//      PostAggregations(postAggregationsSpec);
-
-//      return this;
-//    }
-//  }
-//}
+      return request;
+    }
+  }
+}

@@ -29,19 +29,19 @@ namespace Raygun.Druid4Net
       return result;
     }
 
-    //public IQueryResponse<TResponse> GroupBy<TResponse>(Func<IQueryDescriptor, IGroupByQueryDescriptor> selector) where TResponse : class
-    //{
-    //  return GroupByAsync<T>(selector).Result;
-    //}
+    public IQueryResponse<TResponse> GroupBy<TResponse>(Func<IQueryDescriptor, IGroupByQueryDescriptor> selector) where TResponse : class
+    {
+      return GroupByAsync<TResponse>(selector).Result;
+    }
 
-    //public async Task<IQueryResponse<TResponse>> GroupByAsync<TResponse>(Func<IQueryDescriptor, IGroupByQueryDescriptor> selector) where TResponse : class
-    //{
-    //  //var request = ((GroupByQueryDescriptor)selector(new GroupByQueryDescriptor())).Generate();
+    public async Task<IQueryResponse<TResponse>> GroupByAsync<TResponse>(Func<IQueryDescriptor, IGroupByQueryDescriptor> selector) where TResponse : class
+    {
+      var request = ((GroupByQueryDescriptor)selector(new GroupByQueryDescriptor())).Generate();
 
-    //  var result = await ExecuteQueryAsync<TResponse>(_apiEndpoint, request);
+      var result = await ExecuteQueryAsync<TResponse, GroupByRequestData>(_apiEndpoint, request);
 
-    //  return result;
-    //}
+      return result;
+    }
 
     public IQueryResponse<TResponse> Timeseries<TResponse>(Func<IQueryDescriptor, ITimeseriesQueryDescriptor> selector) where TResponse : class
     {
