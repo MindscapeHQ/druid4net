@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Raygun.Druid4Net", "Raygun.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Raygun.Druid4Net.Tests", "Raygun.Druid4Net.Tests\Raygun.Druid4Net.Tests.csproj", "{9FE9173A-4124-4E68-B179-E19DCBCB94A1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Raygun.Druid4Net.IntegrationTests", "Raygun.Druid4Net.IntegrationTests\Raygun.Druid4Net.IntegrationTests.csproj", "{996E1EEF-0191-45DB-9354-F3765880027C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{9FE9173A-4124-4E68-B179-E19DCBCB94A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9FE9173A-4124-4E68-B179-E19DCBCB94A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9FE9173A-4124-4E68-B179-E19DCBCB94A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{996E1EEF-0191-45DB-9354-F3765880027C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{996E1EEF-0191-45DB-9354-F3765880027C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{996E1EEF-0191-45DB-9354-F3765880027C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{996E1EEF-0191-45DB-9354-F3765880027C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

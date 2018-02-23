@@ -6,26 +6,14 @@ using System.Threading.Tasks;
 
 namespace Raygun.Druid4Net
 {
-  public interface IGroupByQueryDescriptor
+  public interface IGroupByQueryDescriptor : IAggregatableQueryDescriptor
   {
-    //IGroupByQueryDescriptor DataSource(string dataSource);
+    IGroupByQueryDescriptor DataSource(Func<IGroupByQueryDescriptor, IGroupByQueryDescriptor> innerGroupByQueryDescriptor);
 
-    //IGroupByQueryDescriptor DataSource(Func<IGroupByQueryDescriptor, IGroupByQueryDescriptor> innerGroupByQueryDescriptor);
+    IGroupByQueryDescriptor Having(IHavingSpec havingSpec);
 
-    //IGroupByQueryDescriptor Granularity(Granularities granularity);
+    IGroupByQueryDescriptor Dimensions(IEnumerable<string> dimensions);
 
-    //IGroupByQueryDescriptor Intervals(DateTime dateFrom, DateTime dateTo);
-
-    //IGroupByQueryDescriptor Filter(FilterSpec filterSpec);
-
-    //IGroupByQueryDescriptor Having(HavingSpec havingSpec);
-
-    //IGroupByQueryDescriptor Dimensions(IEnumerable<string> dimensions);
-
-    //IGroupByQueryDescriptor Limit(LimitSpec limitSpec);
-
-    //IGroupByQueryDescriptor Aggregations(IEnumerable<AggregationSpec> aggregationsSpec);
-
-    //IGroupByQueryDescriptor PostAggregations(IEnumerable<PostAggregationSpec> postAggregationsSpec);
+    IGroupByQueryDescriptor Limit(ILimitSpec limitSpec);
   }
 }

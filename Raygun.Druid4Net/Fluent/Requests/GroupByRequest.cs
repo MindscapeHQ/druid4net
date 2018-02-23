@@ -8,7 +8,15 @@
     {
       var qd = queryDescriptor as GroupByQueryDescriptor;
 
-      RequestData = new GroupByRequestData(qd.DataSourceValue, qd.GranularityValue, qd.IntervalsValue, qd.FilterValue, qd.ContextValue, qd.DimensionsValue, qd.MetricsValue, qd.AggregationSpecsValue, qd.PostAggregationSpecsValue, qd.LimitSpecValue, qd.HavingSpecValue);
+      object datasource = qd.DataSourceValue;
+
+      if (qd.InnerDataSourceValue != null)
+      {
+        var innerQd = qd.InnerDataSourceValue as GroupByQueryDescriptor;
+        datasource = new GroupByRequestData(innerQd.DataSourceValue, innerQd.GranularityValue, innerQd.IntervalsValue, innerQd.FilterValue, innerQd.ContextValue, innerQd.DimensionsValue, innerQd.MetricsValue, innerQd.AggregationSpecsValue, innerQd.PostAggregationSpecsValue, innerQd.LimitSpecValue, innerQd.HavingSpecValue);
+      }
+
+      RequestData = new GroupByRequestData(datasource, qd.GranularityValue, qd.IntervalsValue, qd.FilterValue, qd.ContextValue, qd.DimensionsValue, qd.MetricsValue, qd.AggregationSpecsValue, qd.PostAggregationSpecsValue, qd.LimitSpecValue, qd.HavingSpecValue);
     }
   }
 }

@@ -22,6 +22,13 @@
       return this;
     }
 
+    public ITopNQueryDescriptor Metric(string metric)
+    {
+      MetricSpecValue = new NumericTopNMetricSpec(metric);
+
+      return this;
+    }
+
     public ITopNQueryDescriptor Metric(ITopNMetricSpec metricSpec)
     {
       MetricSpecValue = metricSpec;

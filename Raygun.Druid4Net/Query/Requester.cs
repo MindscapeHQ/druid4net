@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Text;
 using System.Threading.Tasks;
 using Jil;
 
@@ -15,7 +16,6 @@ namespace Raygun.Druid4Net
     {
       _client = new HttpClient();
       _client.BaseAddress = new Uri($"{host}:{port}/");
-      _client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
       _jsonOptions = new Options(prettyPrint: false, excludeNulls: true, includeInherited: true, serializationNameFormat: SerializationNameFormat.CamelCase);
     }
@@ -28,7 +28,7 @@ namespace Raygun.Druid4Net
       //{
 
       var requestString = JSON.SerializeDynamic(request.RequestData, _jsonOptions);
-      var response = await _client.PostAsync(endpoint, new StringContent(requestString));
+      var response = await _client.PostAsync(endpoint, new StringContent(requestString, Encoding.UTF8, "application/json"));
 
       response.EnsureSuccessStatusCode();
 

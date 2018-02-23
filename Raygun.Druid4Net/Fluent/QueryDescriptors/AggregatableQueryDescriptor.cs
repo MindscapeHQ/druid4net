@@ -8,7 +8,7 @@ namespace Raygun.Druid4Net
 
     internal IEnumerable<IPostAggregationSpec> PostAggregationSpecsValue;
 
-    public IAggregatableQueryDescriptor Aggregations(IEnumerable<IAggregationSpec> aggregationsSpec)
+    public IAggregatableQueryDescriptor Aggregations(params IAggregationSpec[] aggregationsSpec)
     {
       AggregationSpecsValue = aggregationsSpec;
 

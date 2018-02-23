@@ -4,6 +4,8 @@
   {
     ITopNQueryDescriptor Dimension(string dimension);
 
+    ITopNQueryDescriptor Metric(string metric);
+
     ITopNQueryDescriptor Metric(ITopNMetricSpec metricSpec);
 
     ITopNQueryDescriptor Threshold(long threshold);

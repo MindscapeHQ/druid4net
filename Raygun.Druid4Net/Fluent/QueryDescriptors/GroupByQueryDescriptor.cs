@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Raygun.Druid4Net
 {
@@ -13,6 +14,8 @@ namespace Raygun.Druid4Net
     internal IHavingSpec HavingSpecValue;
 
     internal new GroupByContextSpec ContextValue;
+
+    internal IGroupByQueryDescriptor InnerDataSourceValue;
 
     public GroupByQueryDescriptor()
     {
@@ -36,6 +39,15 @@ namespace Raygun.Druid4Net
     public IGroupByQueryDescriptor Limit(ILimitSpec limitSpec)
     {
       LimitSpecValue = limitSpec;
+
+      return this;
+    }
+
+    public IGroupByQueryDescriptor DataSource(Func<IGroupByQueryDescriptor, IGroupByQueryDescriptor> innerGroupByQueryDescriptor)
+    {
+      var qd = (GroupByQueryDescriptor)innerGroupByQueryDescriptor(new GroupByQueryDescriptor());
+
+      InnerDataSourceValue = qd;
 
       return this;
     }
