@@ -1,23 +1,20 @@
 ﻿using System;
 using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
-using Jil;
 
 namespace Raygun.Druid4Net
 {
   public class Requester
   {
+    private readonly IJsonSerializer _json;
     private readonly HttpClient _client;
-    private readonly Options _jsonOptions;
 
-    public Requester(string host, int port)
+    public Requester(IJsonSerializer json, string host, int port)
     {
+      _json = json;
       _client = new HttpClient();
-      _client.BaseAddress = new Uri($"{host}:{port}/");
-
-      _jsonOptions = new Options(prettyPrint: false, excludeNulls: true, includeInherited: true, serializationNameFormat: SerializationNameFormat.CamelCase);
+      _client.BaseAddress = new Uri($"{host}:{port}");
     }
 
     public async Task<IQueryResponse<TResponse>> PostAsync<TResponse, TRequest>(string endpoint, IDruidRequest<TRequest> request)
@@ -27,13 +24,13 @@ namespace Raygun.Druid4Net
       //try
       //{
 
-      var requestString = JSON.SerializeDynamic(request.RequestData, _jsonOptions);
+      var requestString = _json.Serialize(request.RequestData);
       var response = await _client.PostAsync(endpoint, new StringContent(requestString, Encoding.UTF8, "application/json"));
 
       response.EnsureSuccessStatusCode();
 
       var responseString = await response.Content.ReadAsStringAsync();
-      var data = JSON.Deserialize<TResponse>(responseString);
+      var data = _json.Deserialize<TResponse>(responseString);
 
       var queryResponse = new DruidResponse<TResponse>
       {

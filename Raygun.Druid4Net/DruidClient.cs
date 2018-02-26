@@ -8,9 +8,9 @@ namespace Raygun.Druid4Net
     private readonly Requester _requester;
     private readonly string _apiEndpoint;
 
-    public DruidClient(string hostName, int port = 8082, string apiEndpoint = "/druid/v2")
+    public DruidClient(IJsonSerializer jsonSerializer, string hostName, int port = 8082, string apiEndpoint = "/druid/v2")
     {
-      _requester = new Requester(hostName, port);
+      _requester = new Requester(jsonSerializer, hostName, port);
       _apiEndpoint = apiEndpoint;
     }
 

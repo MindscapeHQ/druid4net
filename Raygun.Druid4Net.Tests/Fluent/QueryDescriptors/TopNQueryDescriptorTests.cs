@@ -70,8 +70,7 @@ namespace Raygun.Druid4Net.Tests.Fluent.QueryDescriptors
     [Test]
     public void SumAggregationIsSet_SetsAggregationInBody()
     {
-      var aggregations = new List<IAggregationSpec> {new LongSumAggregator("sum_count", "count")};
-      var request = ((TopNQueryDescriptor) new TopNQueryDescriptor().Aggregations(aggregations)).Generate();
+      var request = ((TopNQueryDescriptor) new TopNQueryDescriptor().Aggregations(new LongSumAggregator("sum_count", "count"))).Generate();
 
       var agg = request.RequestData.Aggregations.First() as LongSumAggregator;
 

@@ -26,8 +26,4 @@
     <Reference Include="System.Net.Http" />
   </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Jil" Version="2.15.4" />
-  </ItemGroup>
-
 </Project>
