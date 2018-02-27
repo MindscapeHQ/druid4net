@@ -5,9 +5,8 @@ namespace Raygun.Druid4Net.IntegrationTests.Queries
 {
   public abstract class TestQueryBase
   {
-    protected DateTime FromDate = DateTime.Parse("2018-02-19T10:00:00Z");
-    protected DateTime ToDate = DateTime.Parse("2018-02-26T10:00:00Z");
-    protected string TestDataSource = "pulsepayload_v4";
+    protected DateTime FromDate = new DateTime(2015, 9, 12, 0, 0, 0, DateTimeKind.Utc);
+    protected DateTime ToDate = new DateTime(2015, 9, 13, 0, 0, 0, DateTimeKind.Utc);
 
     protected IDruidClient DruidClient;
 

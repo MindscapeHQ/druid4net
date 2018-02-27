@@ -8,10 +8,10 @@
 
     public string FieldName { get; }
 
-    protected SumAggregator(string name, string fieldName)
+    protected SumAggregator(string name, string fieldName = null)
     {
       Name = name;
-      FieldName = fieldName;
+      FieldName = fieldName ?? name;
     }
   }
 }

@@ -8,7 +8,7 @@ namespace Raygun.Druid4Net
 
     public IEnumerable<IFilterSpec> Fields;
 
-    public OrFilter(IEnumerable<IFilterSpec> filters)
+    public OrFilter(params IFilterSpec[] filters)
     {
       Fields = filters;
     }

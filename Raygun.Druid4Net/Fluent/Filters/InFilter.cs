@@ -10,7 +10,7 @@ namespace Raygun.Druid4Net
 
     public IEnumerable<T> Values;
 
-    public InFilter(string dimension, IEnumerable<T> values)
+    public InFilter(string dimension, params T[] values)
     {
       Dimension = dimension;
       Values = values;

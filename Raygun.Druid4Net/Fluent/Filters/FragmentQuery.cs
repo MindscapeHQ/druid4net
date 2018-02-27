@@ -10,7 +10,10 @@ namespace Raygun.Druid4Net
 
     public bool CaseSensitive { get; }
 
-    public FragmentQuery(IEnumerable<string> values, bool caseSesitive = false)
+    public FragmentQuery(params string[] values) : this(false, values)
+    { }
+
+    public FragmentQuery(bool caseSesitive, params string[] values)
     {
       Values = values;
       CaseSensitive = caseSesitive;
