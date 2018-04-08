@@ -8,13 +8,13 @@ namespace Raygun.Druid4Net
     public string DataSource { get; }
     public bool Descending { get; }
     public object Granularity { get; }
-    public List<string> Intervals { get; }
+    public IList<string> Intervals { get; }
     public IFilterSpec Filter { get; }
     public IEnumerable<IAggregationSpec> Aggregations { get; }
     public IEnumerable<IPostAggregationSpec> PostAggregations { get; }
     public IContextSpec Context { get; }
 
-    public TimeseriesRequestData(string dataSource, bool descending, object granularity, List<string> intervals, IFilterSpec filter, IEnumerable<IAggregationSpec> aggregations, IEnumerable<IPostAggregationSpec> postAggregations, IContextSpec context)
+    public TimeseriesRequestData(string dataSource, bool descending, object granularity, IList<string> intervals, IFilterSpec filter, IEnumerable<IAggregationSpec> aggregations, IEnumerable<IPostAggregationSpec> postAggregations, IContextSpec context)
     {
       DataSource = dataSource;
       Descending = descending;

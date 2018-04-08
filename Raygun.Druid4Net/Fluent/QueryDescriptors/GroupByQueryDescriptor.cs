@@ -22,14 +22,14 @@ namespace Raygun.Druid4Net
       ContextValue = new GroupByContextSpec();
     }
 
-    public IGroupByQueryDescriptor Metrics(IEnumerable<string> metrics)
+    public IGroupByQueryDescriptor Metrics(params string[] metrics)
     {
       MetricsValue = metrics;
 
       return this;
     }
 
-    public IGroupByQueryDescriptor Dimensions(IEnumerable<string> dimensions)
+    public IGroupByQueryDescriptor Dimensions(params string[] dimensions)
     {
       DimensionsValue = dimensions;
 
