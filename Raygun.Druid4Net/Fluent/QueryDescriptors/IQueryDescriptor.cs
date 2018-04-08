@@ -6,7 +6,9 @@ namespace Raygun.Druid4Net
   {
     IQueryDescriptor DataSource(string dataSource);
 
-    IQueryDescriptor Intervals(DateTime dateFrom, DateTime dateTo);
+    IQueryDescriptor Interval(DateTime from, DateTime to);
+    
+    IQueryDescriptor Intervals(params Interval[] intervals);
 
     IQueryDescriptor Granularity(Granularities granularity);
 

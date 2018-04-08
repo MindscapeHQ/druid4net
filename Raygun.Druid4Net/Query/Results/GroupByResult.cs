@@ -1,8 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Raygun.Druid4Net
 {
-  public class GroupByResult<T>
+  public class GroupByResult<T> : List<TimestampedEvent<T>>
+  {
+  }
+
+  public class TimestampedEvent<T>
   {
     public DateTime Timestamp { get; set; }
 

@@ -46,6 +46,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Fluent\QueryDescriptors\AggregatableQueryDescriptorTests.cs" />
+    <Compile Include="Fluent\QueryDescriptors\QueryDescriptorTests.cs" />
     <Compile Include="Fluent\QueryDescriptors\TopNQueryDescriptorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
