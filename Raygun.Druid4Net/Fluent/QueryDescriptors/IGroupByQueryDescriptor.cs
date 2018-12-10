@@ -12,8 +12,6 @@ namespace Raygun.Druid4Net
 
     IGroupByQueryDescriptor Having(IHavingSpec havingSpec);
 
-    IGroupByQueryDescriptor Metrics(params string[] metrics);
-    
     IGroupByQueryDescriptor Dimensions(params string[] dimensions);
 
     IGroupByQueryDescriptor Limit(ILimitSpec limitSpec);

@@ -12,9 +12,9 @@ namespace Raygun.Druid4Net
     public IFilterSpec Filter { get; }
     public IEnumerable<IAggregationSpec> Aggregations { get; }
     public IEnumerable<IPostAggregationSpec> PostAggregations { get; }
-    public IContextSpec Context { get; }
+    public TimeseriesContextSpec Context { get; }
 
-    public TimeseriesRequestData(string dataSource, bool descending, object granularity, IList<string> intervals, IFilterSpec filter, IEnumerable<IAggregationSpec> aggregations, IEnumerable<IPostAggregationSpec> postAggregations, IContextSpec context)
+    public TimeseriesRequestData(string dataSource, bool descending, object granularity, IList<string> intervals, IFilterSpec filter, IEnumerable<IAggregationSpec> aggregations, IEnumerable<IPostAggregationSpec> postAggregations, TimeseriesContextSpec context)
     {
       DataSource = dataSource;
       Descending = descending;

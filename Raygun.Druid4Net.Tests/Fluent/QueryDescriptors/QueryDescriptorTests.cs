@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using NUnit.Framework;
 
 namespace Raygun.Druid4Net.Tests.Fluent.QueryDescriptors
@@ -9,7 +7,7 @@ namespace Raygun.Druid4Net.Tests.Fluent.QueryDescriptors
   public class QueryDescriptorTests
   {
     [Test]
-    public void DatasourceIsSet_SetsDatasourceInBody()
+    public void DataSourceIsSet_SetsDataSourceInBody()
     {
       var request = ((TopNQueryDescriptor) new TopNQueryDescriptor().DataSource("test_datasource")).Generate();
 

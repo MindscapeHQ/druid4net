@@ -5,8 +5,6 @@ namespace Raygun.Druid4Net
 {
   public class GroupByQueryDescriptor : AggregatableQueryDescriptor<GroupByRequestData>, IGroupByQueryDescriptor
   {
-    internal IEnumerable<string> MetricsValue;
-
     internal IEnumerable<string> DimensionsValue;
 
     internal ILimitSpec LimitSpecValue;
@@ -20,13 +18,6 @@ namespace Raygun.Druid4Net
     public GroupByQueryDescriptor()
     {
       ContextValue = new GroupByContextSpec();
-    }
-
-    public IGroupByQueryDescriptor Metrics(params string[] metrics)
-    {
-      MetricsValue = metrics;
-
-      return this;
     }
 
     public IGroupByQueryDescriptor Dimensions(params string[] dimensions)

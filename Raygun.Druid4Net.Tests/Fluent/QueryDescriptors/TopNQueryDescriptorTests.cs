@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 
 namespace Raygun.Druid4Net.Tests.Fluent.QueryDescriptors
 {
@@ -9,9 +6,19 @@ namespace Raygun.Druid4Net.Tests.Fluent.QueryDescriptors
   public class TopNQueryDescriptorTests
   {
     [Test]
+    public void DefaultQuery_HasCorrectQueryType()
+    {
+      var request = new TopNQueryDescriptor().Generate();
+
+      Assert.That(request.RequestData.QueryType, Is.EqualTo("topN"));
+    }
+    
+    [Test]
     public void DimensionIsSet_SetsDimensionInBody()
     {
-      var request = ((TopNQueryDescriptor) new TopNQueryDescriptor().Dimension("test_dim")).Generate();
+      var request = ((TopNQueryDescriptor) new TopNQueryDescriptor()
+        .Dimension("test_dim"))
+        .Generate();
 
       Assert.That(request.RequestData.Dimension, Is.EqualTo("test_dim"));
     }
@@ -19,7 +26,9 @@ namespace Raygun.Druid4Net.Tests.Fluent.QueryDescriptors
     [Test]
     public void MetricSpecIsSet_SetsMetricInBody()
     {
-      var request = ((TopNQueryDescriptor) new TopNQueryDescriptor().Metric(new NumericTopNMetricSpec("test_metric"))).Generate();
+      var request = ((TopNQueryDescriptor) new TopNQueryDescriptor()
+        .Metric(new NumericTopNMetricSpec("test_metric")))
+        .Generate();
 
       var metric = request.RequestData.Metric as NumericTopNMetricSpec;
 
@@ -31,7 +40,9 @@ namespace Raygun.Druid4Net.Tests.Fluent.QueryDescriptors
     [Test]
     public void MetricIsSet_SetsMetricInBody()
     {
-      var request = ((TopNQueryDescriptor) new TopNQueryDescriptor().Metric("test_metric")).Generate();
+      var request = ((TopNQueryDescriptor) new TopNQueryDescriptor()
+        .Metric("test_metric"))
+        .Generate();
 
       var metric = request.RequestData.Metric as NumericTopNMetricSpec;
 
@@ -43,7 +54,9 @@ namespace Raygun.Druid4Net.Tests.Fluent.QueryDescriptors
     [Test]
     public void ThresholdIsSet_SetsThresholdInBody()
     {
-      var request = ((TopNQueryDescriptor) new TopNQueryDescriptor().Threshold(10)).Generate();
+      var request = ((TopNQueryDescriptor) new TopNQueryDescriptor()
+        .Threshold(10))
+        .Generate();
 
       Assert.That(request.RequestData.Threshold, Is.EqualTo(10));
     }
@@ -51,7 +64,9 @@ namespace Raygun.Druid4Net.Tests.Fluent.QueryDescriptors
     [Test]
     public void ContextMinTopNThresholdIsSet_SetsMinTopNThresholdInBody()
     {
-      var request = ((TopNQueryDescriptor)new TopNQueryDescriptor().Context(minTopNThreshold: 500)).Generate();
+      var request = ((TopNQueryDescriptor)new TopNQueryDescriptor()
+        .Context(minTopNThreshold: 500))
+        .Generate();
 
       Assert.That(request.RequestData.Context.MinTopNThreshold, Is.EqualTo(500));
     }
