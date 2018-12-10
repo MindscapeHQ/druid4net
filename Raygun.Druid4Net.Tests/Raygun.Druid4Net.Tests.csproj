@@ -46,6 +46,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Fluent\Aggregations\AggregatorTestsBase.cs" />
+    <Compile Include="Fluent\Aggregations\CountAggregatorTests.cs" />
+    <Compile Include="Fluent\Aggregations\DoubleFirstAggregatorTests.cs" />
+    <Compile Include="Fluent\Aggregations\DoubleLastAggregatorTests.cs" />
+    <Compile Include="Fluent\Aggregations\DoubleMaxAggregatorTests.cs" />
+    <Compile Include="Fluent\Aggregations\DoubleMinAggregatorTests.cs" />
+    <Compile Include="Fluent\Aggregations\DoubleSumAggregatorTests.cs" />
+    <Compile Include="Fluent\Aggregations\FloatFirstAggregatorTests.cs" />
+    <Compile Include="Fluent\Aggregations\FloatLastAggregatorTests.cs" />
+    <Compile Include="Fluent\Aggregations\FloatMaxAggregatorTests.cs" />
+    <Compile Include="Fluent\Aggregations\FloatMinAggregatorTests.cs" />
+    <Compile Include="Fluent\Aggregations\FloatSumAggregatorTests.cs" />
+    <Compile Include="Fluent\Aggregations\LongFirstAggregatorTests.cs" />
+    <Compile Include="Fluent\Aggregations\LongLastAggregatorTests.cs" />
+    <Compile Include="Fluent\Aggregations\LongMaxAggregatorTests.cs" />
+    <Compile Include="Fluent\Aggregations\LongMinAggregatorTests.cs" />
+    <Compile Include="Fluent\Aggregations\LongSumAggregatorTests.cs" />
     <Compile Include="Fluent\QueryDescriptors\AggregatableQueryDescriptorTests.cs" />
     <Compile Include="Fluent\QueryDescriptors\GroupByQueryDescriptorTests.cs" />
     <Compile Include="Fluent\QueryDescriptors\QueryDescriptorTests.cs" />
