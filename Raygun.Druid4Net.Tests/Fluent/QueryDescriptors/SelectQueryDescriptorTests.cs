@@ -27,8 +27,8 @@ namespace Raygun.Druid4Net.Tests.Fluent.QueryDescriptors
         .Generate();
 
       Assert.That(request.RequestData.Dimensions.Count(), Is.EqualTo(2));
-      Assert.That(request.RequestData.Dimensions.Contains("test_dim1"), Is.True);
-      Assert.That(request.RequestData.Dimensions.Contains("test_dim2"), Is.True);
+      Assert.That(request.RequestData.Dimensions, Contains.Item("test_dim1"));
+      Assert.That(request.RequestData.Dimensions, Contains.Item("test_dim2"));
     }
     
     [Test]
@@ -39,8 +39,8 @@ namespace Raygun.Druid4Net.Tests.Fluent.QueryDescriptors
         .Generate();
 
       Assert.That(request.RequestData.Metrics.Count(), Is.EqualTo(2));
-      Assert.That(request.RequestData.Metrics.Contains("test_metric1"), Is.True);
-      Assert.That(request.RequestData.Metrics.Contains("test_metric2"), Is.True);
+      Assert.That(request.RequestData.Metrics, Contains.Item("test_metric1"));
+      Assert.That(request.RequestData.Metrics, Contains.Item("test_metric2"));
     }
     
     [Test]

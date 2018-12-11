@@ -63,6 +63,16 @@
     <Compile Include="Fluent\Aggregations\LongMaxAggregatorTests.cs" />
     <Compile Include="Fluent\Aggregations\LongMinAggregatorTests.cs" />
     <Compile Include="Fluent\Aggregations\LongSumAggregatorTests.cs" />
+    <Compile Include="Fluent\Filters\AndFilterTests.cs" />
+    <Compile Include="Fluent\Filters\BoundFilterTests.cs" />
+    <Compile Include="Fluent\Filters\InFilterTests.cs" />
+    <Compile Include="Fluent\Filters\JavaScriptFilterTests.cs" />
+    <Compile Include="Fluent\Filters\LikeFilterTests.cs" />
+    <Compile Include="Fluent\Filters\NotFilterTests.cs" />
+    <Compile Include="Fluent\Filters\OrFilterTests.cs" />
+    <Compile Include="Fluent\Filters\RegexFilterTests.cs" />
+    <Compile Include="Fluent\Filters\SearchFilterTests.cs" />
+    <Compile Include="Fluent\Filters\SelectorFilterTests.cs" />
     <Compile Include="Fluent\QueryDescriptors\AggregationQueryDescriptorTests.cs" />
     <Compile Include="Fluent\QueryDescriptors\GroupByQueryDescriptorTests.cs" />
     <Compile Include="Fluent\QueryDescriptors\QueryDescriptorTests.cs" />

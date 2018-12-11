@@ -8,10 +8,10 @@
 
     public bool CaseSensitive { get; }
 
-    public ContainsQuery(string value, bool caseSesitive = false)
+    public ContainsQuery(string value, bool caseSensitive = false)
     {
       Value = value;
-      CaseSensitive = caseSesitive;
+      CaseSensitive = caseSensitive;
     }
   }
 }

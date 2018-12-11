@@ -27,8 +27,8 @@ namespace Raygun.Druid4Net.Tests.Fluent.QueryDescriptors
         .Generate();
 
       Assert.That(request.RequestData.Dimensions.Count(), Is.EqualTo(2));
-      Assert.That(request.RequestData.Dimensions.Contains("test_dim1"), Is.True);
-      Assert.That(request.RequestData.Dimensions.Contains("test_dim2"), Is.True);
+      Assert.That(request.RequestData.Dimensions, Contains.Item("test_dim1"));
+      Assert.That(request.RequestData.Dimensions, Contains.Item("test_dim2"));
     }
 
     [Test]
@@ -73,11 +73,11 @@ namespace Raygun.Druid4Net.Tests.Fluent.QueryDescriptors
       
       Assert.IsNotNull(datasource);
       Assert.That(datasource.Dimensions.Count(), Is.EqualTo(2));
-      Assert.That(datasource.Dimensions.Contains("test_dim1"), Is.True);
-      Assert.That(datasource.Dimensions.Contains("test_dim2"), Is.True);
+      Assert.That(datasource.Dimensions, Contains.Item("test_dim1"));
+      Assert.That(datasource.Dimensions, Contains.Item("test_dim2"));
 
       Assert.That(request.RequestData.Dimensions.Count(), Is.EqualTo(1));
-      Assert.That(request.RequestData.Dimensions.Contains("test_dim1"), Is.True);
+      Assert.That(request.RequestData.Dimensions, Contains.Item("test_dim1"));
     }
 
     [Test]
