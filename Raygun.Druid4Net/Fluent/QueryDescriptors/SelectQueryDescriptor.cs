@@ -13,14 +13,19 @@ namespace Raygun.Druid4Net
     internal IEnumerable<string> DimensionsValue;
 
     internal ContextSpec ContextValue;
-    
-    public ISelectQueryDescriptor Metrics(IEnumerable<string> metrics)
+
+    public SelectQueryDescriptor()
+    {
+      ContextValue = new ContextSpec();
+    }
+
+    public ISelectQueryDescriptor Metrics(params string[] metrics)
     {
       MetricsValue = metrics;
       return this;
     }
 
-    public ISelectQueryDescriptor Dimensions(IEnumerable<string> dimensions)
+    public ISelectQueryDescriptor Dimensions(params string[] dimensions)
     {
       DimensionsValue = dimensions;
       return this;

@@ -66,6 +66,8 @@
     <Compile Include="Fluent\QueryDescriptors\AggregationQueryDescriptorTests.cs" />
     <Compile Include="Fluent\QueryDescriptors\GroupByQueryDescriptorTests.cs" />
     <Compile Include="Fluent\QueryDescriptors\QueryDescriptorTests.cs" />
+    <Compile Include="Fluent\QueryDescriptors\SelectQueryDescriptorTests.cs" />
+    <Compile Include="Fluent\QueryDescriptors\TimeseriesQueryDescriptorTests.cs" />
     <Compile Include="Fluent\QueryDescriptors\TopNQueryDescriptorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
