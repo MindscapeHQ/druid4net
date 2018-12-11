@@ -2,7 +2,7 @@
 {
   public class FieldAccessPostAggregator : IPostAggregationSpec
   {
-    public string Type => "fieldAccess";
+    public virtual string Type => "fieldAccess";
 
     public string Name { get; }
 

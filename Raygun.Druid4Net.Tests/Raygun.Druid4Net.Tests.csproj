@@ -81,6 +81,9 @@
     <Compile Include="Fluent\Having\NotHavingSpecTests.cs" />
     <Compile Include="Fluent\Having\OrHavingSpecTests.cs" />
     <Compile Include="Fluent\Having\QueryFilterHavingSpecTests.cs" />
+    <Compile Include="Fluent\PostAggregations\ArithmeticPostAggregatorTests.cs" />
+    <Compile Include="Fluent\PostAggregations\FieldAccessPostAggregatorTests.cs" />
+    <Compile Include="Fluent\PostAggregations\FinalizingFieldAccessPostAggregatorTests.cs" />
     <Compile Include="Fluent\QueryDescriptors\AggregationQueryDescriptorTests.cs" />
     <Compile Include="Fluent\QueryDescriptors\GroupByQueryDescriptorTests.cs" />
     <Compile Include="Fluent\QueryDescriptors\QueryDescriptorTests.cs" />
