@@ -72,7 +72,7 @@ namespace Raygun.Druid4Net
 
     private async Task<IQueryResponse<TResponse>> ExecuteQueryAsync<TResponse, TRequest>(string endpoint, IDruidRequest<TRequest> request) 
       where TResponse : class 
-      where TRequest : class
+      where TRequest : QueryRequestData
     {
       return await _requester.PostAsync<TResponse, TRequest>(endpoint, request);
     }

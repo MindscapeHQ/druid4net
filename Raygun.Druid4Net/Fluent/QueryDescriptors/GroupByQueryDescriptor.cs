@@ -11,7 +11,7 @@ namespace Raygun.Druid4Net
 
     internal IHavingSpec HavingSpecValue;
 
-    internal new GroupByContextSpec ContextValue;
+    internal GroupByContextSpec ContextValue;
 
     internal IGroupByQueryDescriptor InnerDataSourceValue;
 

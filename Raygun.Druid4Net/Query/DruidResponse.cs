@@ -4,6 +4,6 @@
   {
     public T Data { get; set; }
 
-    public QueryRequestData RequestData { get; set; }
+    public DruidQueryRequestData RequestData { get; set; }
   }
 }

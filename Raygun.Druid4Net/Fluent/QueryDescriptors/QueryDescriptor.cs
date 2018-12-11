@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Raygun.Druid4Net
 {
-  public abstract class QueryDescriptor<TResponse> : IQueryDescriptor where TResponse : class
+  public abstract class QueryDescriptor<TRequest> : IQueryDescriptor where TRequest : QueryRequestData
   {
     internal List<string> IntervalsValue;
 
@@ -13,11 +13,8 @@ namespace Raygun.Druid4Net
 
     internal IFilterSpec FilterValue;
 
-    internal ContextSpec ContextValue;
-
     protected QueryDescriptor()
     {
-      ContextValue = new ContextSpec();
       IntervalsValue = new List<string>();
     }
 
@@ -110,13 +107,6 @@ namespace Raygun.Druid4Net
       return this;
     }
 
-    public IQueryDescriptor Context(int? timeout = null, long? maxScatterGatherBytes = null, int? priority = null, string queryId = null, bool? useCache = null, bool? populateCache = null, bool? bySegment = null, bool? finalize = null, string chunkPeriod = null, bool? serializeDateTimeAsLong = null, bool? serializeDateTimeAsLongInner = null)
-    {
-      SetCommonContextProperties(ContextValue, timeout, maxScatterGatherBytes, priority, queryId, useCache, populateCache, bySegment, finalize, chunkPeriod, serializeDateTimeAsLong, serializeDateTimeAsLongInner);
-
-      return this;
-    }
-
     protected void SetCommonContextProperties(ContextSpec context, int? timeout, long? maxScatterGatherBytes, int? priority, string queryId, bool? useCache, bool? populateCache, bool? bySegment, bool? finalize, string chunkPeriod, bool? serializeDateTimeAsLong, bool? serializeDateTimeAsLongInner)
     {
       context.Timeout = timeout;
@@ -132,6 +122,6 @@ namespace Raygun.Druid4Net
       context.SerializeDateTimeAsLongInner = serializeDateTimeAsLongInner;
     }
 
-    internal abstract IDruidRequest<TResponse> Generate();
+    internal abstract IDruidRequest<TRequest> Generate();
   }
 }

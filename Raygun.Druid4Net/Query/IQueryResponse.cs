@@ -4,6 +4,6 @@
   {
     T Data { get; }
 
-    QueryRequestData RequestData { get; }
+    DruidQueryRequestData RequestData { get; }
   }
 }

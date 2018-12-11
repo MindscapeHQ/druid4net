@@ -63,7 +63,7 @@
     <Compile Include="Fluent\Aggregations\LongMaxAggregatorTests.cs" />
     <Compile Include="Fluent\Aggregations\LongMinAggregatorTests.cs" />
     <Compile Include="Fluent\Aggregations\LongSumAggregatorTests.cs" />
-    <Compile Include="Fluent\QueryDescriptors\AggregatableQueryDescriptorTests.cs" />
+    <Compile Include="Fluent\QueryDescriptors\AggregationQueryDescriptorTests.cs" />
     <Compile Include="Fluent\QueryDescriptors\GroupByQueryDescriptorTests.cs" />
     <Compile Include="Fluent\QueryDescriptors\QueryDescriptorTests.cs" />
     <Compile Include="Fluent\QueryDescriptors\TopNQueryDescriptorTests.cs" />

@@ -5,12 +5,16 @@ using NUnit.Framework;
 namespace Raygun.Druid4Net.Tests.Fluent.QueryDescriptors
 {
   [TestFixture]
-  public class AggregatableQueryDescriptorTests
+  public abstract class AggregationQueryDescriptorTests<T, TResponse> : QueryDescriptorTests<T, TResponse> 
+    where T : AggregatableQueryDescriptor<TResponse> 
+    where TResponse : AggregationQueryRequestData
   {
+    protected abstract override T CreateQueryDescriptor();
+    
     [Test]
     public void SumAggregationIsSet_SetsAggregationInBody()
     {
-      var request = ((TopNQueryDescriptor) new TopNQueryDescriptor().Aggregations(new LongSumAggregator("sum_count", "count"))).Generate();
+      var request = ((T) CreateQueryDescriptor().Aggregations(new LongSumAggregator("sum_count", "count"))).Generate();
 
       var agg = request.RequestData.Aggregations.First() as LongSumAggregator;
 
@@ -25,7 +29,7 @@ namespace Raygun.Druid4Net.Tests.Fluent.QueryDescriptors
     {
       var fields = new List<IPostAggregationSpec> {new FieldAccessPostAggregator("loaded", "my_loaded"), new FieldAccessPostAggregator("total", "my_total") };
       var aggregations = new List<IPostAggregationSpec> {new ArithmeticPostAggregator("average", fields, ArithmeticFunction.Divide) };
-      var request = ((TopNQueryDescriptor) new TopNQueryDescriptor().PostAggregations(aggregations)).Generate();
+      var request = ((T) CreateQueryDescriptor().PostAggregations(aggregations)).Generate();
 
       var agg = request.RequestData.PostAggregations.First() as ArithmeticPostAggregator;
 

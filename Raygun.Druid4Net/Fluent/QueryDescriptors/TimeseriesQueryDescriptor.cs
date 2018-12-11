@@ -4,7 +4,7 @@
   {
     internal bool DescendingValue;
 
-    internal new TimeseriesContextSpec ContextValue;
+    internal TimeseriesContextSpec ContextValue;
 
     public TimeseriesQueryDescriptor()
     {

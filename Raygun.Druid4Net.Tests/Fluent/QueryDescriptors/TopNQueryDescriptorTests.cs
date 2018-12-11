@@ -3,8 +3,13 @@
 namespace Raygun.Druid4Net.Tests.Fluent.QueryDescriptors
 {
   [TestFixture]
-  public class TopNQueryDescriptorTests
+  public class TopNQueryDescriptorTests : AggregationQueryDescriptorTests<TopNQueryDescriptor, TopNRequestData>
   {
+    protected override TopNQueryDescriptor CreateQueryDescriptor()
+    {
+      return new TopNQueryDescriptor();
+    }
+    
     [Test]
     public void DefaultQuery_HasCorrectQueryType()
     {
@@ -60,15 +65,40 @@ namespace Raygun.Druid4Net.Tests.Fluent.QueryDescriptors
 
       Assert.That(request.RequestData.Threshold, Is.EqualTo(10));
     }
-
+    
     [Test]
-    public void ContextMinTopNThresholdIsSet_SetsMinTopNThresholdInBody()
+    public void ContextPropertiesAreSet_SetsContextInBody()
     {
-      var request = ((TopNQueryDescriptor)new TopNQueryDescriptor()
-        .Context(minTopNThreshold: 500))
-        .Generate();
+      var request = ((TopNQueryDescriptor)new TopNQueryDescriptor().Context(
+        timeout: 60, 
+        maxScatterGatherBytes: 100,
+        priority: 10,
+        queryId: "ABC",
+        useCache: false,
+        populateCache: false,
+        bySegment: true,
+        finalize: false,
+        chunkPeriod: "PT1H",
+        serializeDateTimeAsLong: true,
+        serializeDateTimeAsLongInner: false,
+        minTopNThreshold: 500
+        )).Generate();
 
-      Assert.That(request.RequestData.Context.MinTopNThreshold, Is.EqualTo(500));
+      var context = request.RequestData.Context;
+
+      Assert.IsNotNull(context);
+      Assert.That(context.Timeout, Is.EqualTo(60));
+      Assert.That(context.MaxScatterGatherBytes, Is.EqualTo(100));
+      Assert.That(context.Priority, Is.EqualTo(10));
+      Assert.That(context.QueryId, Is.EqualTo("ABC"));
+      Assert.That(context.UseCache, Is.False);
+      Assert.That(context.PopulateCache, Is.False);
+      Assert.That(context.BySegment, Is.True);
+      Assert.That(context.Finalize, Is.False);
+      Assert.That(context.ChunkPeriod, Is.EqualTo("PT1H"));
+      Assert.That(context.SerializeDateTimeAsLong, Is.True);
+      Assert.That(context.SerializeDateTimeAsLongInner, Is.False);
+      Assert.That(context.MinTopNThreshold, Is.EqualTo(500));
     }
   }
 }

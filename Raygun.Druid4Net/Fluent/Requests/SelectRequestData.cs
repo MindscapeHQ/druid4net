@@ -2,13 +2,9 @@
 
 namespace Raygun.Druid4Net
 {
-  public class SelectRequestData
+  public class SelectRequestData : QueryRequestData
   {
     public string QueryType => "select";
-    public string DataSource { get; }
-    public object Granularity { get; }
-    public IList<string> Intervals { get; }
-    public IFilterSpec Filter { get; }
     public IContextSpec Context { get; }
     public IEnumerable<string> Dimensions { get; }
     public IEnumerable<string> Metrics { get; }

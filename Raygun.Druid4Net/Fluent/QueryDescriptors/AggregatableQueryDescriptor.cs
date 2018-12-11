@@ -2,7 +2,7 @@
 
 namespace Raygun.Druid4Net
 {
-  public abstract class AggregatableQueryDescriptor<TResponse> : QueryDescriptor<TResponse>, IAggregatableQueryDescriptor where TResponse : class
+  public abstract class AggregatableQueryDescriptor<TRequest> : QueryDescriptor<TRequest>, IAggregatableQueryDescriptor where TRequest : QueryRequestData
   {
     internal IEnumerable<IAggregationSpec> AggregationSpecsValue;
 

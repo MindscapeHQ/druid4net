@@ -8,7 +8,7 @@
 
     internal long ThresholdValue;
 
-    internal new TopNContextSpec ContextValue;
+    internal TopNContextSpec ContextValue;
 
     public TopNQueryDescriptor()
     {

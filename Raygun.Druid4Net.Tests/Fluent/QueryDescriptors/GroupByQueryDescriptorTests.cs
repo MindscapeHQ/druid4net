@@ -4,8 +4,13 @@ using NUnit.Framework;
 namespace Raygun.Druid4Net.Tests.Fluent.QueryDescriptors
 {
   [TestFixture]
-  public class GroupByQueryDescriptorTests
+  public class GroupByQueryDescriptorTests : AggregationQueryDescriptorTests<GroupByQueryDescriptor, GroupByRequestData>
   {
+    protected override GroupByQueryDescriptor CreateQueryDescriptor()
+    {
+      return new GroupByQueryDescriptor();
+    }
+    
     [Test]
     public void DefaultQuery_HasCorrectQueryType()
     {

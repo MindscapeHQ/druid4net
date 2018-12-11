@@ -12,6 +12,8 @@ namespace Raygun.Druid4Net
 
     internal IEnumerable<string> DimensionsValue;
 
+    internal ContextSpec ContextValue;
+    
     public ISelectQueryDescriptor Metrics(IEnumerable<string> metrics)
     {
       MetricsValue = metrics;
@@ -33,6 +35,13 @@ namespace Raygun.Druid4Net
     public ISelectQueryDescriptor Descending(bool descending)
     {
       DescendingValue = descending;
+      return this;
+    }
+    
+    public IQueryDescriptor Context(int? timeout = null, long? maxScatterGatherBytes = null, int? priority = null, string queryId = null, bool? useCache = null, bool? populateCache = null, bool? bySegment = null, bool? finalize = null, string chunkPeriod = null, bool? serializeDateTimeAsLong = null, bool? serializeDateTimeAsLongInner = null)
+    {
+      SetCommonContextProperties(ContextValue, timeout, maxScatterGatherBytes, priority, queryId, useCache, populateCache, bySegment, finalize, chunkPeriod, serializeDateTimeAsLong, serializeDateTimeAsLongInner);
+
       return this;
     }
 

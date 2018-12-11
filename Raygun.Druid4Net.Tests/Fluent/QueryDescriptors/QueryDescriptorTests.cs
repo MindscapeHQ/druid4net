@@ -4,12 +4,14 @@ using NUnit.Framework;
 namespace Raygun.Druid4Net.Tests.Fluent.QueryDescriptors
 {
   [TestFixture]
-  public class QueryDescriptorTests
+  public abstract class QueryDescriptorTests<T, TResponse> where T : QueryDescriptor<TResponse> where TResponse : QueryRequestData
   {
+    protected abstract T CreateQueryDescriptor();
+    
     [Test]
     public void DataSourceIsSet_SetsDataSourceInBody()
     {
-      var request = ((TopNQueryDescriptor) new TopNQueryDescriptor().DataSource("test_datasource")).Generate();
+      var request = ((T) CreateQueryDescriptor().DataSource("test_datasource")).Generate();
 
       Assert.That(request.RequestData.DataSource, Is.EqualTo("test_datasource"));
     }
@@ -19,7 +21,7 @@ namespace Raygun.Druid4Net.Tests.Fluent.QueryDescriptors
     {
       var fromDate = DateTime.Parse("2017-10-01T14:45:22.123");
       var toDate = DateTime.Parse("2017-10-02T10:35:21.345");
-      var request = ((TopNQueryDescriptor) new TopNQueryDescriptor().Interval(fromDate, toDate)).Generate();
+      var request = ((T)  CreateQueryDescriptor().Interval(fromDate, toDate)).Generate();
 
       Assert.That(request.RequestData.Intervals[0], Is.EqualTo("2017-10-01T14:45:22Z/2017-10-02T10:35:21Z"));
     }
@@ -29,7 +31,7 @@ namespace Raygun.Druid4Net.Tests.Fluent.QueryDescriptors
     {
       var fromDate = DateTime.Parse("2017-10-01T14:45:22.123");
       var toDate = DateTime.Parse("2017-10-02T10:35:21.345");
-      var request = ((TopNQueryDescriptor) new TopNQueryDescriptor().Intervals(new Interval(fromDate, toDate), new Interval(fromDate.AddMonths(1), toDate.AddMonths(1)))).Generate();
+      var request = ((T) CreateQueryDescriptor().Intervals(new Interval(fromDate, toDate), new Interval(fromDate.AddMonths(1), toDate.AddMonths(1)))).Generate();
 
       Assert.That(request.RequestData.Intervals.Count, Is.EqualTo(2));
       Assert.That(request.RequestData.Intervals[0], Is.EqualTo("2017-10-01T14:45:22Z/2017-10-02T10:35:21Z"));
@@ -41,7 +43,7 @@ namespace Raygun.Druid4Net.Tests.Fluent.QueryDescriptors
     {
       var fromDate = DateTime.Parse("2017-10-01T14:45:22.123");
       var toDate = fromDate.AddHours(-1);
-      var request = ((TopNQueryDescriptor) new TopNQueryDescriptor().Interval(fromDate, toDate)).Generate();
+      var request = ((T) CreateQueryDescriptor().Interval(fromDate, toDate)).Generate();
 
       Assert.That(request.RequestData.Intervals[0], Is.EqualTo("2017-10-01T14:45:22Z/2017-10-01T14:45:22Z"));
     }
@@ -61,7 +63,7 @@ namespace Raygun.Druid4Net.Tests.Fluent.QueryDescriptors
     [TestCase(Granularities.Year, "year")]
     public void GranularityIsSet_SetsGranularityInBody(Granularities granularity, string expectedGranularity)
     {
-      var request = ((TopNQueryDescriptor)new TopNQueryDescriptor().Granularity(granularity)).Generate();
+      var request = ((T) CreateQueryDescriptor().Granularity(granularity)).Generate();
  
       Assert.That(request.RequestData.Granularity, Is.EqualTo(expectedGranularity));
     }
@@ -70,7 +72,7 @@ namespace Raygun.Druid4Net.Tests.Fluent.QueryDescriptors
     public void DurationGranularitySpecIsSet_SetsGranularityInBody()
     {
       var originDate = DateTime.Parse("2017-10-01T14:45:22");
-      var request = ((TopNQueryDescriptor)new TopNQueryDescriptor().Granularity(new DurationGranularity(60, originDate))).Generate();
+      var request = ((T)CreateQueryDescriptor().Granularity(new DurationGranularity(60, originDate))).Generate();
  
       var granularity = request.RequestData.Granularity as DurationGranularity;
 
@@ -84,7 +86,7 @@ namespace Raygun.Druid4Net.Tests.Fluent.QueryDescriptors
     public void PeriodGranularitySpecIsSet_SetsGranularityInBody()
     {
       var originDate = DateTime.Parse("2017-10-01T14:45:22");
-      var request = ((TopNQueryDescriptor)new TopNQueryDescriptor().Granularity(new PeriodGranularity("PT10M", "UTC", originDate))).Generate();
+      var request = ((T)CreateQueryDescriptor().Granularity(new PeriodGranularity("PT10M", "UTC", originDate))).Generate();
  
       var granularity = request.RequestData.Granularity as PeriodGranularity;
 
@@ -98,7 +100,7 @@ namespace Raygun.Druid4Net.Tests.Fluent.QueryDescriptors
     [Test]
     public void BasicFilterIsSet_SetsFilterInBody()
     {
-      var request = ((TopNQueryDescriptor) new TopNQueryDescriptor().Filter(new SelectorFilter("test_dim", "test_value"))).Generate();
+      var request = ((T)CreateQueryDescriptor().Filter(new SelectorFilter("test_dim", "test_value"))).Generate();
 
       var filter = request.RequestData.Filter as SelectorFilter;
 
@@ -106,38 +108,6 @@ namespace Raygun.Druid4Net.Tests.Fluent.QueryDescriptors
       Assert.That(filter.Type, Is.EqualTo("selector"));
       Assert.That(filter.Dimension, Is.EqualTo("test_dim"));
       Assert.That(filter.Value, Is.EqualTo("test_value"));
-    }
-    
-    [Test]
-    public void CommonContextPropertiesAreSet_SetsContextInBody()
-    {
-      var request = ((TopNQueryDescriptor) new TopNQueryDescriptor().Context(
-        timeout: 60, 
-        maxScatterGatherBytes: 100,
-        priority: 10,
-        queryId: "ABC",
-        useCache: false,
-        populateCache: false,
-        bySegment: true,
-        finalize: false,
-        chunkPeriod: "PT1H",
-        serializeDateTimeAsLong: true,
-        serializeDateTimeAsLongInner: false)).Generate();
-
-      var context = request.RequestData.Context as ContextSpec;
-
-      Assert.IsNotNull(context);
-      Assert.That(context.Timeout, Is.EqualTo(60));
-      Assert.That(context.MaxScatterGatherBytes, Is.EqualTo(100));
-      Assert.That(context.Priority, Is.EqualTo(10));
-      Assert.That(context.QueryId, Is.EqualTo("ABC"));
-      Assert.That(context.UseCache, Is.False);
-      Assert.That(context.PopulateCache, Is.False);
-      Assert.That(context.BySegment, Is.True);
-      Assert.That(context.Finalize, Is.False);
-      Assert.That(context.ChunkPeriod, Is.EqualTo("PT1H"));
-      Assert.That(context.SerializeDateTimeAsLong, Is.True);
-      Assert.That(context.SerializeDateTimeAsLongInner, Is.False);
     }
   }
 }
