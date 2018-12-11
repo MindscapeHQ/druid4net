@@ -73,6 +73,14 @@
     <Compile Include="Fluent\Filters\RegexFilterTests.cs" />
     <Compile Include="Fluent\Filters\SearchFilterTests.cs" />
     <Compile Include="Fluent\Filters\SelectorFilterTests.cs" />
+    <Compile Include="Fluent\Having\AndHavingSpecTests.cs" />
+    <Compile Include="Fluent\Having\DimensionSelectorHavingSpecTests.cs" />
+    <Compile Include="Fluent\Having\EqualToHavingSpecTests.cs" />
+    <Compile Include="Fluent\Having\GreaterThanHavingSpecTests.cs" />
+    <Compile Include="Fluent\Having\LessThanHavingSpecTests.cs" />
+    <Compile Include="Fluent\Having\NotHavingSpecTests.cs" />
+    <Compile Include="Fluent\Having\OrHavingSpecTests.cs" />
+    <Compile Include="Fluent\Having\QueryFilterHavingSpecTests.cs" />
     <Compile Include="Fluent\QueryDescriptors\AggregationQueryDescriptorTests.cs" />
     <Compile Include="Fluent\QueryDescriptors\GroupByQueryDescriptorTests.cs" />
     <Compile Include="Fluent\QueryDescriptors\QueryDescriptorTests.cs" />

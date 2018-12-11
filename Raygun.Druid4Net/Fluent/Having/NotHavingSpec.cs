@@ -1,16 +1,14 @@
-﻿using System.Collections.Generic;
-
-namespace Raygun.Druid4Net
+﻿namespace Raygun.Druid4Net
 {
   public class NotHavingSpec : IHavingSpec
   {
     public string Type => "not";
 
-    public IEnumerable<IHavingSpec> HavingSpecs { get; }
+    public IHavingSpec HavingSpec { get; }
 
-    public NotHavingSpec(params IHavingSpec[] havingSpecs)
+    public NotHavingSpec(IHavingSpec havingSpec)
     {
-      HavingSpecs = havingSpecs;
+      HavingSpec = havingSpec;
     }
   }
 }
