@@ -20,7 +20,7 @@ namespace Raygun.Druid4Net
 
     public string ToInterval()
     {
-      return $"{From:yyyy-MM-ddTHH:mm:ssZ}/{To:yyyy-MM-ddTHH:mm:ssZ}";
+      return $"{From:yyyy-MM-ddTHH:mm:ss.fffZ}/{To:yyyy-MM-ddTHH:mm:ss.fffZ}";
     }
   }
 }

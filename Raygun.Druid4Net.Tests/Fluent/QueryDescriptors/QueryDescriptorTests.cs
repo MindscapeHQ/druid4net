@@ -23,7 +23,7 @@ namespace Raygun.Druid4Net.Tests.Fluent.QueryDescriptors
       var toDate = DateTime.Parse("2017-10-02T10:35:21.345");
       var request = ((T)  CreateQueryDescriptor().Interval(fromDate, toDate)).Generate();
 
-      Assert.That(request.RequestData.Intervals[0], Is.EqualTo("2017-10-01T14:45:22Z/2017-10-02T10:35:21Z"));
+      Assert.That(request.RequestData.Intervals[0], Is.EqualTo("2017-10-01T14:45:22.123Z/2017-10-02T10:35:21.345Z"));
     }
 
     [Test]
@@ -34,8 +34,8 @@ namespace Raygun.Druid4Net.Tests.Fluent.QueryDescriptors
       var request = ((T) CreateQueryDescriptor().Intervals(new Interval(fromDate, toDate), new Interval(fromDate.AddMonths(1), toDate.AddMonths(1)))).Generate();
 
       Assert.That(request.RequestData.Intervals.Count, Is.EqualTo(2));
-      Assert.That(request.RequestData.Intervals[0], Is.EqualTo("2017-10-01T14:45:22Z/2017-10-02T10:35:21Z"));
-      Assert.That(request.RequestData.Intervals[1], Is.EqualTo("2017-11-01T14:45:22Z/2017-11-02T10:35:21Z"));
+      Assert.That(request.RequestData.Intervals[0], Is.EqualTo("2017-10-01T14:45:22.123Z/2017-10-02T10:35:21.345Z"));
+      Assert.That(request.RequestData.Intervals[1], Is.EqualTo("2017-11-01T14:45:22.123Z/2017-11-02T10:35:21.345Z"));
     }
 
     [Test]
@@ -45,7 +45,7 @@ namespace Raygun.Druid4Net.Tests.Fluent.QueryDescriptors
       var toDate = fromDate.AddHours(-1);
       var request = ((T) CreateQueryDescriptor().Interval(fromDate, toDate)).Generate();
 
-      Assert.That(request.RequestData.Intervals[0], Is.EqualTo("2017-10-01T14:45:22Z/2017-10-01T14:45:22Z"));
+      Assert.That(request.RequestData.Intervals[0], Is.EqualTo("2017-10-01T14:45:22.123Z/2017-10-01T14:45:22.123Z"));
     }
 
     [Test]
