@@ -86,6 +86,9 @@
     <Compile Include="Fluent\Intervals\IntervalTests.cs" />
     <Compile Include="Fluent\Limits\DefaultLimitSpecTests.cs" />
     <Compile Include="Fluent\Limits\OrderByColumnSpecTests.cs" />
+    <Compile Include="Fluent\Metrics\DimensionTopNMetricSpecTests.cs" />
+    <Compile Include="Fluent\Metrics\InvertedTopNMetricSpecTests.cs" />
+    <Compile Include="Fluent\Metrics\NumericTopNMetricSpecTests.cs" />
     <Compile Include="Fluent\PostAggregations\ArithmeticPostAggregatorTests.cs" />
     <Compile Include="Fluent\PostAggregations\FieldAccessPostAggregatorTests.cs" />
     <Compile Include="Fluent\PostAggregations\FinalizingFieldAccessPostAggregatorTests.cs" />
