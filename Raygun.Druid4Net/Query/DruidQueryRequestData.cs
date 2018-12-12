@@ -1,6 +1,6 @@
 ﻿namespace Raygun.Druid4Net
 {
-  public class QueryRequestData
+  public class DruidQueryRequestData
   {
     public string Address { get; set; }
     public string Method { get; set; }

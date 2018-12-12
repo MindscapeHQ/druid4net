@@ -10,9 +10,9 @@ namespace Raygun.Druid4Net
 
     public DateTime? Origin { get; }
 
-    public DurationGranularity(long duration, DateTime? origin = null)
+    public DurationGranularity(long durationMillis, DateTime? origin = null)
     {
-      Duration = duration;
+      Duration = durationMillis;
       Origin = origin;
     }
   }

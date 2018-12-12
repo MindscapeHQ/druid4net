@@ -13,10 +13,10 @@ namespace Raygun.Druid4Net
     public FragmentQuery(params string[] values) : this(false, values)
     { }
 
-    public FragmentQuery(bool caseSesitive, params string[] values)
+    public FragmentQuery(bool caseSensitive, params string[] values)
     {
       Values = values;
-      CaseSensitive = caseSesitive;
+      CaseSensitive = caseSensitive;
     }
   }
 }

@@ -1,6 +1,6 @@
 ﻿namespace Raygun.Druid4Net
 {
-  public abstract class SumAggregator : IAggregationSpec
+  public abstract class BaseAggregator : IAggregationSpec
   {
     public abstract string Type { get; }
 
@@ -8,7 +8,7 @@
 
     public string FieldName { get; }
 
-    protected SumAggregator(string name, string fieldName = null)
+    protected BaseAggregator(string name, string fieldName = null)
     {
       Name = name;
       FieldName = fieldName ?? name;

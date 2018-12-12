@@ -5,15 +5,13 @@ namespace Raygun.Druid4Net
 {
   public class GroupByQueryDescriptor : AggregatableQueryDescriptor<GroupByRequestData>, IGroupByQueryDescriptor
   {
-    internal IEnumerable<string> MetricsValue;
-
     internal IEnumerable<string> DimensionsValue;
 
     internal ILimitSpec LimitSpecValue;
 
     internal IHavingSpec HavingSpecValue;
 
-    internal new GroupByContextSpec ContextValue;
+    internal GroupByContextSpec ContextValue;
 
     internal IGroupByQueryDescriptor InnerDataSourceValue;
 
@@ -22,14 +20,7 @@ namespace Raygun.Druid4Net
       ContextValue = new GroupByContextSpec();
     }
 
-    public IGroupByQueryDescriptor Metrics(IEnumerable<string> metrics)
-    {
-      MetricsValue = metrics;
-
-      return this;
-    }
-
-    public IGroupByQueryDescriptor Dimensions(IEnumerable<string> dimensions)
+    public IGroupByQueryDescriptor Dimensions(params string[] dimensions)
     {
       DimensionsValue = dimensions;
 
@@ -61,7 +52,7 @@ namespace Raygun.Druid4Net
 
     public IGroupByQueryDescriptor Context(int? timeout = null, long? maxScatterGatherBytes = null, int? priority = null, string queryId = null, bool? useCache = null, bool? populateCache = null, bool? bySegment = null, bool? finalize = null, string chunkPeriod = null, bool? serializeDateTimeAsLong = null, bool? serializeDateTimeAsLongInner = null, string groupByStrategy = null, long? maxOnDiskStorage = null)
     {
-      SetCommonContextProperties(timeout, maxScatterGatherBytes, priority, queryId, useCache, populateCache, bySegment, finalize, chunkPeriod, serializeDateTimeAsLong, serializeDateTimeAsLongInner);
+      SetCommonContextProperties(ContextValue, timeout, maxScatterGatherBytes, priority, queryId, useCache, populateCache, bySegment, finalize, chunkPeriod, serializeDateTimeAsLong, serializeDateTimeAsLongInner);
 
       ContextValue.GroupByStrategy = groupByStrategy;
       ContextValue.MaxOnDiskStorage = maxOnDiskStorage;

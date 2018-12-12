@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Raygun.Druid4Net
 {
-  public abstract class QueryDescriptor<TResponse> : IQueryDescriptor where TResponse : class
+  public abstract class QueryDescriptor<TRequest> : IQueryDescriptor where TRequest : QueryRequestData
   {
     internal List<string> IntervalsValue;
 
@@ -13,24 +13,31 @@ namespace Raygun.Druid4Net
 
     internal IFilterSpec FilterValue;
 
-    internal ContextSpec ContextValue;
-
     protected QueryDescriptor()
     {
-      ContextValue = new ContextSpec();
       IntervalsValue = new List<string>();
     }
 
-    public IQueryDescriptor Intervals(DateTime dateFrom, DateTime dateTo)
+    public IQueryDescriptor Interval(DateTime from, DateTime to)
     {
-      if (dateTo < dateFrom)
-      {
-        dateTo = dateFrom;
-      }
-
-      IntervalsValue.Add($"{dateFrom:yyyy-MM-ddTHH:mm:ssZ}/{dateTo:yyyy-MM-ddTHH:mm:ssZ}");
+      AddInterval(new Interval(from, to));      
 
       return this;
+    }
+
+    public IQueryDescriptor Intervals(params Interval[] intervals)
+    {
+      foreach (var interval in intervals)
+      {
+        AddInterval(interval);
+      }
+
+      return this;
+    }
+
+    private void AddInterval(Interval interval)
+    {
+      IntervalsValue.Add(interval.ToInterval());
     }
 
     public IQueryDescriptor DataSource(string dataSource)
@@ -100,28 +107,21 @@ namespace Raygun.Druid4Net
       return this;
     }
 
-    public IQueryDescriptor Context(int? timeout = null, long? maxScatterGatherBytes = null, int? priority = null, string queryId = null, bool? useCache = null, bool? populateCache = null, bool? bySegment = null, bool? finalize = null, string chunkPeriod = null, bool? serializeDateTimeAsLong = null, bool? serializeDateTimeAsLongInner = null)
+    protected void SetCommonContextProperties(ContextSpec context, int? timeout, long? maxScatterGatherBytes, int? priority, string queryId, bool? useCache, bool? populateCache, bool? bySegment, bool? finalize, string chunkPeriod, bool? serializeDateTimeAsLong, bool? serializeDateTimeAsLongInner)
     {
-      SetCommonContextProperties(timeout, maxScatterGatherBytes, priority, queryId, useCache, populateCache, bySegment, finalize, chunkPeriod, serializeDateTimeAsLong, serializeDateTimeAsLongInner);
-
-      return this;
+      context.Timeout = timeout;
+      context.MaxScatterGatherBytes = maxScatterGatherBytes;
+      context.Priority = priority;
+      context.QueryId = queryId;
+      context.UseCache = useCache;
+      context.PopulateCache = populateCache;
+      context.BySegment = bySegment;
+      context.Finalize = finalize;
+      context.ChunkPeriod = chunkPeriod;
+      context.SerializeDateTimeAsLong = serializeDateTimeAsLong;
+      context.SerializeDateTimeAsLongInner = serializeDateTimeAsLongInner;
     }
 
-    protected void SetCommonContextProperties(int? timeout, long? maxScatterGatherBytes, int? priority, string queryId, bool? useCache, bool? populateCache, bool? bySegment, bool? finalize, string chunkPeriod, bool? serializeDateTimeAsLong, bool? serializeDateTimeAsLongInner)
-    {
-      ContextValue.Timeout = timeout;
-      ContextValue.MaxScatterGatherBytes = maxScatterGatherBytes;
-      ContextValue.Priority = priority;
-      ContextValue.QueryId = queryId;
-      ContextValue.UseCache = useCache;
-      ContextValue.PopulateCache = populateCache;
-      ContextValue.BySegment = bySegment;
-      ContextValue.Finalize = finalize;
-      ContextValue.ChunkPeriod = chunkPeriod;
-      ContextValue.SerializeDateTimeAsLong = serializeDateTimeAsLong;
-      ContextValue.SerializeDateTimeAsLongInner = serializeDateTimeAsLongInner;
-    }
-
-    internal abstract IDruidRequest<TResponse> Generate();
+    internal abstract IDruidRequest<TRequest> Generate();
   }
 }

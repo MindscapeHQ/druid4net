@@ -18,7 +18,7 @@ namespace Raygun.Druid4Net.IntegrationTests.Queries.TopN
         .Threshold(10)
         .Aggregations(new LongSumAggregator(Wikiticker.Metrics.Count))
         .DataSource(Wikiticker.DataSource)
-        .Intervals(FromDate, ToDate)
+        .Interval(FromDate, ToDate)
         .Granularity(Granularities.All)
       );
 

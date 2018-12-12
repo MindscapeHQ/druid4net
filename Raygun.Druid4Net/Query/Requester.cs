@@ -19,7 +19,7 @@ namespace Raygun.Druid4Net
 
     public async Task<IQueryResponse<TResponse>> PostAsync<TResponse, TRequest>(string endpoint, IDruidRequest<TRequest> request)
       where TResponse : class
-      where TRequest : class
+      where TRequest : QueryRequestData
     {
       //try
       //{
@@ -35,7 +35,7 @@ namespace Raygun.Druid4Net
       var queryResponse = new DruidResponse<TResponse>
       {
         Data = data,
-        RequestData = new QueryRequestData
+        RequestData = new DruidQueryRequestData
         {
           Address = _client.BaseAddress + endpoint,
           Method = "POST",

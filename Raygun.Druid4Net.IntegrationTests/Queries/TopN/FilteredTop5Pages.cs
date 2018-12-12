@@ -22,7 +22,7 @@ namespace Raygun.Druid4Net.IntegrationTests.Queries.TopN
           new SelectorFilter(Wikiticker.Dimensions.CountryCode, "US")
         ))
         .DataSource(Wikiticker.DataSource)
-        .Intervals(FromDate, ToDate)
+        .Interval(FromDate, ToDate)
         .Granularity(Granularities.All)
       );
 

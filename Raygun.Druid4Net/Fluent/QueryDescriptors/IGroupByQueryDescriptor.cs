@@ -12,7 +12,7 @@ namespace Raygun.Druid4Net
 
     IGroupByQueryDescriptor Having(IHavingSpec havingSpec);
 
-    IGroupByQueryDescriptor Dimensions(IEnumerable<string> dimensions);
+    IGroupByQueryDescriptor Dimensions(params string[] dimensions);
 
     IGroupByQueryDescriptor Limit(ILimitSpec limitSpec);
   }
