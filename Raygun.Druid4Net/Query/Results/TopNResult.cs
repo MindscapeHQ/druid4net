@@ -3,11 +3,11 @@ using System.Collections.Generic;
 
 namespace Raygun.Druid4Net
 {
-  public class TopNResult<T> : List<TimestampedResult<T>>
+  public class TopNResult<T> : List<TimestampedResultList<T>>
   {
   }
 
-  public class TimestampedResult<T>
+  public class TimestampedResultList<T>
   {
     public DateTime Timestamp { get; set; }
 
