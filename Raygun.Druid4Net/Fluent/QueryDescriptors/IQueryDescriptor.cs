@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Raygun.Druid4Net
 {
@@ -9,6 +10,8 @@ namespace Raygun.Druid4Net
     IQueryDescriptor Interval(DateTime from, DateTime to);
     
     IQueryDescriptor Intervals(params Interval[] intervals);
+    
+    IQueryDescriptor Intervals(IEnumerable<Interval> intervals);
 
     IQueryDescriptor Granularity(Granularities granularity);
 

@@ -14,6 +14,20 @@ namespace Raygun.Druid4Net
 
       return this;
     }
+    
+    public IAggregatableQueryDescriptor Aggregations(IEnumerable<IAggregationSpec> aggregationsSpec)
+    {
+      AggregationSpecsValue = aggregationsSpec;
+
+      return this;
+    }
+
+    public IAggregatableQueryDescriptor PostAggregations(params IPostAggregationSpec[] postAggregationsSpec)
+    {
+      PostAggregationSpecsValue = postAggregationsSpec;
+
+      return this;
+    }
 
     public IAggregatableQueryDescriptor PostAggregations(IEnumerable<IPostAggregationSpec> postAggregationsSpec)
     {

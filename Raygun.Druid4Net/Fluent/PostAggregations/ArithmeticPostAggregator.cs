@@ -14,7 +14,13 @@ namespace Raygun.Druid4Net
 
     public string Ordering { get; }
 
-    public ArithmeticPostAggregator(string name, IEnumerable<IPostAggregationSpec> fields, ArithmeticFunction fn, string ordering = null)
+
+    public ArithmeticPostAggregator(string name, ArithmeticFunction fn, string ordering = null, params IPostAggregationSpec[] fields)
+      : this(name, fn, fields, ordering)
+    {
+    }
+
+    public ArithmeticPostAggregator(string name, ArithmeticFunction fn, IEnumerable<IPostAggregationSpec> fields, string ordering = null)
     {
       Name = name;
       Fields = fields;

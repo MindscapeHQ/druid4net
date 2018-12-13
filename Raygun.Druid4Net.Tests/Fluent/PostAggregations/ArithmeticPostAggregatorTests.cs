@@ -10,7 +10,7 @@ namespace Raygun.Druid4Net.Tests.Fluent.PostAggregations
     [Test]
     public void Constructor_TypeIsCorrect()
     {
-      var spec = new ArithmeticPostAggregator("average", null, ArithmeticFunction.Divide);
+      var spec = new ArithmeticPostAggregator("average", ArithmeticFunction.Divide, null);
       Assert.That(spec.Type, Is.EqualTo("arithmetic"));
     }
     
@@ -18,7 +18,7 @@ namespace Raygun.Druid4Net.Tests.Fluent.PostAggregations
     public void Constructor_WithMinimumValues_PropertiesAreSet()
     {
       var fields = new List<IPostAggregationSpec> {new FieldAccessPostAggregator("loaded", "my_loaded"), new FieldAccessPostAggregator("total", "my_total") };
-      var spec = new ArithmeticPostAggregator("average", fields, ArithmeticFunction.Divide);
+      var spec = new ArithmeticPostAggregator("average", ArithmeticFunction.Divide, fields);
       
       Assert.That(spec.Fn, Is.EqualTo("/"));
       Assert.That(spec.Name, Is.EqualTo("average"));
@@ -29,35 +29,35 @@ namespace Raygun.Druid4Net.Tests.Fluent.PostAggregations
     [Test]
     public void Constructor_WithPlusFunction_FunctionIsSet()
     {
-      var spec = new ArithmeticPostAggregator("average", null, ArithmeticFunction.Plus);
+      var spec = new ArithmeticPostAggregator("average", ArithmeticFunction.Plus, null);
       Assert.That(spec.Fn, Is.EqualTo("+"));
     }
     
     [Test]
     public void Constructor_WithMinusFunction_FunctionIsSet()
     {
-      var spec = new ArithmeticPostAggregator("average", null, ArithmeticFunction.Minus);
+      var spec = new ArithmeticPostAggregator("average", ArithmeticFunction.Minus, null);
       Assert.That(spec.Fn, Is.EqualTo("-"));
     }
     
     [Test]
     public void Constructor_WithMultiplyFunction_FunctionIsSet()
     {
-      var spec = new ArithmeticPostAggregator("average", null, ArithmeticFunction.Multiply);
+      var spec = new ArithmeticPostAggregator("average", ArithmeticFunction.Multiply, null);
       Assert.That(spec.Fn, Is.EqualTo("*"));
     }
     
     [Test]
     public void Constructor_WithDivideFunction_FunctionIsSet()
     {
-      var spec = new ArithmeticPostAggregator("average", null, ArithmeticFunction.Divide);
+      var spec = new ArithmeticPostAggregator("average", ArithmeticFunction.Divide, null);
       Assert.That(spec.Fn, Is.EqualTo("/"));
     }
     
     [Test]
     public void Constructor_WithQuotientFunction_FunctionIsSet()
     {
-      var spec = new ArithmeticPostAggregator("average", null, ArithmeticFunction.Quotient);
+      var spec = new ArithmeticPostAggregator("average", ArithmeticFunction.Quotient, null);
       Assert.That(spec.Fn, Is.EqualTo("quotient"));
     }
   }

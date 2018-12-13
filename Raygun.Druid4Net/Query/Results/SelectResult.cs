@@ -3,7 +3,11 @@ using System.Collections.Generic;
 
 namespace Raygun.Druid4Net
 {
-  public class SelectResult<T>
+  public class SelectResult<T> : List<SelectResultList<T>>
+  {
+  }
+  
+  public class SelectResultList<T>
   {
     public DateTime Timestamp { get; set; }
 
@@ -12,9 +16,13 @@ namespace Raygun.Druid4Net
 
   public class SelectEventList<T>
   {
-    public IDictionary<string, int> PagingIdentifiers { get; set; }
+    public Dictionary<string, int> PagingIdentifiers { get; set; }
+   
+    public List<string> Dimensions { get; set; }
+    
+    public List<string> Metrics { get; set; }
 
-    public IList<SelectEvent<T>> Events { get; set; }
+    public List<SelectEvent<T>> Events { get; set; }
   }
 
   public class SelectEvent<T>
