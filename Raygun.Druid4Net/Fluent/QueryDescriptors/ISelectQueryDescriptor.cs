@@ -5,8 +5,12 @@ namespace Raygun.Druid4Net
   public interface ISelectQueryDescriptor : IQueryDescriptor
   {
     ISelectQueryDescriptor Metrics(params string[] metrics);
+    
+    ISelectQueryDescriptor Metrics(IEnumerable<string> metrics);
 
     ISelectQueryDescriptor Dimensions(params string[] dimensions);
+    
+    ISelectQueryDescriptor Dimensions(IEnumerable<string> dimensions);
 
     ISelectQueryDescriptor Paging(PagingSpec pagingSpec);
 

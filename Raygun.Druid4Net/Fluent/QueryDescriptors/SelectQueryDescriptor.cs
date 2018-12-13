@@ -25,7 +25,19 @@ namespace Raygun.Druid4Net
       return this;
     }
 
+    public ISelectQueryDescriptor Metrics(IEnumerable<string> metrics)
+    {
+      MetricsValue = metrics;
+      return this;
+    }
+
     public ISelectQueryDescriptor Dimensions(params string[] dimensions)
+    {
+      DimensionsValue = dimensions;
+      return this;
+    }
+
+    public ISelectQueryDescriptor Dimensions(IEnumerable<string> dimensions)
     {
       DimensionsValue = dimensions;
       return this;

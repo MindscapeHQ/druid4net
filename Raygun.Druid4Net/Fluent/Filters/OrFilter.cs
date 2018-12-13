@@ -12,5 +12,10 @@ namespace Raygun.Druid4Net
     {
       Fields = filters;
     }
+    
+    public OrFilter(IEnumerable<IFilterSpec> filters)
+    {
+      Fields = filters;
+    }
   }
 }

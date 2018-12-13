@@ -35,6 +35,16 @@ namespace Raygun.Druid4Net
       return this;
     }
 
+    public IQueryDescriptor Intervals(IEnumerable<Interval> intervals)
+    {
+      foreach (var interval in intervals)
+      {
+        AddInterval(interval);
+      }
+
+      return this;
+    }
+
     private void AddInterval(Interval interval)
     {
       IntervalsValue.Add(interval.ToInterval());

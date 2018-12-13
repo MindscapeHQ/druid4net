@@ -1,6 +1,4 @@
 ﻿using System;
-using System.IO;
-using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -70,6 +68,10 @@ namespace Raygun.Druid4Net
               case "io.druid.query.ResourceLimitExceededException":
                 ex = new DruidResourceExceededException(errorResponse.ErrorMessage);
                 break;
+              
+              case "com.fasterxml.jackson.databind.JsonMappingException":
+                ex = new DruidJsonMappingException(errorResponse.ErrorMessage);
+                break;
 
               case "io.druid.java.util.common.RE":
                 if (errorResponse.ErrorMessage.Contains("ReadTimeoutException"))
@@ -81,7 +83,7 @@ namespace Raygun.Druid4Net
 
               default:
                 var message = errorResponse.ErrorMessage ?? errorResponse.Error;
-                ex = new DruidClientException($"Failed request to {_client.BaseAddress}{endpoint}with error: {message}");
+                ex = new DruidClientException($"Failed request to {_client.BaseAddress}{endpoint} {message}");
                 break;
             }
 

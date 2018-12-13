@@ -28,7 +28,7 @@ namespace Raygun.Druid4Net.Tests.Fluent.QueryDescriptors
     public void ArithmeticPostAggregataionIsSet_SetsPostAggregationInBody()
     {
       var fields = new List<IPostAggregationSpec> {new FieldAccessPostAggregator("loaded", "my_loaded"), new FieldAccessPostAggregator("total", "my_total") };
-      var aggregations = new List<IPostAggregationSpec> {new ArithmeticPostAggregator("average", fields, ArithmeticFunction.Divide) };
+      var aggregations = new List<IPostAggregationSpec> {new ArithmeticPostAggregator("average", ArithmeticFunction.Divide, fields) };
       var request = ((T) CreateQueryDescriptor().PostAggregations(aggregations)).Generate();
 
       var agg = request.RequestData.PostAggregations.First() as ArithmeticPostAggregator;
