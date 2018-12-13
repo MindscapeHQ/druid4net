@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Raygun.Druid4Net
 {
   public class GroupByQueryDescriptor : AggregatableQueryDescriptor<GroupByRequestData>, IGroupByQueryDescriptor
   {
-    internal IEnumerable<string> DimensionsValue;
+    internal IEnumerable<IDimensionSpec> DimensionsValue;
 
     internal ILimitSpec LimitSpecValue;
 
@@ -21,6 +22,27 @@ namespace Raygun.Druid4Net
     }
 
     public IGroupByQueryDescriptor Dimensions(params string[] dimensions)
+    {
+      DimensionsValue = dimensions.Select(d => new DefaultDimension(d));
+
+      return this;
+    }
+
+    public IGroupByQueryDescriptor Dimensions(IEnumerable<string> dimensions)
+    {
+      DimensionsValue = dimensions.Select(d => new DefaultDimension(d));
+
+      return this;
+    }
+
+    public IGroupByQueryDescriptor Dimensions(params IDimensionSpec[] dimensions)
+    {
+      DimensionsValue = dimensions;
+
+      return this;
+    }
+
+    public IGroupByQueryDescriptor Dimensions(IEnumerable<IDimensionSpec> dimensions)
     {
       DimensionsValue = dimensions;
 

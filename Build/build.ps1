@@ -1,1 +1,1 @@
-dotnet pack ..\Raygun.Druid4Net\ --output ..\Build --configuration Release
+dotnet pack ..\Raygun.Druid4Net\ --output ..\Build --configuration Release /p:Version=1.0.2

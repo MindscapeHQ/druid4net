@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Raygun.Druid4Net
 {
@@ -13,6 +10,12 @@ namespace Raygun.Druid4Net
     IGroupByQueryDescriptor Having(IHavingSpec havingSpec);
 
     IGroupByQueryDescriptor Dimensions(params string[] dimensions);
+    
+    IGroupByQueryDescriptor Dimensions(IEnumerable<string> dimensions);
+    
+    IGroupByQueryDescriptor Dimensions(params IDimensionSpec[] dimensions);
+    
+    IGroupByQueryDescriptor Dimensions(IEnumerable<IDimensionSpec> dimensions);
 
     IGroupByQueryDescriptor Limit(ILimitSpec limitSpec);
 

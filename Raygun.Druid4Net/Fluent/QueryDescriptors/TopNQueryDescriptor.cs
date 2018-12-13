@@ -2,7 +2,7 @@
 {
   public class TopNQueryDescriptor : AggregatableQueryDescriptor<TopNRequestData>, ITopNQueryDescriptor
   {
-    internal string DimensionValue;
+    internal IDimensionSpec DimensionValue;
 
     internal ITopNMetricSpec MetricSpecValue;
 
@@ -16,6 +16,13 @@
     }
 
     public ITopNQueryDescriptor Dimension(string dimension)
+    {
+      DimensionValue = new DefaultDimension(dimension);
+
+      return this;
+    }
+
+    public ITopNQueryDescriptor Dimension(IDimensionSpec dimension)
     {
       DimensionValue = dimension;
 

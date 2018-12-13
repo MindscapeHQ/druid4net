@@ -3,6 +3,8 @@
   public interface ITopNQueryDescriptor : IAggregatableQueryDescriptor
   {
     ITopNQueryDescriptor Dimension(string dimension);
+    
+    ITopNQueryDescriptor Dimension(IDimensionSpec dimension);
 
     ITopNQueryDescriptor Metric(string metric);
 
