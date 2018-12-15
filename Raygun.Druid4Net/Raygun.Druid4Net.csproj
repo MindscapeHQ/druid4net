@@ -1,17 +1,24 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>netstandard1.6;netstandard2.0;net45;</TargetFrameworks>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
   </PropertyGroup>
   <!-- NuGet Options -->
   <PropertyGroup>
     <Authors>Raygun</Authors>
+    <Company>Raygun</Company>
+    <Version>1.0.3</Version>
+    <Copyright>Copyright © Raygun 2018</Copyright>
+    <Title>Druid4Net - A .NET druid.io client</Title>
     <Description>A .NET druid.io client written in C#</Description>
     <PackageId>Druid4Net</PackageId>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageLicenseUrl>https://github.com/MindscapeHQ/druid4net/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/MindscapeHQ/druid4net</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/MindscapeHQ/druid4net</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
     <PackageIconUrl>https://app.raygun.com/Content/Images/nuget-icon.png</PackageIconUrl>
+    <PackageTags>druid;druidio</PackageTags>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard2.0'">
     <DefineConstants>NETCORE;NETSTANDARD;NETSTANDARD2_0</DefineConstants>

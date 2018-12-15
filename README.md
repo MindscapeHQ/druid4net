@@ -4,7 +4,7 @@ A .NET [druid.io](http://druid.io) client written in C#
 Supports .NET 4.5 and above, .NET Standard 1.6 and 2.0
 
 ## Getting started
-1. Add a reference to druid4net from [Nuget]() or download and reference the dll from [releases](https://github.com/MindscapeHQ/druid4net/releases)
+1. Add a reference to druid4net from [Nuget](https://www.nuget.org/packages/Druid4Net) or download and reference the dll from [releases](https://github.com/MindscapeHQ/druid4net/releases)
 2. Add your favorite JSON parser (if you don't already have one referenced)
 3. Implement the `IJsonSerializer` interface
 4. Create a `DruidClient` and start querying
