@@ -1,6 +1,9 @@
-﻿namespace Raygun.Druid4Net
+﻿using System;
+using System.Collections.Generic;
+
+namespace Raygun.Druid4Net
 {
-  public class TopNQueryDescriptor : AggregatableQueryDescriptor<TopNRequestData>, ITopNQueryDescriptor
+  public class TopNQueryDescriptor : AggregatableQueryDescriptor, ITopNQueryDescriptor
   {
     internal IDimensionSpec DimensionValue;
 
@@ -49,6 +52,83 @@
 
       return this;
     }
+    
+    public ITopNQueryDescriptor Aggregations(params IAggregationSpec[] aggregationsSpec)
+    {
+      AggregationSpecsValue = aggregationsSpec;
+
+      return this;
+    }
+    
+    public ITopNQueryDescriptor Aggregations(IEnumerable<IAggregationSpec> aggregationsSpec)
+    {
+      AggregationSpecsValue = aggregationsSpec;
+
+      return this;
+    }
+
+    public ITopNQueryDescriptor PostAggregations(params IPostAggregationSpec[] postAggregationsSpec)
+    {
+      PostAggregationSpecsValue = postAggregationsSpec;
+
+      return this;
+    }
+
+    public ITopNQueryDescriptor PostAggregations(IEnumerable<IPostAggregationSpec> postAggregationsSpec)
+    {
+      PostAggregationSpecsValue = postAggregationsSpec;
+
+      return this;
+    }
+    
+    public ITopNQueryDescriptor Interval(DateTime from, DateTime to)
+    {
+      SetInterval(from, to);      
+
+      return this;
+    }
+
+    public ITopNQueryDescriptor Intervals(params Interval[] intervals)
+    {
+      SetIntervals(intervals);
+
+      return this;
+    }
+
+    public ITopNQueryDescriptor Intervals(IEnumerable<Interval> intervals)
+    {
+      SetIntervals(intervals);
+
+      return this;
+    }
+    
+    public ITopNQueryDescriptor DataSource(string dataSource)
+    {
+      DataSourceValue = dataSource;
+
+      return this;
+    }
+
+    public ITopNQueryDescriptor Granularity(Granularities granularity)
+    {
+      SetGranularity(granularity);
+      
+      return this;
+    }
+    
+    public ITopNQueryDescriptor Granularity(IGranularitySpec granularitySpec)
+    {
+      GranularityValue = granularitySpec;
+
+      return this;
+    }
+
+    public ITopNQueryDescriptor Filter(IFilterSpec filterSpec)
+    {
+      FilterValue = filterSpec;
+
+      return this;
+    }
 
     public ITopNQueryDescriptor Context(int? timeout = null, long? maxScatterGatherBytes = null, int? priority = null, string queryId = null, bool? useCache = null, bool? populateCache = null, bool? bySegment = null, bool? finalize = null, string chunkPeriod = null, bool? serializeDateTimeAsLong = null, bool? serializeDateTimeAsLongInner = null, int? minTopNThreshold = null)
     {
@@ -59,7 +139,7 @@
       return this;
     }
 
-    internal override IDruidRequest<TopNRequestData> Generate()
+    public IDruidRequest<TopNRequestData> Generate()
     {
       var request = new TopNRequest();
       request.Build(this);

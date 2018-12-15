@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Raygun.Druid4Net
 {
-  public class GroupByQueryDescriptor : AggregatableQueryDescriptor<GroupByRequestData>, IGroupByQueryDescriptor
+  public class GroupByQueryDescriptor : AggregatableQueryDescriptor, IGroupByQueryDescriptor
   {
     internal IEnumerable<IDimensionSpec> DimensionsValue;
 
@@ -71,6 +71,83 @@ namespace Raygun.Druid4Net
 
       return this;
     }
+    
+    public IGroupByQueryDescriptor Aggregations(params IAggregationSpec[] aggregationsSpec)
+    {
+      AggregationSpecsValue = aggregationsSpec;
+
+      return this;
+    }
+    
+    public IGroupByQueryDescriptor Aggregations(IEnumerable<IAggregationSpec> aggregationsSpec)
+    {
+      AggregationSpecsValue = aggregationsSpec;
+
+      return this;
+    }
+
+    public IGroupByQueryDescriptor PostAggregations(params IPostAggregationSpec[] postAggregationsSpec)
+    {
+      PostAggregationSpecsValue = postAggregationsSpec;
+
+      return this;
+    }
+
+    public IGroupByQueryDescriptor PostAggregations(IEnumerable<IPostAggregationSpec> postAggregationsSpec)
+    {
+      PostAggregationSpecsValue = postAggregationsSpec;
+
+      return this;
+    }
+    
+    public IGroupByQueryDescriptor Interval(DateTime from, DateTime to)
+    {
+      SetInterval(from, to);      
+
+      return this;
+    }
+
+    public IGroupByQueryDescriptor Intervals(params Interval[] intervals)
+    {
+      SetIntervals(intervals);
+
+      return this;
+    }
+
+    public IGroupByQueryDescriptor Intervals(IEnumerable<Interval> intervals)
+    {
+      SetIntervals(intervals);
+
+      return this;
+    }
+    
+    public IGroupByQueryDescriptor DataSource(string dataSource)
+    {
+      DataSourceValue = dataSource;
+
+      return this;
+    }
+
+    public IGroupByQueryDescriptor Granularity(Granularities granularity)
+    {
+      SetGranularity(granularity);
+      
+      return this;
+    }
+    
+    public IGroupByQueryDescriptor Granularity(IGranularitySpec granularitySpec)
+    {
+      GranularityValue = granularitySpec;
+
+      return this;
+    }
+
+    public IGroupByQueryDescriptor Filter(IFilterSpec filterSpec)
+    {
+      FilterValue = filterSpec;
+
+      return this;
+    }
 
     public IGroupByQueryDescriptor Context(int? timeout = null, long? maxScatterGatherBytes = null, int? priority = null, string queryId = null, bool? useCache = null, bool? populateCache = null, bool? bySegment = null, bool? finalize = null, string chunkPeriod = null, bool? serializeDateTimeAsLong = null, bool? serializeDateTimeAsLongInner = null, string groupByStrategy = null, long? maxOnDiskStorage = null)
     {
@@ -82,7 +159,7 @@ namespace Raygun.Druid4Net
       return this;
     }
 
-    internal override IDruidRequest<GroupByRequestData> Generate()
+    public IDruidRequest<GroupByRequestData> Generate()
     {
       var request = new GroupByRequest();
       request.Build(this);

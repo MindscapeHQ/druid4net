@@ -14,26 +14,26 @@ namespace Raygun.Druid4Net
       _apiEndpoint = apiEndpoint;
     }
 
-    public IQueryResponse<T> TopN<T>(Func<ITopNQueryDescriptor, IQueryDescriptor> selector) where T : class
+    public IQueryResponse<T> TopN<T>(Func<ITopNQueryDescriptor, ITopNQueryDescriptor> selector) where T : class
     {
       return TopNAsync<T>(selector).Result;
     }
 
-    public async Task<IQueryResponse<TResponse>> TopNAsync<TResponse>(Func<ITopNQueryDescriptor, IQueryDescriptor> selector) where TResponse : class
+    public async Task<IQueryResponse<TResponse>> TopNAsync<TResponse>(Func<ITopNQueryDescriptor, ITopNQueryDescriptor> selector) where TResponse : class
     {
-      var request = ((TopNQueryDescriptor)selector(new TopNQueryDescriptor())).Generate();
+      var request = selector(new TopNQueryDescriptor()).Generate();
 
       var result = await ExecuteQueryAsync<TResponse, TopNRequestData>(_apiEndpoint, request);
 
       return result;
     }
 
-    public IQueryResponse<TResponse> GroupBy<TResponse>(Func<IGroupByQueryDescriptor, IQueryDescriptor> selector) where TResponse : class
+    public IQueryResponse<TResponse> GroupBy<TResponse>(Func<IGroupByQueryDescriptor, IGroupByQueryDescriptor> selector) where TResponse : class
     {
       return GroupByAsync<TResponse>(selector).Result;
     }
 
-    public async Task<IQueryResponse<TResponse>> GroupByAsync<TResponse>(Func<IGroupByQueryDescriptor, IQueryDescriptor> selector) where TResponse : class
+    public async Task<IQueryResponse<TResponse>> GroupByAsync<TResponse>(Func<IGroupByQueryDescriptor, IGroupByQueryDescriptor> selector) where TResponse : class
     {
       var request = ((GroupByQueryDescriptor)selector(new GroupByQueryDescriptor())).Generate();
 
@@ -42,12 +42,12 @@ namespace Raygun.Druid4Net
       return result;
     }
 
-    public IQueryResponse<TResponse> Timeseries<TResponse>(Func<ITimeseriesQueryDescriptor, IQueryDescriptor> selector) where TResponse : class
+    public IQueryResponse<TResponse> Timeseries<TResponse>(Func<ITimeseriesQueryDescriptor, ITimeseriesQueryDescriptor> selector) where TResponse : class
     {
       return TimeseriesAsync<TResponse>(selector).Result;
     }
 
-    public async Task<IQueryResponse<TResponse>> TimeseriesAsync<TResponse>(Func<ITimeseriesQueryDescriptor, IQueryDescriptor> selector) where TResponse : class
+    public async Task<IQueryResponse<TResponse>> TimeseriesAsync<TResponse>(Func<ITimeseriesQueryDescriptor, ITimeseriesQueryDescriptor> selector) where TResponse : class
     {
       var request = ((TimeseriesQueryDescriptor)selector(new TimeseriesQueryDescriptor())).Generate();
 
@@ -56,12 +56,12 @@ namespace Raygun.Druid4Net
       return result;
     }
 
-    public IQueryResponse<TResponse> Select<TResponse>(Func<ISelectQueryDescriptor, IQueryDescriptor> selector) where TResponse : class
+    public IQueryResponse<TResponse> Select<TResponse>(Func<ISelectQueryDescriptor, ISelectQueryDescriptor> selector) where TResponse : class
     {
       return SelectAsync<TResponse>(selector).Result;
     }
 
-    public async Task<IQueryResponse<TResponse>> SelectAsync<TResponse>(Func<ISelectQueryDescriptor, IQueryDescriptor> selector) where TResponse : class
+    public async Task<IQueryResponse<TResponse>> SelectAsync<TResponse>(Func<ISelectQueryDescriptor, ISelectQueryDescriptor> selector) where TResponse : class
     {
       var request = ((SelectQueryDescriptor)selector(new SelectQueryDescriptor())).Generate();
 

@@ -2,38 +2,10 @@
 
 namespace Raygun.Druid4Net
 {
-  public abstract class AggregatableQueryDescriptor<TRequest> : QueryDescriptor<TRequest>, IAggregatableQueryDescriptor where TRequest : QueryRequestData
+  public abstract class AggregatableQueryDescriptor : QueryDescriptor
   {
     internal IEnumerable<IAggregationSpec> AggregationSpecsValue;
 
     internal IEnumerable<IPostAggregationSpec> PostAggregationSpecsValue;
-
-    public IAggregatableQueryDescriptor Aggregations(params IAggregationSpec[] aggregationsSpec)
-    {
-      AggregationSpecsValue = aggregationsSpec;
-
-      return this;
-    }
-    
-    public IAggregatableQueryDescriptor Aggregations(IEnumerable<IAggregationSpec> aggregationsSpec)
-    {
-      AggregationSpecsValue = aggregationsSpec;
-
-      return this;
-    }
-
-    public IAggregatableQueryDescriptor PostAggregations(params IPostAggregationSpec[] postAggregationsSpec)
-    {
-      PostAggregationSpecsValue = postAggregationsSpec;
-
-      return this;
-    }
-
-    public IAggregatableQueryDescriptor PostAggregations(IEnumerable<IPostAggregationSpec> postAggregationsSpec)
-    {
-      PostAggregationSpecsValue = postAggregationsSpec;
-
-      return this;
-    }
   }
 }

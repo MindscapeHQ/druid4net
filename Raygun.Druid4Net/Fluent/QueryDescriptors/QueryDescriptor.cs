@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Raygun.Druid4Net
 {
-  public abstract class QueryDescriptor<TRequest> : IQueryDescriptor where TRequest : QueryRequestData
+  public abstract class QueryDescriptor
   {
     internal List<string> IntervalsValue;
 
@@ -18,31 +18,17 @@ namespace Raygun.Druid4Net
       IntervalsValue = new List<string>();
     }
 
-    public IQueryDescriptor Interval(DateTime from, DateTime to)
+    protected void SetInterval(DateTime from, DateTime to)
     {
       AddInterval(new Interval(from, to));      
-
-      return this;
     }
 
-    public IQueryDescriptor Intervals(params Interval[] intervals)
+    protected void SetIntervals(IEnumerable<Interval> intervals)
     {
       foreach (var interval in intervals)
       {
         AddInterval(interval);
       }
-
-      return this;
-    }
-
-    public IQueryDescriptor Intervals(IEnumerable<Interval> intervals)
-    {
-      foreach (var interval in intervals)
-      {
-        AddInterval(interval);
-      }
-
-      return this;
     }
 
     private void AddInterval(Interval interval)
@@ -50,14 +36,7 @@ namespace Raygun.Druid4Net
       IntervalsValue.Add(interval.ToInterval());
     }
 
-    public IQueryDescriptor DataSource(string dataSource)
-    {
-      DataSourceValue = dataSource;
-
-      return this;
-    }
-
-    public IQueryDescriptor Granularity(Granularities granularity)
+    protected void SetGranularity(Granularities granularity)
     {
       switch (granularity)
       {
@@ -98,23 +77,6 @@ namespace Raygun.Druid4Net
           GranularityValue = "year";
           break;
       }
-
-      return this;
-    }
-
-    public IQueryDescriptor Granularity(IGranularitySpec granularitySpec)
-    {
-      GranularityValue = granularitySpec;
-
-      return this;
-    }
-
-
-    public IQueryDescriptor Filter(IFilterSpec filterSpec)
-    {
-      FilterValue = filterSpec;
-
-      return this;
     }
 
     protected void SetCommonContextProperties(ContextSpec context, int? timeout, long? maxScatterGatherBytes, int? priority, string queryId, bool? useCache, bool? populateCache, bool? bySegment, bool? finalize, string chunkPeriod, bool? serializeDateTimeAsLong, bool? serializeDateTimeAsLongInner)
@@ -131,7 +93,5 @@ namespace Raygun.Druid4Net
       context.SerializeDateTimeAsLong = serializeDateTimeAsLong;
       context.SerializeDateTimeAsLongInner = serializeDateTimeAsLongInner;
     }
-
-    internal abstract IDruidRequest<TRequest> Generate();
   }
 }

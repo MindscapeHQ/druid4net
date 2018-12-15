@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Raygun.Druid4Net
 {
-  public class SelectQueryDescriptor : QueryDescriptor<SelectRequestData>, ISelectQueryDescriptor
+  public class SelectQueryDescriptor : QueryDescriptor, ISelectQueryDescriptor
   {
     internal PagingSpec PagingSpecValue;
 
@@ -55,14 +56,63 @@ namespace Raygun.Druid4Net
       return this;
     }
     
-    public IQueryDescriptor Context(int? timeout = null, long? maxScatterGatherBytes = null, int? priority = null, string queryId = null, bool? useCache = null, bool? populateCache = null, bool? bySegment = null, bool? finalize = null, string chunkPeriod = null, bool? serializeDateTimeAsLong = null, bool? serializeDateTimeAsLongInner = null)
+    public ISelectQueryDescriptor Interval(DateTime from, DateTime to)
+    {
+      SetInterval(from, to);      
+
+      return this;
+    }
+
+    public ISelectQueryDescriptor Intervals(params Interval[] intervals)
+    {
+      SetIntervals(intervals);
+
+      return this;
+    }
+
+    public ISelectQueryDescriptor Intervals(IEnumerable<Interval> intervals)
+    {
+      SetIntervals(intervals);
+
+      return this;
+    }
+    
+    public ISelectQueryDescriptor DataSource(string dataSource)
+    {
+      DataSourceValue = dataSource;
+
+      return this;
+    }
+
+    public ISelectQueryDescriptor Granularity(Granularities granularity)
+    {
+      SetGranularity(granularity);
+      
+      return this;
+    }
+    
+    public ISelectQueryDescriptor Granularity(IGranularitySpec granularitySpec)
+    {
+      GranularityValue = granularitySpec;
+
+      return this;
+    }
+
+    public ISelectQueryDescriptor Filter(IFilterSpec filterSpec)
+    {
+      FilterValue = filterSpec;
+
+      return this;
+    }
+    
+    public ISelectQueryDescriptor Context(int? timeout = null, long? maxScatterGatherBytes = null, int? priority = null, string queryId = null, bool? useCache = null, bool? populateCache = null, bool? bySegment = null, bool? finalize = null, string chunkPeriod = null, bool? serializeDateTimeAsLong = null, bool? serializeDateTimeAsLongInner = null)
     {
       SetCommonContextProperties(ContextValue, timeout, maxScatterGatherBytes, priority, queryId, useCache, populateCache, bySegment, finalize, chunkPeriod, serializeDateTimeAsLong, serializeDateTimeAsLongInner);
 
       return this;
     }
 
-    internal override IDruidRequest<SelectRequestData> Generate()
+    public IDruidRequest<SelectRequestData> Generate()
     {
       var request = new SelectRequest();
       request.Build(this);
