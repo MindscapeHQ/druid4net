@@ -7,9 +7,9 @@ namespace Raygun.Druid4Net
 
     public OrderByDirection Direction { get; }
 
-    public DimensionOrder DimensionOrder;
+    public SortingOrder DimensionOrder;
 
-    public OrderByColumnSpec(string dimension, OrderByDirection direction = OrderByDirection.ascending, DimensionOrder dimensionOrder = DimensionOrder.lexicographic)
+    public OrderByColumnSpec(string dimension, OrderByDirection direction = OrderByDirection.ascending, SortingOrder dimensionOrder = SortingOrder.lexicographic)
     {
       Dimension = dimension;
       Direction = direction;

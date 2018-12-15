@@ -4,11 +4,11 @@
   {
     public string Type => "dimension";
 
-    public DimensionOrder Ordering;
+    public SortingOrder Ordering;
     
     public string PreviousStop;
 
-    public DimensionTopNMetricSpec(DimensionOrder ordering = DimensionOrder.lexicographic, string previousStop = null)
+    public DimensionTopNMetricSpec(SortingOrder ordering = SortingOrder.lexicographic, string previousStop = null)
     {
       Ordering = ordering;
       PreviousStop = previousStop;

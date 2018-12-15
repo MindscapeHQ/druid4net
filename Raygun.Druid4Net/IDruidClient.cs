@@ -16,5 +16,8 @@ namespace Raygun.Druid4Net
 
     IQueryResponse<TResponse> Select<TResponse>(Func<ISelectQueryDescriptor, ISelectQueryDescriptor> selector) where TResponse : class;
     Task<IQueryResponse<TResponse>> SelectAsync<TResponse>(Func<ISelectQueryDescriptor, ISelectQueryDescriptor> selector) where TResponse : class;
+
+    IQueryResponse<TResponse> Search<TResponse>(Func<ISearchQueryDescriptor, ISearchQueryDescriptor> selector) where TResponse : class;
+    Task<IQueryResponse<TResponse>> SearchAsync<TResponse>(Func<ISearchQueryDescriptor, ISearchQueryDescriptor> selector) where TResponse : class;
   }
 }

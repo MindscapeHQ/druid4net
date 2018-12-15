@@ -15,9 +15,9 @@ namespace Raygun.Druid4Net
 
     public bool UpperStrict { get; }
 
-    public DimensionOrder Ordering { get; }
+    public SortingOrder Ordering { get; }
 
-    public BoundFilter(string dimension, T? lower, T? upper = null, bool lowerStrict = false, bool upperStrict = false, DimensionOrder ordering = DimensionOrder.lexicographic)
+    public BoundFilter(string dimension, T? lower, T? upper = null, bool lowerStrict = false, bool upperStrict = false, SortingOrder ordering = SortingOrder.lexicographic)
     {
       Dimension = dimension;
       Lower = lower;

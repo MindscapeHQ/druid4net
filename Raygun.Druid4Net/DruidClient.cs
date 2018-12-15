@@ -35,7 +35,7 @@ namespace Raygun.Druid4Net
 
     public async Task<IQueryResponse<TResponse>> GroupByAsync<TResponse>(Func<IGroupByQueryDescriptor, IGroupByQueryDescriptor> selector) where TResponse : class
     {
-      var request = ((GroupByQueryDescriptor)selector(new GroupByQueryDescriptor())).Generate();
+      var request = selector(new GroupByQueryDescriptor()).Generate();
 
       var result = await ExecuteQueryAsync<TResponse, GroupByRequestData>(_apiEndpoint, request);
 
@@ -49,7 +49,7 @@ namespace Raygun.Druid4Net
 
     public async Task<IQueryResponse<TResponse>> TimeseriesAsync<TResponse>(Func<ITimeseriesQueryDescriptor, ITimeseriesQueryDescriptor> selector) where TResponse : class
     {
-      var request = ((TimeseriesQueryDescriptor)selector(new TimeseriesQueryDescriptor())).Generate();
+      var request = selector(new TimeseriesQueryDescriptor()).Generate();
 
       var result = await ExecuteQueryAsync<TResponse, TimeseriesRequestData>(_apiEndpoint, request);
 
@@ -63,9 +63,23 @@ namespace Raygun.Druid4Net
 
     public async Task<IQueryResponse<TResponse>> SelectAsync<TResponse>(Func<ISelectQueryDescriptor, ISelectQueryDescriptor> selector) where TResponse : class
     {
-      var request = ((SelectQueryDescriptor)selector(new SelectQueryDescriptor())).Generate();
+      var request = selector(new SelectQueryDescriptor()).Generate();
 
       var result = await ExecuteQueryAsync<TResponse, SelectRequestData>(_apiEndpoint, request);
+
+      return result;
+    }
+
+    public IQueryResponse<TResponse> Search<TResponse>(Func<ISearchQueryDescriptor, ISearchQueryDescriptor> selector) where TResponse : class
+    {
+      return SearchAsync<TResponse>(selector).Result;
+    }
+
+    public async Task<IQueryResponse<TResponse>> SearchAsync<TResponse>(Func<ISearchQueryDescriptor, ISearchQueryDescriptor> selector) where TResponse : class
+    {
+      var request = selector(new SearchQueryDescriptor()).Generate();
+
+      var result = await ExecuteQueryAsync<TResponse, SearchRequestData>(_apiEndpoint, request);
 
       return result;
     }
