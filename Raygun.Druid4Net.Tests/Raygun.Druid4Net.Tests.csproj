@@ -92,9 +92,7 @@
     <Compile Include="Fluent\PostAggregations\ArithmeticPostAggregatorTests.cs" />
     <Compile Include="Fluent\PostAggregations\FieldAccessPostAggregatorTests.cs" />
     <Compile Include="Fluent\PostAggregations\FinalizingFieldAccessPostAggregatorTests.cs" />
-    <Compile Include="Fluent\QueryDescriptors\AggregationQueryDescriptorTests.cs" />
     <Compile Include="Fluent\QueryDescriptors\GroupByQueryDescriptorTests.cs" />
-    <Compile Include="Fluent\QueryDescriptors\QueryDescriptorTests.cs" />
     <Compile Include="Fluent\QueryDescriptors\SelectQueryDescriptorTests.cs" />
     <Compile Include="Fluent\QueryDescriptors\TimeseriesQueryDescriptorTests.cs" />
     <Compile Include="Fluent\QueryDescriptors\TopNQueryDescriptorTests.cs" />
