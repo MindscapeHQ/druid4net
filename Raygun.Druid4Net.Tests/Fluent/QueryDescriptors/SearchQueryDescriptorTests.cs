@@ -91,7 +91,7 @@ namespace Raygun.Druid4Net.Tests.Fluent.QueryDescriptors
         .Sort(SortingOrder.alphanumeric)
         .Generate();
 
-      Assert.That(request.RequestData.Sort, Is.EqualTo(SortingOrder.alphanumeric));
+      Assert.That(request.RequestData.Sort.Type, Is.EqualTo(SortingOrder.alphanumeric));
     }
     
     [Test]

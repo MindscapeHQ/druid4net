@@ -23,81 +23,72 @@ namespace Raygun.Druid4Net
     {
       var requestString = _json.Serialize(request.RequestData);
 
-      try
-      {
-        var response = await _client.PostAsync(endpoint, new StringContent(requestString, Encoding.UTF8, "application/json"));
+      var response = await _client.PostAsync(endpoint, new StringContent(requestString, Encoding.UTF8, "application/json"));
 
-        if (response.IsSuccessStatusCode)
+      if (response.IsSuccessStatusCode)
+      {
+        var responseString = await response.Content.ReadAsStringAsync();
+        var data = _json.Deserialize<TResponse>(responseString);
+
+        var queryResponse = new DruidResponse<TResponse>
+        {
+          Data = data,
+          RequestData = new DruidQueryRequestData
+          {
+            Address = _client.BaseAddress + endpoint,
+            Method = "POST",
+            Query = requestString
+          }
+        };
+
+        return queryResponse;
+      }
+      else
+      {
+        // Error or timeout, try and read the error response (if any)
+        Exception ex = new DruidClientException($"Failed request to {_client.BaseAddress}{endpoint} with status {response.StatusCode}");
+        ErrorResponse errorResponse = null;
+
+        try
         {
           var responseString = await response.Content.ReadAsStringAsync();
-          var data = _json.Deserialize<TResponse>(responseString);
-
-          var queryResponse = new DruidResponse<TResponse>
-          {
-            Data = data,
-            RequestData = new DruidQueryRequestData
-            {
-              Address = _client.BaseAddress + endpoint,
-              Method = "POST",
-              Query = requestString
-            }
-          };
-
-          return queryResponse;
+          errorResponse = _json.Deserialize<ErrorResponse>(responseString);
         }
-        else
+        catch (Exception e)
         {
-          // Error or timeout, try and read the error response (if any)
-          Exception ex = new DruidClientException($"Failed request to {_client.BaseAddress}{endpoint} with status {response.StatusCode}");
-          ErrorResponse errorResponse = null;
-
-          try
-          {
-            var responseString = await response.Content.ReadAsStringAsync();
-            errorResponse = _json.Deserialize<ErrorResponse>(responseString);
-          }
-          catch (Exception e)
-          {
-            ex = new DruidClientException($"Failed request to {_client.BaseAddress}{endpoint} with status {response.StatusCode}", e);
-          }
-
-          if (errorResponse != null)
-          {
-            switch (errorResponse.ErrorClass)
-            {
-              case "io.druid.query.ResourceLimitExceededException":
-                ex = new DruidResourceExceededException(errorResponse.ErrorMessage);
-                break;
-              
-              case "com.fasterxml.jackson.databind.JsonMappingException":
-                ex = new DruidJsonMappingException(errorResponse.ErrorMessage);
-                break;
-
-              case "io.druid.java.util.common.RE":
-                if (errorResponse.ErrorMessage.Contains("ReadTimeoutException"))
-                {
-                  ex = new DruidTimeoutException(errorResponse.ErrorMessage);
-                }
-
-                break;
-
-              default:
-                var message = errorResponse.ErrorMessage ?? errorResponse.Error;
-                ex = new DruidClientException($"Failed request to {_client.BaseAddress}{endpoint} {message}");
-                break;
-            }
-
-            ex.Data["host"] = errorResponse.Host;
-            ex.Data["error"] = errorResponse.Error;
-          }
-
-          ex.Data["query"] = requestString;
-          throw ex;
+          ex = new DruidClientException($"Failed request to {_client.BaseAddress}{endpoint} with status {response.StatusCode}", e);
         }
-      }
-      catch (Exception e)
-      {
-        var ex = new DruidClientException($"Failed request to {_client.BaseAddress}{endpoint}",  e);
+
+        if (errorResponse != null)
+        {
+          switch (errorResponse.ErrorClass)
+          {
+            case "io.druid.query.ResourceLimitExceededException":
+              ex = new DruidResourceExceededException(errorResponse.ErrorMessage);
+              break;
+
+            case "com.fasterxml.jackson.databind.JsonMappingException":
+              ex = new DruidJsonMappingException(errorResponse.ErrorMessage);
+              break;
+
+            case "io.druid.java.util.common.RE":
+              if (errorResponse.ErrorMessage.Contains("ReadTimeoutException"))
+              {
+                ex = new DruidTimeoutException(errorResponse.ErrorMessage);
+              }
+
+              break;
+
+            default:
+              var message = errorResponse.ErrorMessage ?? errorResponse.Error;
+              ex = new DruidClientException($"Failed request to {_client.BaseAddress}{endpoint} {message}");
+              break;
+          }
+
+          ex.Data["host"] = errorResponse.Host;
+          ex.Data["error"] = errorResponse.Error;
+        }
+
         ex.Data["query"] = requestString;
         throw ex;
       }

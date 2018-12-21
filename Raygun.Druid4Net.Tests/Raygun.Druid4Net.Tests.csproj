@@ -101,6 +101,7 @@
     <Compile Include="Fluent\SearchQueries\FragmentSearchQueryTests.cs" />
     <Compile Include="Fluent\SearchQueries\InsensitiveContainsSearchQueryTests.cs" />
     <Compile Include="Fluent\SearchQueries\RegexSearchQueryTests.cs" />
+    <Compile Include="Fluent\Sort\SortSpecTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

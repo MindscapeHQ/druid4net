@@ -9,7 +9,7 @@ namespace Raygun.Druid4Net
 
     internal ISearchQuerySpec QueryValue;
     
-    internal SortingOrder SortValue;
+    internal SortSpec SortValue;
 
     internal IEnumerable<string> SearchDimensionsValue;
 
@@ -18,6 +18,7 @@ namespace Raygun.Druid4Net
     public SearchQueryDescriptor()
     {
       ContextValue = new ContextSpec();
+      SortValue = new SortSpec();
     }
 
     public ISearchQueryDescriptor SearchDimensions(params string[] dimensions)
@@ -46,7 +47,7 @@ namespace Raygun.Druid4Net
 
     public ISearchQueryDescriptor Sort(SortingOrder sortingOrder)
     {
-      SortValue = sortingOrder;
+      SortValue.Type = sortingOrder;
       return this;
     }
     
