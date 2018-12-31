@@ -92,6 +92,23 @@ var response = _druidClient.Select<SelectResult<QueryResult>>(q => q
 );
 ```
 
+### Search
+See [druid.io Search query documentation](http://druid.io/docs/latest/querying/searchquery.html) for more details on this type of query.
+
+The following example query is performing a search query against the sample wikiticker datasource.
+It searches for pages that contain the term "Dragon" and returns the page dimension value limited to the top 10 records.
+
+```csharp
+var response = DruidClient.Search<SearchResult>(q => q
+  .DataSource(Wikiticker.DataSource)
+  .Granularity(Granularities.All)
+  .SearchDimensions(Wikiticker.Dimensions.Page)
+  .Query(new ContainsSearchQuery("Dragon"))
+  .Limit(10)
+  .Interval(FromDate, ToDate)
+);
+```
+
 ## Notes
 
 ### Why do I need to implement IJsonSerializer?
@@ -103,7 +120,6 @@ solution that can be used by implementing the interface in a simple pass-through
 ### Not supported yet
 * Union data source
 * Time boundary queries
-* Search queries
 * Scan queries
 * JavaScript aggregator
 * Cardinality aggregator
