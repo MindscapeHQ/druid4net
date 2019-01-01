@@ -1,6 +1,6 @@
 namespace Raygun.Druid4Net
 {
-  public enum DimensionOrder
+  public enum SortingOrder
   {
     lexicographic,
 

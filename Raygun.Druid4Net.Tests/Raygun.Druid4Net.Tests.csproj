@@ -93,9 +93,15 @@
     <Compile Include="Fluent\PostAggregations\FieldAccessPostAggregatorTests.cs" />
     <Compile Include="Fluent\PostAggregations\FinalizingFieldAccessPostAggregatorTests.cs" />
     <Compile Include="Fluent\QueryDescriptors\GroupByQueryDescriptorTests.cs" />
+    <Compile Include="Fluent\QueryDescriptors\SearchQueryDescriptorTests.cs" />
     <Compile Include="Fluent\QueryDescriptors\SelectQueryDescriptorTests.cs" />
     <Compile Include="Fluent\QueryDescriptors\TimeseriesQueryDescriptorTests.cs" />
     <Compile Include="Fluent\QueryDescriptors\TopNQueryDescriptorTests.cs" />
+    <Compile Include="Fluent\SearchQueries\ContainsSearchQueryTests.cs" />
+    <Compile Include="Fluent\SearchQueries\FragmentSearchQueryTests.cs" />
+    <Compile Include="Fluent\SearchQueries\InsensitiveContainsSearchQueryTests.cs" />
+    <Compile Include="Fluent\SearchQueries\RegexSearchQueryTests.cs" />
+    <Compile Include="Fluent\Sort\SortSpecTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

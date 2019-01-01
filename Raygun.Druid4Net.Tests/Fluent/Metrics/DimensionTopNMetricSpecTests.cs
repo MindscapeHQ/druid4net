@@ -16,15 +16,15 @@ namespace Raygun.Druid4Net.Tests.Fluent
     public void Constructor_WithDefaultValues_PropertiesAreSet()
     {
       var spec = new DimensionTopNMetricSpec();
-      Assert.That(spec.Ordering, Is.EqualTo(DimensionOrder.lexicographic));
+      Assert.That(spec.Ordering, Is.EqualTo(SortingOrder.lexicographic));
       Assert.That(spec.PreviousStop, Is.Null);
     }
     
     [Test]
     public void Constructor_WithSpecifiedValues_PropertiesAreSet()
     {
-      var spec = new DimensionTopNMetricSpec(DimensionOrder.alphanumeric, "a");
-      Assert.That(spec.Ordering, Is.EqualTo(DimensionOrder.alphanumeric));
+      var spec = new DimensionTopNMetricSpec(SortingOrder.alphanumeric, "a");
+      Assert.That(spec.Ordering, Is.EqualTo(SortingOrder.alphanumeric));
       Assert.That(spec.PreviousStop, Is.EqualTo("a"));
     }
   }
