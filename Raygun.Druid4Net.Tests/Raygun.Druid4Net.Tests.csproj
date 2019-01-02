@@ -67,6 +67,8 @@
     <Compile Include="Fluent\Aggregations\LongMaxAggregatorTests.cs" />
     <Compile Include="Fluent\Aggregations\LongMinAggregatorTests.cs" />
     <Compile Include="Fluent\Aggregations\LongSumAggregatorTests.cs" />
+    <Compile Include="Fluent\Aggregations\StringFirstAggregatorTests.cs" />
+    <Compile Include="Fluent\Aggregations\StringLastAggregatorTests.cs" />
     <Compile Include="Fluent\Filters\AndFilterTests.cs" />
     <Compile Include="Fluent\Filters\BoundFilterTests.cs" />
     <Compile Include="Fluent\Filters\InFilterTests.cs" />
