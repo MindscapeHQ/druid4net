@@ -14,7 +14,7 @@ namespace Raygun.Druid4Net.IntegrationTests.Queries.Select
     [SetUp]
     public void Execute()
     {
-      var response = DruidClient.Select<SelectResult<QueryResult>>(q => q
+      var response = DruidClient.Select<QueryResult>(q => q
         .Dimensions(Wikiticker.Dimensions.CountryName, Wikiticker.Dimensions.CityName, Wikiticker.Dimensions.Page)
         .Metrics(Wikiticker.Metrics.Added, Wikiticker.Metrics.Deleted)
         .Paging(new PagingSpec(10))

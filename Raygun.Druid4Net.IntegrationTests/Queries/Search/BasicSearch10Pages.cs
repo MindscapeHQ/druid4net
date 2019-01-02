@@ -12,7 +12,7 @@ namespace Raygun.Druid4Net.IntegrationTests.Queries.Search
     [SetUp]
     public void Execute()
     {
-      var response = DruidClient.Search<SearchResult>(q => q
+      var response = DruidClient.Search(q => q
         .DataSource(Wikiticker.DataSource)
         .Granularity(Granularities.All)
         .SearchDimensions(Wikiticker.Dimensions.Page)

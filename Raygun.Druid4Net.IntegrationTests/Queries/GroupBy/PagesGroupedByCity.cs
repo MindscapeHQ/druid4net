@@ -12,7 +12,7 @@ namespace Raygun.Druid4Net.IntegrationTests.Queries.GroupBy
     [SetUp]
     public void Execute()
     {
-      var response = DruidClient.GroupBy<GroupByResult<QueryResult>>(q => q
+      var response = DruidClient.GroupBy<QueryResult>(q => q
         .Dimensions(Wikiticker.Dimensions.CountryName)
         .Aggregations(new LongSumAggregator(Wikiticker.Metrics.Count))
         .DataSource(Wikiticker.DataSource)
