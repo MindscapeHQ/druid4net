@@ -5,9 +5,9 @@ namespace Raygun.Druid4Net.Tests.Fluent.Aggregations
   [TestFixture]
   public class StringFirstAggregatorTests : AggregatorTestsBase
   {
-    protected override BaseAggregator GetAggregator(string fieldName, string name = null)
+    protected override BaseAggregator GetAggregator(string name, string fieldName)
     {
-      return new StringFirstAggregator(fieldName, name);
+      return new StringFirstAggregator(name, fieldName);
     }
 
     protected override string ExpectedAggregatorType => "stringFirst";
@@ -15,7 +15,7 @@ namespace Raygun.Druid4Net.Tests.Fluent.Aggregations
     [Test]
     public void Constructor_WithAllProperties_AllValuesAreSet()
     {
-      var aggregator = new StringFirstAggregator("test", "test_name", 2048, true);
+      var aggregator = new StringFirstAggregator("test_name", "test", 2048, true);
       Assert.That(aggregator.FieldName, Is.EqualTo("test"));
       Assert.That(aggregator.Name, Is.EqualTo("test_name"));
       Assert.That(aggregator.MaxStringBytes, Is.EqualTo(2048));

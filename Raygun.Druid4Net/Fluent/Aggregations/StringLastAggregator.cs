@@ -8,7 +8,8 @@
     
     public bool FilterNullValues { get; }
 
-    public StringLastAggregator(string fieldName, string name = null, int maxStringBytes = 1024, bool filterNullValues = false) : base(fieldName, name)
+    public StringLastAggregator(string name, string fieldName, int maxStringBytes = 1024, bool filterNullValues = false) 
+      : base(name, fieldName)
     {
       MaxStringBytes = maxStringBytes;
       FilterNullValues = filterNullValues;

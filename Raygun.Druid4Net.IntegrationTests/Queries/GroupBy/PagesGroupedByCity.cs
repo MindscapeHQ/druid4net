@@ -14,7 +14,7 @@ namespace Raygun.Druid4Net.IntegrationTests.Queries.GroupBy
     {
       var response = DruidClient.GroupBy<QueryResult>(q => q
         .Dimensions(Wikiticker.Dimensions.CountryName)
-        .Aggregations(new LongSumAggregator(Wikiticker.Metrics.Count))
+        .Aggregations(new LongSumAggregator("totalCount", Wikiticker.Metrics.Count))
         .DataSource(Wikiticker.DataSource)
         .Filter(new NotFilter(new SelectorFilter(Wikiticker.Dimensions.CountryName, string.Empty)))
         .Interval(FromDate, ToDate)
@@ -34,20 +34,20 @@ namespace Raygun.Druid4Net.IntegrationTests.Queries.GroupBy
     public void FirstResultIsCorrect()
     {
       Assert.That(_results.First().CountryName, Is.EqualTo("Albania"));
-      Assert.That(_results.First().Count, Is.EqualTo(2));
+      Assert.That(_results.First().TotalCount, Is.EqualTo(2));
     }
 
     [Test]
     public void LastResultIsCorrect()
     {
       Assert.That(_results.Last().CountryName, Is.EqualTo("Zimbabwe"));
-      Assert.That(_results.Last().Count, Is.EqualTo(3));
+      Assert.That(_results.Last().TotalCount, Is.EqualTo(3));
     }
 
     private class QueryResult
     {
       public string CountryName { get; set; }
-      public int Count { get; set; }
+      public int TotalCount { get; set; }
     }
   }
 }

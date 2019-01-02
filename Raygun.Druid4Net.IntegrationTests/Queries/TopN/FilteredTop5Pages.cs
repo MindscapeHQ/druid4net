@@ -13,10 +13,10 @@ namespace Raygun.Druid4Net.IntegrationTests.Queries.TopN
     public void Execute()
     {
       var response = DruidClient.TopN<QueryResult>(q => q
-        .Metric(Wikiticker.Metrics.Count)
+        .Metric("totalCount")
         .Dimension(Wikiticker.Dimensions.Page)
         .Threshold(5)
-        .Aggregations(new LongSumAggregator(Wikiticker.Metrics.Count))
+        .Aggregations(new LongSumAggregator("totalCount", Wikiticker.Metrics.Count))
         .Filter(new AndFilter(
           new SelectorFilter(Wikiticker.Dimensions.IsAnonymous, "true"),
           new SelectorFilter(Wikiticker.Dimensions.CountryCode, "US")
@@ -39,21 +39,21 @@ namespace Raygun.Druid4Net.IntegrationTests.Queries.TopN
     public void FirstResultIsCorrect()
     {
       Assert.That(_results.First().Page, Is.EqualTo("The Naked Brothers Band (TV series)"));
-      Assert.That(_results.First().Count, Is.EqualTo(10));
+      Assert.That(_results.First().TotalCount, Is.EqualTo(10));
     }
 
     [Test]
     public void LastResultIsCorrect()
     {
       Assert.That(_results.Last().Page, Is.EqualTo("Total Drama Presents: The Ridonculous Race"));
-      Assert.That(_results.Last().Count, Is.EqualTo(4));
+      Assert.That(_results.Last().TotalCount, Is.EqualTo(4));
     }
 
     internal class QueryResult
     {
       public string Page { get; set; }
 
-      public int Count { get; set; }
+      public int TotalCount { get; set; }
     }
   }
 }

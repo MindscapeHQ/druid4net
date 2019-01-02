@@ -1,21 +1,16 @@
 ﻿namespace Raygun.Druid4Net
 {
-  public class HyperUniqueAggregator : IAggregationSpec
+  public class HyperUniqueAggregator : BaseAggregator
   {
-    public string Type => "hyperUnique";
+    public override string Type => "hyperUnique";
 
-    public string Name { get; }
-    
-    public string FieldName { get; }
-    
     public bool IsInputHyperUnique { get; }
     
     public bool Round { get; }
 
-    public HyperUniqueAggregator(string fieldName, string name = null, bool isInputHyperUnique = false, bool round = false)
+    public HyperUniqueAggregator(string name, string fieldName, bool isInputHyperUnique = false, bool round = false)
+      : base(name, fieldName)
     {
-      FieldName = fieldName;
-      Name = name ?? fieldName;
       IsInputHyperUnique = isInputHyperUnique;
       Round = round;
     }

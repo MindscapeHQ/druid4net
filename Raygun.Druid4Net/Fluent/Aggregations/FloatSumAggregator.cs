@@ -4,7 +4,7 @@
   {
     public override string Type => "floatSum";
 
-    public FloatSumAggregator(string name, string fieldName = null) 
+    public FloatSumAggregator(string name, string fieldName) 
       : base (name, fieldName)
     {
     }

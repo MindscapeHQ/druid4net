@@ -13,10 +13,10 @@ namespace Raygun.Druid4Net.IntegrationTests.Queries.TopN
     public void Execute()
     {
       var response = DruidClient.TopN<QueryResult>(q => q
-        .Metric(Wikiticker.Metrics.Count)
         .Dimension(Wikiticker.Dimensions.Page)
         .Threshold(10)
-        .Aggregations(new LongSumAggregator(Wikiticker.Metrics.Count))
+        .Aggregations(new LongSumAggregator("totalCount", Wikiticker.Metrics.Count))
+        .Metric("totalCount")
         .DataSource(Wikiticker.DataSource)
         .Interval(FromDate, ToDate)
         .Granularity(Granularities.All)
@@ -35,21 +35,21 @@ namespace Raygun.Druid4Net.IntegrationTests.Queries.TopN
     public void FirstResultIsCorrect()
     {
       Assert.That(_results.First().Page, Is.EqualTo("Wikipedia:Vandalismusmeldung"));
-      Assert.That(_results.First().Count, Is.EqualTo(33));
+      Assert.That(_results.First().TotalCount, Is.EqualTo(33));
     }
 
     [Test]
     public void LastResultIsCorrect()
     {
       Assert.That(_results.Last().Page, Is.EqualTo("Wikipedia:Requests for page protection"));
-      Assert.That(_results.Last().Count, Is.EqualTo(17));
+      Assert.That(_results.Last().TotalCount, Is.EqualTo(17));
     }
 
     internal class QueryResult
     {
       public string Page { get; set; }
 
-      public int Count { get; set; }
+      public int TotalCount { get; set; }
     }
   }
 }

@@ -4,14 +4,14 @@
   {
     public abstract string Type { get; }
 
-    public string FieldName { get; }
-
     public string Name { get; }
-
-    protected BaseAggregator(string fieldName, string name = null)
+    
+    public string FieldName { get; }
+    
+    protected BaseAggregator(string name, string fieldName)
     {
+      Name = name;
       FieldName = fieldName;
-      Name = name ?? fieldName;
     }
   }
 }

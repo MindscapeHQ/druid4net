@@ -4,7 +4,7 @@
   {
     public override string Type => "floatMax";
 
-    public FloatMaxAggregator(string name, string fieldName = null) 
+    public FloatMaxAggregator(string name, string fieldName) 
       : base (name, fieldName)
     {
     }

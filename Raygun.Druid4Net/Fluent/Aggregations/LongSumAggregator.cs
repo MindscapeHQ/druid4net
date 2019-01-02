@@ -4,7 +4,7 @@
   {
     public override string Type => "longSum";
 
-    public LongSumAggregator(string name, string fieldName = null) 
+    public LongSumAggregator(string name, string fieldName) 
       : base (name, fieldName)
     {
     }

@@ -4,7 +4,7 @@
   {
     public override string Type => "longMin";
 
-    public LongMinAggregator(string name, string fieldName = null) 
+    public LongMinAggregator(string name, string fieldName) 
       : base (name, fieldName)
     {
     }
