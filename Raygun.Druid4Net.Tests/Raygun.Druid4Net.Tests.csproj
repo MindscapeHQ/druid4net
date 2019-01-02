@@ -54,6 +54,7 @@
     <Compile Include="Fluent\Aggregations\DoubleMaxAggregatorTests.cs" />
     <Compile Include="Fluent\Aggregations\DoubleMinAggregatorTests.cs" />
     <Compile Include="Fluent\Aggregations\DoubleSumAggregatorTests.cs" />
+    <Compile Include="Fluent\Aggregations\FilteredAggregatorTests.cs" />
     <Compile Include="Fluent\Aggregations\FloatFirstAggregatorTests.cs" />
     <Compile Include="Fluent\Aggregations\FloatLastAggregatorTests.cs" />
     <Compile Include="Fluent\Aggregations\FloatMaxAggregatorTests.cs" />
