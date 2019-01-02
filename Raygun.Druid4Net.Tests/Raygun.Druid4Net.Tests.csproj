@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Fluent\Aggregations\AggregatorTestsBase.cs" />
+    <Compile Include="Fluent\Aggregations\CardinalityAggregatorTests.cs" />
     <Compile Include="Fluent\Aggregations\CountAggregatorTests.cs" />
     <Compile Include="Fluent\Aggregations\DoubleFirstAggregatorTests.cs" />
     <Compile Include="Fluent\Aggregations\DoubleLastAggregatorTests.cs" />

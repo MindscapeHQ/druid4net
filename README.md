@@ -132,8 +132,6 @@ solution that can be used by implementing the interface in a simple pass-through
 * Union data source
 * Time boundary queries
 * Scan queries
-* JavaScript aggregator
-* Cardinality aggregator
 * HyperUnique aggregator
 * Filtered aggregator
 * Extraction filter
