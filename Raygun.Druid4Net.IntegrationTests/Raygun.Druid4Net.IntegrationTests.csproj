@@ -63,6 +63,7 @@
     <Compile Include="Queries\Select\SelectSpecificPagedData.cs" />
     <Compile Include="Queries\TestQueryBase.cs" />
     <Compile Include="Queries\Timeseries\PagesAddedOverTimeByHour.cs" />
+    <Compile Include="Queries\TopN\AsyncBasicTop10Pages.cs" />
     <Compile Include="Queries\TopN\FilteredTop5Pages.cs" />
     <Compile Include="Queries\TopN\BasicTop10Pages.cs" />
     <Compile Include="Queries\Wikiticker.cs" />
