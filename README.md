@@ -26,7 +26,7 @@ It filters the data where the country code is 'US' and the data timestamp is wit
 It then returns the total pages added by hour in a descending order.
 
 ```csharp
-var response = _druidClient.Timeseries<TimeseriesResult<QueryResult>>(q => q
+var response = _druidClient.Timeseries<QueryResult>(q => q
   .Descending(true)
   .Aggregations(new LongSumAggregator(Wikiticker.Metrics.Added))
   .Filter(new SelectorFilter(Wikiticker.Dimensions.CountryCode, "US"))
@@ -44,7 +44,7 @@ It filters the data where the country code is 'US' and the user was anonymous an
 It then returns the top 5 pages by count.
 
 ```csharp
-var response = _druidClient.TopN<TopNResult<QueryResult>>(q => q
+var response = _druidClient.TopN<QueryResult>(q => q
   .Metric(Wikiticker.Metrics.Count)
   .Dimension(Wikiticker.Dimensions.Page)
   .Threshold(5)
@@ -66,7 +66,7 @@ The following example query is performing a groupBy query against the sample wik
 It returns the sum of page count grouped by Country name, then by city name and finally by page name.
 
 ```csharp
-var response = _druidClient.GroupBy<GroupByResult<QueryResult>>(q => q
+var response = _druidClient.GroupBy<QueryResult>(q => q
   .Dimensions(Wikiticker.Dimensions.CountryName, Wikiticker.Dimensions.CityName, Wikiticker.Dimensions.Page)
   .Aggregations(new LongSumAggregator(Wikiticker.Metrics.Count))
   .DataSource(Wikiticker.DataSource)
@@ -82,7 +82,7 @@ The following example query is performing a select query against the sample wiki
 It selects the country name, city name, page, added and deleted values, filtered to anonymous users and limited to 10 records.
 
 ```csharp
-var response = _druidClient.Select<SelectResult<QueryResult>>(q => q
+var response = _druidClient.Select<QueryResult>(q => q
   .Dimensions(Wikiticker.Dimensions.CountryName, Wikiticker.Dimensions.CityName, Wikiticker.Dimensions.Page)
   .Metrics(Wikiticker.Metrics.Added, Wikiticker.Metrics.Deleted)
   .Paging(new PagingSpec(10))
@@ -99,7 +99,7 @@ The following example query is performing a search query against the sample wiki
 It searches for pages that contain the term "Dragon" and returns the page dimension value limited to the top 10 records.
 
 ```csharp
-var response = DruidClient.Search<SearchResult>(q => q
+var response = DruidClient.Search(q => q
   .DataSource(Wikiticker.DataSource)
   .Granularity(Granularities.All)
   .SearchDimensions(Wikiticker.Dimensions.Page)
@@ -107,6 +107,17 @@ var response = DruidClient.Search<SearchResult>(q => q
   .Limit(10)
   .Interval(FromDate, ToDate)
 );
+```
+
+### Async queries
+All query types have both synchronous and asynchronous methods available. 
+
+For example:
+
+```csharp
+var response = _druidClient.Timeseries<T>(q => q...);
+
+var response = await _druidClient.TimeseriesAsync<T>(q => q...);
 ```
 
 ## Notes

@@ -12,7 +12,7 @@ namespace Raygun.Druid4Net.IntegrationTests.Queries.TopN
     [SetUp]
     public void Execute()
     {
-      var response = DruidClient.TopN<TopNResult<QueryResult>>(q => q
+      var response = DruidClient.TopN<QueryResult>(q => q
         .Metric(Wikiticker.Metrics.Count)
         .Dimension(Wikiticker.Dimensions.Page)
         .Threshold(5)

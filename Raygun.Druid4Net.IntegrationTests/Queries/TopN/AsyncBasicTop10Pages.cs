@@ -1,25 +1,26 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using NUnit.Framework;
 
 namespace Raygun.Druid4Net.IntegrationTests.Queries.TopN
 {
   [TestFixture]
-  public class BasicTop10Pages : TestQueryBase
+  public class AsyncBasicTop10Pages : TestQueryBase
   {
     private IList<QueryResult> _results;
 
     [SetUp]
-    public void Execute()
+    public async Task Execute()
     {
-      var response = DruidClient.TopN<QueryResult>(q => q
+      var response = await DruidClient.TopNAsync<QueryResult>(q => q
         .Metric(Wikiticker.Metrics.Count)
         .Dimension(Wikiticker.Dimensions.Page)
         .Threshold(10)
         .Aggregations(new LongSumAggregator(Wikiticker.Metrics.Count))
         .DataSource(Wikiticker.DataSource)
         .Interval(FromDate, ToDate)
-        .Granularity(Granularities.All)
+        .Granularity(Granularities.All)  
       );
 
       _results = response.Data.SelectMany(x => x.Result).ToList();

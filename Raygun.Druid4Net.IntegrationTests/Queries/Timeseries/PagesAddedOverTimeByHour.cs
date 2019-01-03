@@ -13,7 +13,7 @@ namespace Raygun.Druid4Net.IntegrationTests.Queries.Timeseries
     [SetUp]
     public void Execute()
     {
-      var response = DruidClient.Timeseries<TimeseriesResult<QueryResult>>(q => q
+      var response = DruidClient.Timeseries<QueryResult>(q => q
         .Descending(true)
         .Aggregations(new LongSumAggregator(Wikiticker.Metrics.Added))
         .Filter(new SelectorFilter(Wikiticker.Dimensions.CountryCode, "US"))
