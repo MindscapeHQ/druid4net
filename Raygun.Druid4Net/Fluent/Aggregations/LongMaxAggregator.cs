@@ -4,7 +4,7 @@
   {
     public override string Type => "longMax";
 
-    public LongMaxAggregator(string name, string fieldName = null) 
+    public LongMaxAggregator(string name, string fieldName) 
       : base (name, fieldName)
     {
     }

@@ -4,7 +4,7 @@
   {
     public override string Type => "doubleFirst";
 
-    public DoubleFirstAggregator(string name, string fieldName = null) 
+    public DoubleFirstAggregator(string name, string fieldName) 
       : base (name, fieldName)
     {
     }

@@ -4,7 +4,7 @@
   {
     public override string Type => "doubleMax";
 
-    public DoubleMaxAggregator(string name, string fieldName = null) 
+    public DoubleMaxAggregator(string name, string fieldName) 
       : base (name, fieldName)
     {
     }

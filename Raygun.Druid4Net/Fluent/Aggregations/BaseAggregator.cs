@@ -5,13 +5,13 @@
     public abstract string Type { get; }
 
     public string Name { get; }
-
+    
     public string FieldName { get; }
-
-    protected BaseAggregator(string name, string fieldName = null)
+    
+    protected BaseAggregator(string name, string fieldName)
     {
       Name = name;
-      FieldName = fieldName ?? name;
+      FieldName = fieldName;
     }
   }
 }

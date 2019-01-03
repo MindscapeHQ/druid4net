@@ -4,7 +4,7 @@
   {
     public override string Type => "doubleLast";
 
-    public DoubleLastAggregator(string name, string fieldName = null) 
+    public DoubleLastAggregator(string name, string fieldName) 
       : base (name, fieldName)
     {
     }

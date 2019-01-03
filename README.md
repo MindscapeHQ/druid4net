@@ -26,11 +26,11 @@ It filters the data where the country code is 'US' and the data timestamp is wit
 It then returns the total pages added by hour in a descending order.
 
 ```csharp
-var response = _druidClient.Timeseries<QueryResult>(q => q
+var response = _druidClient.Timeseries<T>(q => q
   .Descending(true)
-  .Aggregations(new LongSumAggregator(Wikiticker.Metrics.Added))
-  .Filter(new SelectorFilter(Wikiticker.Dimensions.CountryCode, "US"))
-  .DataSource(Wikiticker.DataSource)
+  .Aggregations(new LongSumAggregator("totalAdded", "added"))
+  .Filter(new SelectorFilter("countryIsoCode", "US"))
+  .DataSource("wikiticker")
   .Interval(FromDate, ToDate)
   .Granularity(Granularities.Hour)
 );
@@ -44,16 +44,16 @@ It filters the data where the country code is 'US' and the user was anonymous an
 It then returns the top 5 pages by count.
 
 ```csharp
-var response = _druidClient.TopN<QueryResult>(q => q
-  .Metric(Wikiticker.Metrics.Count)
-  .Dimension(Wikiticker.Dimensions.Page)
+var response = _druidClient.TopN<T>(q => q
+  .Metric("totalCount")
+  .Dimension("page")
   .Threshold(5)
-  .Aggregations(new LongSumAggregator(Wikiticker.Metrics.Count))
+  .Aggregations(new LongSumAggregator("totalCount", "count"))
   .Filter(new AndFilter(
-    new SelectorFilter(Wikiticker.Dimensions.IsAnonymous, "true"),
-    new SelectorFilter(Wikiticker.Dimensions.CountryCode, "US")
+    new SelectorFilter("isAnonymous", "true"),
+    new SelectorFilter("countryIsoCode", "US")
   ))
-  .DataSource(Wikiticker.DataSource)
+  .DataSource("wikiticker")
   .Interval(FromDate, ToDate)
   .Granularity(Granularities.All)
 );
@@ -66,10 +66,10 @@ The following example query is performing a groupBy query against the sample wik
 It returns the sum of page count grouped by Country name, then by city name and finally by page name.
 
 ```csharp
-var response = _druidClient.GroupBy<QueryResult>(q => q
-  .Dimensions(Wikiticker.Dimensions.CountryName, Wikiticker.Dimensions.CityName, Wikiticker.Dimensions.Page)
-  .Aggregations(new LongSumAggregator(Wikiticker.Metrics.Count))
-  .DataSource(Wikiticker.DataSource)
+var response = _druidClient.GroupBy<T>(q => q
+  .Dimensions("countryName", "cityName", "page")
+  .Aggregations(new LongSumAggregator("totalCount", "count"))
+  .DataSource("wikiticker")
   .Interval(FromDate, ToDate)
   .Granularity(Granularities.All)
 );
@@ -82,12 +82,12 @@ The following example query is performing a select query against the sample wiki
 It selects the country name, city name, page, added and deleted values, filtered to anonymous users and limited to 10 records.
 
 ```csharp
-var response = _druidClient.Select<QueryResult>(q => q
-  .Dimensions(Wikiticker.Dimensions.CountryName, Wikiticker.Dimensions.CityName, Wikiticker.Dimensions.Page)
-  .Metrics(Wikiticker.Metrics.Added, Wikiticker.Metrics.Deleted)
+var response = _druidClient.Select<T>(q => q
+  .Dimensions("countryName", "cityName", "page")
+  .Metrics("added", "deleted")
   .Paging(new PagingSpec(10))
-  .Filter(new SelectorFilter(Wikiticker.Dimensions.IsAnonymous, "true"))
-  .DataSource(Wikiticker.DataSource)
+  .Filter(new SelectorFilter("isAnonymous", "true"))
+  .DataSource("wikiticker")
   .Interval(FromDate, ToDate)
 );
 ```
@@ -99,10 +99,10 @@ The following example query is performing a search query against the sample wiki
 It searches for pages that contain the term "Dragon" and returns the page dimension value limited to the top 10 records.
 
 ```csharp
-var response = DruidClient.Search(q => q
-  .DataSource(Wikiticker.DataSource)
+var response = _druidClient.Search(q => q
+  .DataSource("wikiticker")
   .Granularity(Granularities.All)
-  .SearchDimensions(Wikiticker.Dimensions.Page)
+  .SearchDimensions("page")
   .Query(new ContainsSearchQuery("Dragon"))
   .Limit(10)
   .Interval(FromDate, ToDate)
@@ -132,10 +132,6 @@ solution that can be used by implementing the interface in a simple pass-through
 * Union data source
 * Time boundary queries
 * Scan queries
-* JavaScript aggregator
-* Cardinality aggregator
-* HyperUnique aggregator
-* Filtered aggregator
 * Extraction filter
 * Interval filter
 * Extraction dimensions

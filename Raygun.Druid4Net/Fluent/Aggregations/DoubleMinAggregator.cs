@@ -4,7 +4,7 @@
   {
     public override string Type => "doubleMin";
 
-    public DoubleMinAggregator(string name, string fieldName = null) 
+    public DoubleMinAggregator(string name, string fieldName) 
       : base (name, fieldName)
     {
     }

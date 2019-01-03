@@ -4,7 +4,7 @@
   {
     public override string Type => "longFirst";
 
-    public LongFirstAggregator(string name, string fieldName = null) 
+    public LongFirstAggregator(string name, string fieldName) 
       : base (name, fieldName)
     {
     }

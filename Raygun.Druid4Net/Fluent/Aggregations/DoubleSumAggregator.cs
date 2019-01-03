@@ -4,7 +4,7 @@
   {
     public override string Type => "doubleSum";
 
-    public DoubleSumAggregator(string name, string fieldName = null) 
+    public DoubleSumAggregator(string name, string fieldName) 
       : base (name, fieldName)
     {
     }

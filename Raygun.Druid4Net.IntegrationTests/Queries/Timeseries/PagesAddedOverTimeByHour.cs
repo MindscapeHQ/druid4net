@@ -15,7 +15,7 @@ namespace Raygun.Druid4Net.IntegrationTests.Queries.Timeseries
     {
       var response = DruidClient.Timeseries<QueryResult>(q => q
         .Descending(true)
-        .Aggregations(new LongSumAggregator(Wikiticker.Metrics.Added))
+        .Aggregations(new LongSumAggregator("totalAdded", Wikiticker.Metrics.Added))
         .Filter(new SelectorFilter(Wikiticker.Dimensions.CountryCode, "US"))
         .DataSource(Wikiticker.DataSource)
         .Interval(FromDate, ToDate)
@@ -35,19 +35,19 @@ namespace Raygun.Druid4Net.IntegrationTests.Queries.Timeseries
     public void FirstResultIsCorrect()
     {
       Assert.That(_results.First().Timestamp, Is.EqualTo(new DateTime(2015, 9, 12, 23, 0, 0,DateTimeKind.Utc)));
-      Assert.That(_results.First().Result.Added, Is.EqualTo(3913));
+      Assert.That(_results.First().Result.TotalAdded, Is.EqualTo(3913));
     }
 
     [Test]
     public void LastResultIsCorrect()
     {
       Assert.That(_results.Last().Timestamp, Is.EqualTo(new DateTime(2015, 9, 12, 0, 0, 0,DateTimeKind.Utc)));
-      Assert.That(_results.Last().Result.Added, Is.EqualTo(88));
+      Assert.That(_results.Last().Result.TotalAdded, Is.EqualTo(88));
     }
 
     private class QueryResult
     {
-      public int Added { get; set; }
+      public int TotalAdded { get; set; }
     }
   }
 }

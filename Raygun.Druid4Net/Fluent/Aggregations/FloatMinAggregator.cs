@@ -4,7 +4,7 @@
   {
     public override string Type => "floatMin";
 
-    public FloatMinAggregator(string name, string fieldName = null) 
+    public FloatMinAggregator(string name, string fieldName) 
       : base (name, fieldName)
     {
     }
