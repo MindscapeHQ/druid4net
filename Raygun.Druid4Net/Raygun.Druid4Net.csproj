@@ -7,8 +7,8 @@
   <PropertyGroup>
     <Authors>Raygun</Authors>
     <Company>Raygun</Company>
-    <Version>1.0.3</Version>
-    <Copyright>Copyright © Raygun 2018</Copyright>
+    <Version>2.0.0</Version>
+    <Copyright>Copyright © Raygun 2018-2019</Copyright>
     <Title>Druid4Net - A .NET druid.io client</Title>
     <Description>A .NET druid.io client written in C#</Description>
     <PackageId>Druid4Net</PackageId>
