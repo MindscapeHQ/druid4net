@@ -165,4 +165,3 @@ solution that can be used by implementing the interface in a simple pass-through
 * Union data source
 * Extraction filter
 * Interval filter
-* Extraction dimensions
