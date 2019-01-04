@@ -134,7 +134,6 @@ solution that can be used by implementing the interface in a simple pass-through
 * Scan queries
 * Extraction filter
 * Interval filter
-* Extraction dimensions
 * Constant post aggregator
 * Greatest/Least post aggregator
 * JavaScript post aggregator
