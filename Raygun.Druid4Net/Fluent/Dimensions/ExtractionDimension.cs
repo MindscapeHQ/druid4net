@@ -10,7 +10,14 @@ namespace Raygun.Druid4Net
     
     public DimensionOutputType OutputType;
 
-    public IExtractionFunction ExtractionFn { get; }
+    public IExtractionFunction ExtractionFn;
 
+    public ExtractionDimension(string dimension, string outputName = null, DimensionOutputType outputType = DimensionOutputType.String, IExtractionFunction extractionFn = null)
+    {
+      Dimension = dimension;
+      OutputName = outputName ?? dimension;
+      OutputType = outputType;
+      ExtractionFn = extractionFn;
+    }
   }
 }
