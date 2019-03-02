@@ -99,6 +99,7 @@
     <Compile Include="Fluent\PostAggregations\FieldAccessPostAggregatorTests.cs" />
     <Compile Include="Fluent\PostAggregations\FinalizingFieldAccessPostAggregatorTests.cs" />
     <Compile Include="Fluent\QueryDescriptors\GroupByQueryDescriptorTests.cs" />
+    <Compile Include="Fluent\QueryDescriptors\ScanQueryDescriptorTests.cs" />
     <Compile Include="Fluent\QueryDescriptors\SearchQueryDescriptorTests.cs" />
     <Compile Include="Fluent\QueryDescriptors\SelectQueryDescriptorTests.cs" />
     <Compile Include="Fluent\QueryDescriptors\TimeBoundaryQueryDescriptorTests.cs" />
