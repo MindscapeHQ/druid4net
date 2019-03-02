@@ -68,7 +68,6 @@ namespace Raygun.Druid4Net
 
     public async Task<IQueryResponse<TResponse>> PostAsync<TResponse, TRequest>(string endpoint, IDruidRequest<TRequest> request)
       where TResponse : class
-      where TRequest : QueryRequestData
     {
       var requestString = _json.Serialize(request.RequestData);
 
