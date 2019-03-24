@@ -14,9 +14,8 @@ namespace Raygun.Druid4Net
       _configurationOptions = new ConfigurationOptions
       {
         JsonSerializer = jsonSerializer,
-        ApiHostName = hostName,
-        ApiPort = port,
-        ApiEndpoint = apiEndpoint,
+        QueryApiBaseAddress = new Uri($"{hostName}:{port}"),
+        QueryApiEndpoint = apiEndpoint,
       };
       _requester = new Requester(_configurationOptions);
     }
@@ -36,7 +35,7 @@ namespace Raygun.Druid4Net
     {
       var request = selector(new TopNQueryDescriptor()).Generate();
 
-      var result = await ExecuteQueryAsync<TopNResult<TResponse>, TopNRequestData>(_configurationOptions.ApiEndpoint, request);
+      var result = await ExecuteQueryAsync<TopNResult<TResponse>, TopNRequestData>(_configurationOptions.QueryApiEndpoint, request);
 
       return result;
     }
@@ -50,7 +49,7 @@ namespace Raygun.Druid4Net
     {
       var request = selector(new GroupByQueryDescriptor()).Generate();
 
-      var result = await ExecuteQueryAsync<GroupByResult<TResponse>, GroupByRequestData>(_configurationOptions.ApiEndpoint, request);
+      var result = await ExecuteQueryAsync<GroupByResult<TResponse>, GroupByRequestData>(_configurationOptions.QueryApiEndpoint, request);
 
       return result;
     }
@@ -64,7 +63,7 @@ namespace Raygun.Druid4Net
     {
       var request = selector(new TimeseriesQueryDescriptor()).Generate();
 
-      var result = await ExecuteQueryAsync<TimeseriesResult<TResponse>, TimeseriesRequestData>(_configurationOptions.ApiEndpoint, request);
+      var result = await ExecuteQueryAsync<TimeseriesResult<TResponse>, TimeseriesRequestData>(_configurationOptions.QueryApiEndpoint, request);
 
       return result;
     }
@@ -78,7 +77,7 @@ namespace Raygun.Druid4Net
     {
       var request = selector(new SelectQueryDescriptor()).Generate();
 
-      var result = await ExecuteQueryAsync<SelectResult<TResponse>, SelectRequestData>(_configurationOptions.ApiEndpoint, request);
+      var result = await ExecuteQueryAsync<SelectResult<TResponse>, SelectRequestData>(_configurationOptions.QueryApiEndpoint, request);
 
       return result;
     }
@@ -92,7 +91,7 @@ namespace Raygun.Druid4Net
     {
       var request = selector(new SearchQueryDescriptor()).Generate();
 
-      var result = await ExecuteQueryAsync<SearchResult, SearchRequestData>(_configurationOptions.ApiEndpoint, request);
+      var result = await ExecuteQueryAsync<SearchResult, SearchRequestData>(_configurationOptions.QueryApiEndpoint, request);
 
       return result;
     }

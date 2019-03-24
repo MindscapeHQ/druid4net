@@ -1,8 +1,10 @@
+using System;
+
 namespace Raygun.Druid4Net
 {
   public class ProxySettings
   {
-    public string Address  { get; set; }
+    public Uri Address  { get; set; }
     
     public bool BypassOnLocal  { get; set; }
     

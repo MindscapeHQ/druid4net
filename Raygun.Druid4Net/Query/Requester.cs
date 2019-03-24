@@ -32,7 +32,7 @@ namespace Raygun.Druid4Net
     private HttpClient CreateClient(ConfigurationOptions options)
     {
       var client = options.ProxySettings != null ? CreateClientWithProxyServer(options) : new HttpClient();
-      client.BaseAddress = new Uri($"{options.ApiHostName}:{options.ApiPort}");
+      client.BaseAddress = options.QueryApiBaseAddress;
       return client;
     }
 
@@ -46,7 +46,7 @@ namespace Raygun.Druid4Net
 #else
       var webProxy = new WebProxy
       {
-        Address = new Uri(options.ProxySettings.Address),
+        Address = options.ProxySettings.Address,
         BypassProxyOnLocal = options.ProxySettings.BypassOnLocal,
         UseDefaultCredentials = true
       };
