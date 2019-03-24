@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -14,19 +15,56 @@ namespace Raygun.Druid4Net
     public Requester(ConfigurationOptions options)
     {
       _json = options.JsonSerializer;
-      _client = new HttpClient();
-      _client.BaseAddress = new Uri($"{options.ApiHostName}:{options.ApiPort}");
+      _client = CreateClient(options);
 
-      ConfigureAuthentication(options);
+      ConfigureClientAuthentication(_client, options);
     }
 
-    private void ConfigureAuthentication(ConfigurationOptions options)
+    private void ConfigureClientAuthentication(HttpClient client, ConfigurationOptions options)
     {
       if (options.BasicAuthenticationCredentials != null && !string.IsNullOrEmpty(options.BasicAuthenticationCredentials.ToString()))
       {
         var credentials = Convert.ToBase64String(Encoding.UTF8.GetBytes(options.BasicAuthenticationCredentials.ToString()));
-        _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", credentials);
+        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", credentials);
       }
+    }
+
+    private HttpClient CreateClient(ConfigurationOptions options)
+    {
+      var client = options.ProxySettings != null ? CreateClientWithProxyServer(options) : new HttpClient();
+      client.BaseAddress = new Uri($"{options.ApiHostName}:{options.ApiPort}");
+      return client;
+    }
+
+    private HttpClient CreateClientWithProxyServer(ConfigurationOptions options)
+    {
+#if (NETSTANDARD1_6) 
+      var httpClientHandler = new HttpClientHandler
+      {
+        UseProxy = true
+      };
+#else
+      var webProxy = new WebProxy
+      {
+        Address = new Uri(options.ProxySettings.Address),
+        BypassProxyOnLocal = options.ProxySettings.BypassOnLocal,
+        UseDefaultCredentials = false
+      };
+
+      if (!string.IsNullOrEmpty(options.ProxySettings.Username) && !string.IsNullOrEmpty(options.ProxySettings.Password))
+      {
+        webProxy.UseDefaultCredentials = false;
+        webProxy.Credentials = new NetworkCredential(options.ProxySettings.Username, options.ProxySettings.Password);
+      }
+
+      var httpClientHandler = new HttpClientHandler
+      {
+        UseProxy = true,
+        Proxy = webProxy
+      };
+#endif
+      
+      return new HttpClient(httpClientHandler, true);
     }
 
     public async Task<IQueryResponse<TResponse>> PostAsync<TResponse, TRequest>(string endpoint, IDruidRequest<TRequest> request)

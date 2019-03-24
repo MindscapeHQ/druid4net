@@ -17,6 +17,8 @@ namespace Raygun.Druid4Net
     
     public IJsonSerializer JsonSerializer { get; set; }
 
+    public ProxySettings ProxySettings { get; set; }
+    
     public BasicAuthenticationCredentials BasicAuthenticationCredentials { get; set; }
   }
 }
