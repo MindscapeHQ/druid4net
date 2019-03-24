@@ -48,7 +48,7 @@ namespace Raygun.Druid4Net
       {
         Address = new Uri(options.ProxySettings.Address),
         BypassProxyOnLocal = options.ProxySettings.BypassOnLocal,
-        UseDefaultCredentials = false
+        UseDefaultCredentials = true
       };
 
       if (!string.IsNullOrEmpty(options.ProxySettings.Username) && !string.IsNullOrEmpty(options.ProxySettings.Password))
