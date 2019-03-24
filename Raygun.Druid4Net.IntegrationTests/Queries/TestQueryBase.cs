@@ -12,7 +12,12 @@ namespace Raygun.Druid4Net.IntegrationTests.Queries
 
     protected TestQueryBase()
     {
-      DruidClient = new DruidClient(new JilSerializer(), ConfigurationManager.AppSettings["druid.broker.host"]);
+      var options = new ConfigurationOptions()
+      {
+        JsonSerializer = new JilSerializer(),
+        ApiHostName = ConfigurationManager.AppSettings["druid.broker.host"]
+      };
+      DruidClient = new DruidClient(options);
     }
   }
 }

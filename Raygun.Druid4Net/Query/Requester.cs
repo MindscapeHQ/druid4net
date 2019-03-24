@@ -1,20 +1,32 @@
 ﻿using System;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Raygun.Druid4Net
 {
-  public class Requester
+  public class Requester : IRequester
   {
     private readonly IJsonSerializer _json;
     private readonly HttpClient _client;
 
-    public Requester(IJsonSerializer json, string host, int port)
+    public Requester(ConfigurationOptions options)
     {
-      _json = json;
+      _json = options.JsonSerializer;
       _client = new HttpClient();
-      _client.BaseAddress = new Uri($"{host}:{port}");
+      _client.BaseAddress = new Uri($"{options.ApiHostName}:{options.ApiPort}");
+
+      ConfigureAuthentication(options);
+    }
+
+    private void ConfigureAuthentication(ConfigurationOptions options)
+    {
+      if (options.BasicAuthenticationCredentials != null && !string.IsNullOrEmpty(options.BasicAuthenticationCredentials.ToString()))
+      {
+        var credentials = Convert.ToBase64String(Encoding.UTF8.GetBytes(options.BasicAuthenticationCredentials.ToString()));
+        _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", credentials);
+      }
     }
 
     public async Task<IQueryResponse<TResponse>> PostAsync<TResponse, TRequest>(string endpoint, IDruidRequest<TRequest> request)
