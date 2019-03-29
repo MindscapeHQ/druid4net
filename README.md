@@ -13,7 +13,12 @@ Supports .NET 4.5 and above, .NET Standard 1.6 and 2.0
 To query druid, create an instance of the `DruidClient` using code similar to the following:
 
 ```csharp
-new DruidClient(new JilSerializer(), "http://localhost");
+var options = new ConfigurationOptions()
+{
+  JsonSerializer = new JilSerializer(),
+  QueryApiBaseAddress = new Uri("http://localhost:8082")
+};
+new DruidClient(options);
 ```
 
 _Note the [JilSerializer](https://github.com/MindscapeHQ/druid4net/blob/master/Raygun.Druid4Net.IntegrationTests/JilSerializer.cs) implementation can be found in the Integration tests project along with sample queries of all support query types._ 
