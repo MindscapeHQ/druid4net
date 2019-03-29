@@ -47,8 +47,7 @@ namespace Raygun.Druid4Net
       var webProxy = new WebProxy
       {
         Address = options.ProxySettings.Address,
-        BypassProxyOnLocal = options.ProxySettings.BypassOnLocal,
-        UseDefaultCredentials = true
+        BypassProxyOnLocal = options.ProxySettings.BypassOnLocal
       };
 
       if (!string.IsNullOrEmpty(options.ProxySettings.Username) && !string.IsNullOrEmpty(options.ProxySettings.Password))
