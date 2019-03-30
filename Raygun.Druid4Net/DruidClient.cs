@@ -105,13 +105,14 @@ namespace Raygun.Druid4Net
     {
       var request = selector(new TimeBoundaryQueryDescriptor()).Generate();
 
-      var result = await ExecuteQueryAsync<TimeBoundaryResult, TimeBoundaryRequestData>(_apiEndpoint, request);
+      var result = await ExecuteQueryAsync<TimeBoundaryResult, TimeBoundaryRequestData>(_configurationOptions.QueryApiEndpoint, request);
 
       return result;
     }
 
     private async Task<IQueryResponse<TResponse>> ExecuteQueryAsync<TResponse, TRequest>(string endpoint, IDruidRequest<TRequest> request) 
       where TResponse : class
+      where TRequest : QueryRequestData
     {
       return await _requester.PostAsync<TResponse, TRequest>(endpoint, request);
     }
