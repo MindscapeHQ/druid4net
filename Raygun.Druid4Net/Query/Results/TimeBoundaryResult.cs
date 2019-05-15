@@ -11,7 +11,7 @@ namespace Raygun.Druid4Net
   {
     public DateTime Timestamp { get; set; }
 
-    public List<TimeBoundaryResultItem> Result { get; set; }
+    public TimeBoundaryResultItem Result { get; set; }
   }
   
   public class TimeBoundaryResultItem

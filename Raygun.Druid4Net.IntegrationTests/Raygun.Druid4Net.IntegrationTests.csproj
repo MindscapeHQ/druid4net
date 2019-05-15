@@ -62,6 +62,7 @@
     <Compile Include="Queries\Search\BasicSearch10Pages.cs" />
     <Compile Include="Queries\Select\SelectSpecificPagedData.cs" />
     <Compile Include="Queries\TestQueryBase.cs" />
+    <Compile Include="Queries\TimeBoundary\FilteredTimeBoundary.cs" />
     <Compile Include="Queries\Timeseries\PagesAddedOverTimeByHour.cs" />
     <Compile Include="Queries\TopN\AsyncBasicTop10Pages.cs" />
     <Compile Include="Queries\TopN\FilteredTop5Pages.cs" />
