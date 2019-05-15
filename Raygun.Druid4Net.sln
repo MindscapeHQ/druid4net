@@ -12,6 +12,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{8F77C055-AA50-4EDD-94F9-67B286AA5A12}"
 ProjectSection(SolutionItems) = preProject
 	Build\build.ps1 = Build\build.ps1
+	azure-pipelines.yml = azure-pipelines.yml
 EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Items", "Items", "{C87E633C-9BB6-4EB0-B695-361F12D78C2F}"
