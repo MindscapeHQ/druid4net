@@ -31,5 +31,7 @@ steps:
 
 - task: VSTest@2
   inputs:
+    testSelector: 'testAssemblies'
+    testAssemblyVer2: '**\*Tests.dll!**\*IntegrationTests.dll!**\*TestAdapter.dll!**\obj\**'
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
