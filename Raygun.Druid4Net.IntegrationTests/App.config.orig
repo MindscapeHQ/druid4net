@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+  <appSettings>
+<<<<<<< HEAD
+    <add key="druid.broker.host" value="http://druid3.ec2.raygun.io"/>
+=======
+    <add key="druid.broker.host" value="http://localhost:8082"/>
+>>>>>>> a794de816f5eb950ffce66f7d98e0dcb86d6e7dc
+  </appSettings>
+</configuration>
