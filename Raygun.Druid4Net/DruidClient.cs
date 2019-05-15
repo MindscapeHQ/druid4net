@@ -109,11 +109,7 @@ namespace Raygun.Druid4Net
 
       return result;
     }
-
-
-
-
-
+    
     private async Task<IQueryResponse<TResponse>> ExecuteQueryAsync<TResponse, TRequest>(string endpoint, IDruidRequest<TRequest> request) 
       where TResponse : class
       where TRequest : QueryRequestData
