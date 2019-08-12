@@ -101,6 +101,7 @@
     <Compile Include="Fluent\QueryDescriptors\GroupByQueryDescriptorTests.cs" />
     <Compile Include="Fluent\QueryDescriptors\SearchQueryDescriptorTests.cs" />
     <Compile Include="Fluent\QueryDescriptors\SelectQueryDescriptorTests.cs" />
+    <Compile Include="Fluent\QueryDescriptors\TimeBoundaryQueryDescriptorTests.cs" />
     <Compile Include="Fluent\QueryDescriptors\TimeseriesQueryDescriptorTests.cs" />
     <Compile Include="Fluent\QueryDescriptors\TopNQueryDescriptorTests.cs" />
     <Compile Include="Fluent\SearchQueries\ContainsSearchQueryTests.cs" />

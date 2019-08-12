@@ -114,6 +114,19 @@ var response = _druidClient.Search(q => q
 );
 ```
 
+### TimeBoundary
+See [druid.io TimeBoundary query documentation](http://druid.io/docs/latest/querying/timeboundaryquery.html) for more details on this type of query.
+
+The following example query is performing a timeBoundary query against the sample wikiticker datasource.
+It finds the minimum and maximum data points filtered to anonymous users.
+
+```csharp
+var response = _druidClient.TimeBoundary(q => q
+  .DataSource("wikiticker")
+  .Filter(new SelectorFilter("isAnonymous", "true"))
+);
+```
+
 ### Async queries
 All query types have both synchronous and asynchronous methods available. 
 
@@ -135,7 +148,6 @@ solution that can be used by implementing the interface in a simple pass-through
 
 ### Not supported yet
 * Union data source
-* Time boundary queries
 * Scan queries
 * Extraction filter
 * Interval filter
