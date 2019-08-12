@@ -109,7 +109,21 @@ namespace Raygun.Druid4Net
 
       return result;
     }
-    
+	
+	public IQueryResponse<ScanResult<TResponse>> Scan<TResponse>(Func<IScanQueryDescriptor, IScanQueryDescriptor> selector) where TResponse : class
+    {
+      return ScanAsync<TResponse>(selector).GetAwaiter().GetResult();
+    }
+
+    public async Task<IQueryResponse<ScanResult<TResponse>>> ScanAsync<TResponse>(Func<IScanQueryDescriptor, IScanQueryDescriptor> selector) where TResponse : class
+    {
+      var request = selector(new ScanQueryDescriptor()).Generate();
+
+      var result = await ExecuteQueryAsync<ScanResult<TResponse>, ScanRequestData>(_configurationOptions.QueryApiEndpoint, request);
+
+      return result;
+    }
+	
     private async Task<IQueryResponse<TResponse>> ExecuteQueryAsync<TResponse, TRequest>(string endpoint, IDruidRequest<TRequest> request) 
       where TResponse : class
       where TRequest : QueryRequestData

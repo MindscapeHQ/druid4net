@@ -1,5 +1,5 @@
 # druid4net
-A .NET [druid.io](http://druid.io) client written in C#
+A .NET [Apache Druid](https://druid.apache.org/) client written in C#
 
 Supports .NET 4.5 and above, .NET Standard 1.6 and 2.0
 
@@ -24,7 +24,7 @@ new DruidClient(options);
 _Note the [JilSerializer](https://github.com/MindscapeHQ/druid4net/blob/master/Raygun.Druid4Net.IntegrationTests/JilSerializer.cs) implementation can be found in the Integration tests project along with sample queries of all support query types._ 
 
 ### Timeseries
-See [druid.io Timeseries query documentation](http://druid.io/docs/latest/querying/timeseriesquery.html) for more details on this type of query.
+See [Apache Druid Timeseries query documentation](https://druid.apache.org/docs/latest/querying/timeseriesquery.html) for more details on this type of query.
 
 The following example query is performing a timeseries query against the sample wikiticker datasource.
 It filters the data where the country code is 'US' and the data timestamp is within the specified date interval.
@@ -42,7 +42,7 @@ var response = _druidClient.Timeseries<T>(q => q
 ```
 
 ### TopN
-See [druid.io TopN query documentation](http://druid.io/docs/latest/querying/topnquery.html) for more details on this type of query.
+See [Apache Druid TopN query documentation](https://druid.apache.org/docs/latest/querying/topnquery.html) for more details on this type of query.
 
 The following example query is performing a topN query against the sample wikiticker datasource.
 It filters the data where the country code is 'US' and the user was anonymous and the data timestamp is within the specified date interval.
@@ -65,7 +65,7 @@ var response = _druidClient.TopN<T>(q => q
 ```
 
 ### GroupBy
-See [druid.io GroupBy query documentation](http://druid.io/docs/latest/querying/groupbyquery.html) for more details on this type of query.
+See [Apache Druid GroupBy query documentation](https://druid.apache.org/docs/latest/querying/groupbyquery.html) for more details on this type of query.
 
 The following example query is performing a groupBy query against the sample wikiticker datasource.
 It returns the sum of page count grouped by Country name, then by city name and finally by page name.
@@ -81,7 +81,7 @@ var response = _druidClient.GroupBy<T>(q => q
 ```
 
 ### Select
-See [druid.io Select query documentation](http://druid.io/docs/latest/querying/select-query.html) for more details on this type of query.
+See [Apache Druid Select query documentation](https://druid.apache.org/docs/latest/querying/select-query.html) for more details on this type of query.
 
 The following example query is performing a select query against the sample wikiticker datasource.
 It selects the country name, city name, page, added and deleted values, filtered to anonymous users and limited to 10 records.
@@ -98,7 +98,7 @@ var response = _druidClient.Select<T>(q => q
 ```
 
 ### Search
-See [druid.io Search query documentation](http://druid.io/docs/latest/querying/searchquery.html) for more details on this type of query.
+See [Apache Druid Search query documentation](https://druid.apache.org/docs/latest/querying/searchquery.html) for more details on this type of query.
 
 The following example query is performing a search query against the sample wikiticker datasource.
 It searches for pages that contain the term "Dragon" and returns the page dimension value limited to the top 10 records.
@@ -115,7 +115,7 @@ var response = _druidClient.Search(q => q
 ```
 
 ### TimeBoundary
-See [druid.io TimeBoundary query documentation](http://druid.io/docs/latest/querying/timeboundaryquery.html) for more details on this type of query.
+See [Apache Druid TimeBoundary query documentation](https://druid.apache.org/docs/latest/querying/timeboundaryquery.html) for more details on this type of query.
 
 The following example query is performing a timeBoundary query against the sample wikiticker datasource.
 It finds the minimum and maximum data points filtered to anonymous users.
@@ -124,6 +124,21 @@ It finds the minimum and maximum data points filtered to anonymous users.
 var response = _druidClient.TimeBoundary(q => q
   .DataSource("wikiticker")
   .Filter(new SelectorFilter("isAnonymous", "true"))
+);
+```
+
+### Scan
+See [Apache Druid TimeBoundary query documentation](https://druid.apache.org/docs/latest/querying/scan-query.html) for more details on this type of query.
+
+The following example query is performing a scan query against the sample wikiticker datasource.
+It returns druid records in streaming mode, filtered to anonymous users and limited to the first 10 results. 
+
+```csharp
+var response = _druidClient.Scan<T>(q => q
+  .DataSource("wikiticker")
+  .Interval(FromDate, ToDate)
+  .Filter(new SelectorFilter("isAnonymous", "true"))
+  .Limit(10)
 );
 ```
 
@@ -148,7 +163,6 @@ solution that can be used by implementing the interface in a simple pass-through
 
 ### Not supported yet
 * Union data source
-* Scan queries
 * Extraction filter
 * Interval filter
 * Extraction dimensions
