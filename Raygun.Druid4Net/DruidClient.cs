@@ -119,7 +119,7 @@ namespace Raygun.Druid4Net
     {
       var request = selector(new ScanQueryDescriptor()).Generate();
 
-      var result = await ExecuteQueryAsync<ScanResult<TResponse>, ScanRequestData>(_apiEndpoint, request);
+      var result = await ExecuteQueryAsync<ScanResult<TResponse>, ScanRequestData>(_configurationOptions.QueryApiEndpoint, request);
 
       return result;
     }

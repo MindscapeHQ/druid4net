@@ -18,7 +18,7 @@ namespace Raygun.Druid4Net
     public ScanQueryDescriptor()
     {
       ContextValue = new ContextSpec();
-      ResultFormatValue = "compactedList";
+      ResultFormatValue = "list";
     }
 
     public IScanQueryDescriptor Columns(params string[] columns)
