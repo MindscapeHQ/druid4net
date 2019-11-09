@@ -1,7 +1,7 @@
 using System;
 using NUnit.Framework;
 
-namespace Raygun.Druid4Net.Tests
+namespace Raygun.Druid4Net.Tests.Fluent.Granularity
 {
   [TestFixture]
   public class PeriodGranularityTests

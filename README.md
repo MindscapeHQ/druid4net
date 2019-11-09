@@ -21,7 +21,7 @@ var options = new ConfigurationOptions()
 new DruidClient(options);
 ```
 
-_Note the [JilSerializer](https://github.com/MindscapeHQ/druid4net/blob/master/Raygun.Druid4Net.IntegrationTests/JilSerializer.cs) implementation can be found in the Integration tests project along with sample queries of all support query types._ 
+_Note the [JilSerializer](https://github.com/MindscapeHQ/druid4net/blob/master/Raygun.Druid4Net.IntegrationTests/JilSerializer.cs) implementation can be found in the Integration tests project along with sample queries of all supported query types._ 
 
 ### Timeseries
 See [Apache Druid Timeseries query documentation](https://druid.apache.org/docs/latest/querying/timeseriesquery.html) for more details on this type of query.
@@ -157,7 +157,7 @@ var response = await _druidClient.TimeseriesAsync<T>(q => q...);
 
 ### Why do I need to implement IJsonSerializer?
 The short answer is we wanted no dependencies. We also didn't want to implement
-out own JSON serialization as there are already so many good libraries
+our own JSON serialization as there are already so many good libraries
 out there that do this. Most projects already have a library included in their
 solution that can be used by implementing the interface in a simple pass-through class.
 
@@ -166,7 +166,3 @@ solution that can be used by implementing the interface in a simple pass-through
 * Extraction filter
 * Interval filter
 * Extraction dimensions
-* Constant post aggregator
-* Greatest/Least post aggregator
-* JavaScript post aggregator
-* HyperUnique cardinality post aggregator
