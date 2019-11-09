@@ -25,16 +25,4 @@ namespace Raygun.Druid4Net
       Optimize = optimize;
     }
   }
-
-  public class LookupMap
-  {
-    public string Type => "map";
-    
-    public IDictionary<string, string> Map;
-
-    public LookupMap(IDictionary<string, string> map)
-    {
-      Map = map;
-    }
-  }
 }
