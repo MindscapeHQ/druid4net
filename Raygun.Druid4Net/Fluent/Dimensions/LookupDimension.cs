@@ -25,6 +25,12 @@ namespace Raygun.Druid4Net
       ReplaceMissingValueWith = replaceMissingValueWith;
       RetainMissingValue = retainMissingValue;
       Lookup = new LookupMap(lookupMap);
+
+      // It is illegal to set retainMissingValue = true and also specify a replaceMissingValueWith.
+      if (!string.IsNullOrEmpty(replaceMissingValueWith))
+      {
+        RetainMissingValue = false;
+      }
     }
 
     public LookupDimension(string dimension, string lookupName, string outputName = null)
