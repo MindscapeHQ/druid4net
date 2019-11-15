@@ -21,6 +21,12 @@ namespace Raygun.Druid4Net
       ReplaceMissingValueWith = replaceMissingValueWith;
       Injective = injective;
       Optimize = optimize;
+      
+      // It is illegal to set retainMissingValue = true and also specify a replaceMissingValueWith.
+      if (!string.IsNullOrEmpty(replaceMissingValueWith))
+      {
+        RetainMissingValue = false;
+      }
     }
   }
 }
