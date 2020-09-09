@@ -8,10 +8,12 @@ namespace Raygun.Druid4Net
     public IContextSpec Context { get; }
     public IEnumerable<string> Columns { get; }
     public int? Limit { get; }
+    public OrderByDirection? Order { get; }
     public int? BatchSize { get; }
     public string ResultFormat { get; }
 
-    public ScanRequestData(string dataSource, IList<string> intervals, IFilterSpec filter, IContextSpec context, IEnumerable<string> columns, string resultFormat, int? limit, int? batchSize)
+    public ScanRequestData(string dataSource, IList<string> intervals, IFilterSpec filter, IContextSpec context,
+        IEnumerable<string> columns, string resultFormat, int? limit, OrderByDirection? order, int? batchSize)
     {
       DataSource = dataSource;
       Intervals = intervals;
@@ -19,6 +21,7 @@ namespace Raygun.Druid4Net
       Context = context;
       Columns = columns;
       Limit = limit;
+      Order = order;
       ResultFormat = resultFormat;
       BatchSize = batchSize;
     }
