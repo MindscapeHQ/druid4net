@@ -24,6 +24,8 @@ namespace Raygun.Druid4Net
     IScanQueryDescriptor BatchSize(int batchSize);
     
     IScanQueryDescriptor Limit(int limit);
+
+    IScanQueryDescriptor Order(OrderByDirection? order);
     
     IScanQueryDescriptor Context(int? timeout = null, long? maxScatterGatherBytes = null, int? priority = null, string queryId = null, bool? useCache = null, bool? populateCache = null, bool? bySegment = null, bool? finalize = null, string chunkPeriod = null, bool? serializeDateTimeAsLong = null, bool? serializeDateTimeAsLongInner = null);
 
