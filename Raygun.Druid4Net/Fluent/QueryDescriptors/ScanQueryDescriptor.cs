@@ -47,7 +47,7 @@ namespace Raygun.Druid4Net
       return this;
     }
 
-    public IScanQueryDescriptor Order(OrderByDirection order)
+    public IScanQueryDescriptor Order(OrderByDirection? order)
     {
       OrderValue = order;
       return this;
