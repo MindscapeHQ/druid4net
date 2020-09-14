@@ -8,7 +8,7 @@
     {
       var qd = queryDescriptor as ScanQueryDescriptor;
 
-      RequestData = new ScanRequestData(qd.DataSourceValue, qd.IntervalsValue, qd.FilterValue, qd.ContextValue, qd.ColumnsValue, qd.ResultFormatValue, qd.LimitValue, qd.BatchSizeValue);
+      RequestData = new ScanRequestData(qd.DataSourceValue, qd.IntervalsValue, qd.FilterValue, qd.ContextValue, qd.ColumnsValue, qd.ResultFormatValue, qd.LimitValue, qd.OrderValue, qd.BatchSizeValue);
     }
   }
 }

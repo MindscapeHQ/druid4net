@@ -7,6 +7,8 @@ namespace Raygun.Druid4Net
   {
     internal int? LimitValue;
 
+    internal OrderByDirection? OrderValue;
+
     internal int? BatchSizeValue;
     
     internal string ResultFormatValue;
@@ -42,6 +44,12 @@ namespace Raygun.Druid4Net
     public IScanQueryDescriptor Limit(int limit)
     {
       LimitValue = limit;
+      return this;
+    }
+
+    public IScanQueryDescriptor Order(OrderByDirection? order)
+    {
+      OrderValue = order;
       return this;
     }
 
