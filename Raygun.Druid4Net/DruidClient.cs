@@ -5,13 +5,25 @@ namespace Raygun.Druid4Net
 {
   public class DruidClient : IDruidClient
   {
-    private readonly Requester _requester;
-    private readonly string _apiEndpoint;
+    private readonly IRequester _requester;
+    private readonly ConfigurationOptions _configurationOptions;
 
+    [Obsolete("Use the constructor that takes a ConfigurationOptions instance")]
     public DruidClient(IJsonSerializer jsonSerializer, string hostName, int port = 8082, string apiEndpoint = "druid/v2")
     {
-      _requester = new Requester(jsonSerializer, hostName, port);
-      _apiEndpoint = apiEndpoint;
+      _configurationOptions = new ConfigurationOptions
+      {
+        JsonSerializer = jsonSerializer,
+        QueryApiBaseAddress = new Uri($"{hostName}:{port}"),
+        QueryApiEndpoint = apiEndpoint,
+      };
+      _requester = new Requester(_configurationOptions);
+    }
+    
+    public DruidClient(ConfigurationOptions options, IRequester requester = null)
+    {
+      _configurationOptions = options;
+      _requester = requester ?? new Requester(options);
     }
 
     public IQueryResponse<TopNResult<TResponse>> TopN<TResponse>(Func<ITopNQueryDescriptor, ITopNQueryDescriptor> selector) where TResponse : class
@@ -23,7 +35,7 @@ namespace Raygun.Druid4Net
     {
       var request = selector(new TopNQueryDescriptor()).Generate();
 
-      var result = await ExecuteQueryAsync<TopNResult<TResponse>, TopNRequestData>(_apiEndpoint, request);
+      var result = await ExecuteQueryAsync<TopNResult<TResponse>, TopNRequestData>(_configurationOptions.QueryApiEndpoint, request);
 
       return result;
     }
@@ -37,7 +49,7 @@ namespace Raygun.Druid4Net
     {
       var request = selector(new GroupByQueryDescriptor()).Generate();
 
-      var result = await ExecuteQueryAsync<GroupByResult<TResponse>, GroupByRequestData>(_apiEndpoint, request);
+      var result = await ExecuteQueryAsync<GroupByResult<TResponse>, GroupByRequestData>(_configurationOptions.QueryApiEndpoint, request);
 
       return result;
     }
@@ -51,7 +63,7 @@ namespace Raygun.Druid4Net
     {
       var request = selector(new TimeseriesQueryDescriptor()).Generate();
 
-      var result = await ExecuteQueryAsync<TimeseriesResult<TResponse>, TimeseriesRequestData>(_apiEndpoint, request);
+      var result = await ExecuteQueryAsync<TimeseriesResult<TResponse>, TimeseriesRequestData>(_configurationOptions.QueryApiEndpoint, request);
 
       return result;
     }
@@ -65,7 +77,7 @@ namespace Raygun.Druid4Net
     {
       var request = selector(new SelectQueryDescriptor()).Generate();
 
-      var result = await ExecuteQueryAsync<SelectResult<TResponse>, SelectRequestData>(_apiEndpoint, request);
+      var result = await ExecuteQueryAsync<SelectResult<TResponse>, SelectRequestData>(_configurationOptions.QueryApiEndpoint, request);
 
       return result;
     }
@@ -79,13 +91,41 @@ namespace Raygun.Druid4Net
     {
       var request = selector(new SearchQueryDescriptor()).Generate();
 
-      var result = await ExecuteQueryAsync<SearchResult, SearchRequestData>(_apiEndpoint, request);
+      var result = await ExecuteQueryAsync<SearchResult, SearchRequestData>(_configurationOptions.QueryApiEndpoint, request);
 
       return result;
     }
 
+    public IQueryResponse<TimeBoundaryResult> TimeBoundary(Func<ITimeBoundaryQueryDescriptor, ITimeBoundaryQueryDescriptor> selector)
+    {
+      return TimeBoundaryAsync(selector).GetAwaiter().GetResult();
+    }
+
+    public async Task<IQueryResponse<TimeBoundaryResult>> TimeBoundaryAsync(Func<ITimeBoundaryQueryDescriptor, ITimeBoundaryQueryDescriptor> selector)
+    {
+      var request = selector(new TimeBoundaryQueryDescriptor()).Generate();
+
+      var result = await ExecuteQueryAsync<TimeBoundaryResult, TimeBoundaryRequestData>(_configurationOptions.QueryApiEndpoint, request);
+
+      return result;
+    }
+	
+	public IQueryResponse<ScanResult<TResponse>> Scan<TResponse>(Func<IScanQueryDescriptor, IScanQueryDescriptor> selector) where TResponse : class
+    {
+      return ScanAsync<TResponse>(selector).GetAwaiter().GetResult();
+    }
+
+    public async Task<IQueryResponse<ScanResult<TResponse>>> ScanAsync<TResponse>(Func<IScanQueryDescriptor, IScanQueryDescriptor> selector) where TResponse : class
+    {
+      var request = selector(new ScanQueryDescriptor()).Generate();
+
+      var result = await ExecuteQueryAsync<ScanResult<TResponse>, ScanRequestData>(_configurationOptions.QueryApiEndpoint, request);
+
+      return result;
+    }
+	
     private async Task<IQueryResponse<TResponse>> ExecuteQueryAsync<TResponse, TRequest>(string endpoint, IDruidRequest<TRequest> request) 
-      where TResponse : class 
+      where TResponse : class
       where TRequest : QueryRequestData
     {
       return await _requester.PostAsync<TResponse, TRequest>(endpoint, request);
