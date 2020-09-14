@@ -69,6 +69,9 @@
     <Compile Include="Fluent\Aggregations\LongSumAggregatorTests.cs" />
     <Compile Include="Fluent\Aggregations\StringFirstAggregatorTests.cs" />
     <Compile Include="Fluent\Aggregations\StringLastAggregatorTests.cs" />
+    <Compile Include="Fluent\Dimensions\DefaultDimensionTests.cs" />
+    <Compile Include="Fluent\Dimensions\ExtractionDimensionTests.cs" />
+    <Compile Include="Fluent\Dimensions\ExtractionFunctions\BucketExtractionFunctionTests.cs" />
     <Compile Include="Fluent\Filters\AndFilterTests.cs" />
     <Compile Include="Fluent\Filters\BoundFilterTests.cs" />
     <Compile Include="Fluent\Filters\InFilterTests.cs" />
