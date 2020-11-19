@@ -60,6 +60,16 @@ namespace Raygun.Druid4Net.Tests.Fluent.QueryDescriptors
 
       Assert.That(request.RequestData.Limit, Is.EqualTo(500));
     }
+    
+    [Test]
+    public void OffsetIsSet_SetsOffsetInBody()
+    {
+      var request = new ScanQueryDescriptor()
+        .Offset(500)
+        .Generate();
+
+      Assert.That(request.RequestData.Offset, Is.EqualTo(500));
+    }
 
     [Test]
     public void OrderIsSet_SetsLimitInBody()
