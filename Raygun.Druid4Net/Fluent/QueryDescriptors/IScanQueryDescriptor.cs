@@ -24,6 +24,8 @@ namespace Raygun.Druid4Net
     IScanQueryDescriptor BatchSize(int batchSize);
     
     IScanQueryDescriptor Limit(int limit);
+    
+    IScanQueryDescriptor Offset(int offset);
 
     IScanQueryDescriptor Order(OrderByDirection? order);
     
