@@ -27,7 +27,7 @@ namespace Raygun.Druid4Net.Tests.Fluent.QueryDescriptors
       Assert.That(request.RequestData.Dimensions.OfType<DefaultDimension>().FirstOrDefault(d => d.Dimension == "test_dim1"), Is.Not.Null);
       Assert.That(request.RequestData.Dimensions.OfType<DefaultDimension>().FirstOrDefault(d => d.Dimension == "test_dim2"), Is.Not.Null);
     }
-
+    
     [Test]
     public void LimitIsSet_SetsLimitInBody()
     {
@@ -40,6 +40,24 @@ namespace Raygun.Druid4Net.Tests.Fluent.QueryDescriptors
       Assert.IsNotNull(limit);
       Assert.That(limit.Type, Is.EqualTo("default"));
       Assert.That(limit.Limit, Is.EqualTo(10));
+      Assert.That(limit.Offset, Is.EqualTo(0));
+      Assert.That(limit.Columns.Count(), Is.EqualTo(1));
+      Assert.That(limit.Columns.First().Dimension, Is.EqualTo("test_dim1"));
+    }
+
+    [Test]
+    public void LimitIsSet_SetsLimitOffsetInBody()
+    {
+      var request = new GroupByQueryDescriptor()
+        .Limit(new DefaultLimitSpec(10, 20, new OrderByColumnSpec("test_dim1")))
+        .Generate();
+
+      var limit = request.RequestData.LimitSpec as DefaultLimitSpec;
+
+      Assert.IsNotNull(limit);
+      Assert.That(limit.Type, Is.EqualTo("default"));
+      Assert.That(limit.Limit, Is.EqualTo(10));
+      Assert.That(limit.Offset, Is.EqualTo(20));
       Assert.That(limit.Columns.Count(), Is.EqualTo(1));
       Assert.That(limit.Columns.First().Dimension, Is.EqualTo("test_dim1"));
     }
