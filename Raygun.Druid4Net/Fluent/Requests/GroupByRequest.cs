@@ -13,10 +13,10 @@
       if (qd.InnerDataSourceValue != null)
       {
         var innerQd = qd.InnerDataSourceValue as GroupByQueryDescriptor;
-        datasource = new GroupByRequestData(innerQd.DataSourceValue, innerQd.GranularityValue, innerQd.IntervalsValue, innerQd.FilterValue, innerQd.ContextValue, innerQd.DimensionsValue, innerQd.AggregationSpecsValue, innerQd.PostAggregationSpecsValue, innerQd.LimitSpecValue, innerQd.HavingSpecValue);
+        datasource = new GroupByRequestData(innerQd.DataSourceValue, innerQd.VirtualColumnsValue, innerQd.GranularityValue, innerQd.IntervalsValue, innerQd.FilterValue, innerQd.ContextValue, innerQd.DimensionsValue, innerQd.AggregationSpecsValue, innerQd.PostAggregationSpecsValue, innerQd.LimitSpecValue, innerQd.HavingSpecValue);
       }
 
-      RequestData = new GroupByRequestData(datasource, qd.GranularityValue, qd.IntervalsValue, qd.FilterValue, qd.ContextValue, qd.DimensionsValue, qd.AggregationSpecsValue, qd.PostAggregationSpecsValue, qd.LimitSpecValue, qd.HavingSpecValue);
+      RequestData = new GroupByRequestData(datasource, qd.VirtualColumnsValue, qd.GranularityValue, qd.IntervalsValue, qd.FilterValue, qd.ContextValue, qd.DimensionsValue, qd.AggregationSpecsValue, qd.PostAggregationSpecsValue, qd.LimitSpecValue, qd.HavingSpecValue);
     }
   }
 }

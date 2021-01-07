@@ -13,6 +13,13 @@ namespace Raygun.Druid4Net
     {
       ContextValue = new TimeseriesContextSpec();
     }
+    
+    public ITimeseriesQueryDescriptor VirtualColumns(IEnumerable<ExpressionVirtualColumn> virtualColumns)
+    {
+      SetVirtualColumns(virtualColumns);
+      
+      return this;
+    }
 
     public ITimeseriesQueryDescriptor Descending(bool descending)
     {

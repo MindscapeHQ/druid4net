@@ -1,9 +1,11 @@
+using System.Collections.Generic;
+
 namespace Raygun.Druid4Net
 {
   public interface ITimeBoundaryQueryDescriptor
   {
     ITimeBoundaryQueryDescriptor DataSource(string dataSource);
-
+    
     ITimeBoundaryQueryDescriptor Bound(TimeBoundary boundary);
     
     ITimeBoundaryQueryDescriptor Filter(IFilterSpec filterSpec);

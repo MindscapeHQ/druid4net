@@ -2,7 +2,7 @@
 
 namespace Raygun.Druid4Net
 {
-  public class ScanRequestData : QueryRequestData
+  public class ScanRequestData : VirtualColumnQueryRequestData
   {
     public string QueryType => "scan";
     public IContextSpec Context { get; }
@@ -13,10 +13,11 @@ namespace Raygun.Druid4Net
     public int? BatchSize { get; }
     public string ResultFormat { get; }
 
-    public ScanRequestData(string dataSource, IList<string> intervals, IFilterSpec filter, IContextSpec context,
+    public ScanRequestData(string dataSource, IEnumerable<ExpressionVirtualColumn> virtualColumns, IList<string> intervals, IFilterSpec filter, IContextSpec context,
         IEnumerable<string> columns, string resultFormat, int? limit, int? offset, OrderByDirection? order, int? batchSize)
     {
       DataSource = dataSource;
+      VirtualColumns = virtualColumns;
       Intervals = intervals;
       Filter = filter;
       Context = context;

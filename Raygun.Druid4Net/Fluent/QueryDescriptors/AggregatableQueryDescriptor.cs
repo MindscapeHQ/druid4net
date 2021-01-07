@@ -2,7 +2,7 @@
 
 namespace Raygun.Druid4Net
 {
-  public abstract class AggregatableQueryDescriptor : QueryDescriptor
+  public abstract class AggregatableQueryDescriptor : VirtualColumnCompatibleQueryDescriptor
   {
     internal IEnumerable<IAggregationSpec> AggregationSpecsValue;
 

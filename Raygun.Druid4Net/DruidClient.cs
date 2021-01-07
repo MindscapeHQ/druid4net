@@ -68,11 +68,13 @@ namespace Raygun.Druid4Net
       return result;
     }
 
+    [Obsolete("The 'select' query has been removed since Druid 0.17.0, use 'scan' instead. See https://druid.apache.org/docs/latest/querying/select-query.html for more details.")]
     public IQueryResponse<SelectResult<TResponse>> Select<TResponse>(Func<ISelectQueryDescriptor, ISelectQueryDescriptor> selector) where TResponse : class
     {
       return SelectAsync<TResponse>(selector).GetAwaiter().GetResult();
     }
 
+    [Obsolete("The 'select' query has been removed since Druid 0.17.0, use 'scan' instead. See https://druid.apache.org/docs/latest/querying/select-query.html for more details.")]
     public async Task<IQueryResponse<SelectResult<TResponse>>> SelectAsync<TResponse>(Func<ISelectQueryDescriptor, ISelectQueryDescriptor> selector) where TResponse : class
     {
       var request = selector(new SelectQueryDescriptor()).Generate();

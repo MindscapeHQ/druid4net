@@ -6,6 +6,8 @@ namespace Raygun.Druid4Net
   public interface IGroupByQueryDescriptor
   {
     IGroupByQueryDescriptor DataSource(string dataSource);
+    
+    IGroupByQueryDescriptor VirtualColumns(IEnumerable<ExpressionVirtualColumn> virtualColumns);
 
     IGroupByQueryDescriptor Interval(DateTime from, DateTime to);
     

@@ -6,6 +6,8 @@ namespace Raygun.Druid4Net
   public interface ITopNQueryDescriptor
   {
     ITopNQueryDescriptor DataSource(string dataSource);
+    
+    ITopNQueryDescriptor VirtualColumns(IEnumerable<ExpressionVirtualColumn> virtualColumns);
 
     ITopNQueryDescriptor Interval(DateTime from, DateTime to);
     

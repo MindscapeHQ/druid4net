@@ -10,9 +10,10 @@ namespace Raygun.Druid4Net
     public IHavingSpec HavingSpec { get; }
     public GroupByContextSpec Context { get; }
 
-    public GroupByRequestData(object dataSource, object granularity, IList<string> intervals, IFilterSpec filter, GroupByContextSpec context, IEnumerable<IDimensionSpec> dimensions, IEnumerable<IAggregationSpec> aggregations, IEnumerable<IPostAggregationSpec> postAggregations, ILimitSpec limitSpec, IHavingSpec havingSpec)
+    public GroupByRequestData(object dataSource, IEnumerable<ExpressionVirtualColumn> virtualColumns, object granularity, IList<string> intervals, IFilterSpec filter, GroupByContextSpec context, IEnumerable<IDimensionSpec> dimensions, IEnumerable<IAggregationSpec> aggregations, IEnumerable<IPostAggregationSpec> postAggregations, ILimitSpec limitSpec, IHavingSpec havingSpec)
     {
       DataSource = dataSource;
+      VirtualColumns = virtualColumns;
       Granularity = granularity;
       Intervals = intervals;
       Filter = filter;

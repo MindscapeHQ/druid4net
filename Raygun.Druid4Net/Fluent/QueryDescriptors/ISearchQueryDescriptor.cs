@@ -6,7 +6,7 @@ namespace Raygun.Druid4Net
   public interface ISearchQueryDescriptor
   {
     ISearchQueryDescriptor DataSource(string dataSource);
-
+    
     ISearchQueryDescriptor Interval(DateTime from, DateTime to);
     
     ISearchQueryDescriptor Intervals(params Interval[] intervals);

@@ -1,4 +1,6 @@
-﻿namespace Raygun.Druid4Net
+﻿using System.Collections.Generic;
+
+namespace Raygun.Druid4Net
 {
   public class TimeBoundaryQueryDescriptor : QueryDescriptor, ITimeBoundaryQueryDescriptor
   {
