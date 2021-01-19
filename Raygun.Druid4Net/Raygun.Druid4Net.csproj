@@ -2,23 +2,24 @@
   <PropertyGroup>
     <TargetFrameworks>net45;netstandard1.6;netstandard2.0</TargetFrameworks>
     <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
-    <PackageVersion>2.0.3</PackageVersion>
+    <PackageVersion>2.0.4</PackageVersion>
   </PropertyGroup>
   <!-- NuGet Options -->
   <PropertyGroup>
     <Authors>Raygun</Authors>
     <Company>Raygun</Company>
-    <Version>2.0.3</Version>
-    <Copyright>Copyright © Raygun 2018-2020</Copyright>
+    <Version>2.0.4</Version>
+    <Copyright>Copyright © Raygun 2018-2021</Copyright>
     <Title>Druid4Net - A .NET Apache Druid client</Title>
     <Description>A .NET Apache Druid client written in C#</Description>
     <PackageId>Druid4Net</PackageId>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <PackageLicenseUrl>https://github.com/MindscapeHQ/druid4net/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/MindscapeHQ/druid4net</PackageProjectUrl>
     <RepositoryUrl>https://github.com/MindscapeHQ/druid4net</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageIconUrl>https://app.raygun.com/Content/Images/nuget-icon.png</PackageIconUrl>
+    <PackageIcon>nuget-icon.png</PackageIcon>
     <PackageTags>druid;druidio</PackageTags>
   </PropertyGroup>
   <PropertyGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
@@ -37,5 +38,9 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\nuget-icon.png" Pack="true" PackagePath="" />
+    <None Include="..\LICENSE" Pack="true" PackagePath=""/>
   </ItemGroup>
 </Project>
