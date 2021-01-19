@@ -65,6 +65,13 @@ namespace Raygun.Druid4Net
       return this;
     }
 
+    public IGroupByQueryDescriptor VirtualColumns(IEnumerable<ExpressionVirtualColumn> virtualColumns)
+    {
+      SetVirtualColumns(virtualColumns);
+      
+      return this;
+    }
+
     public IGroupByQueryDescriptor Having(IHavingSpec havingSpec)
     {
       HavingSpecValue = havingSpec;

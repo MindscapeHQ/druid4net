@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Raygun.Druid4Net
 {
-  public class ScanQueryDescriptor : QueryDescriptor, IScanQueryDescriptor
+  public class ScanQueryDescriptor : VirtualColumnCompatibleQueryDescriptor, IScanQueryDescriptor
   {
     internal int? LimitValue;
 
@@ -23,6 +23,13 @@ namespace Raygun.Druid4Net
     {
       ContextValue = new ContextSpec();
       ResultFormatValue = "list";
+    }
+    
+    public IScanQueryDescriptor VirtualColumns(IEnumerable<ExpressionVirtualColumn> virtualColumns)
+    {
+      SetVirtualColumns(virtualColumns);
+      
+      return this;
     }
 
     public IScanQueryDescriptor Columns(params string[] columns)

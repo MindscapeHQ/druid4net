@@ -60,6 +60,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Queries\GroupBy\PagesGroupedByCity.cs" />
     <Compile Include="Queries\Scan\ScanFilteredData.cs" />
+    <Compile Include="Queries\Scan\ScanVirtualColumns.cs" />
     <Compile Include="Queries\Search\BasicSearch10Pages.cs" />
     <Compile Include="Queries\Select\SelectSpecificPagedData.cs" />
     <Compile Include="Queries\TestQueryBase.cs" />

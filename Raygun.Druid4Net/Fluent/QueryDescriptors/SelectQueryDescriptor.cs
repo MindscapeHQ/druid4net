@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Raygun.Druid4Net
 {
-  public class SelectQueryDescriptor : QueryDescriptor, ISelectQueryDescriptor
+  public class SelectQueryDescriptor : VirtualColumnCompatibleQueryDescriptor, ISelectQueryDescriptor
   {
     internal PagingSpec PagingSpecValue;
 
@@ -19,7 +19,7 @@ namespace Raygun.Druid4Net
     {
       ContextValue = new ContextSpec();
     }
-
+    
     public ISelectQueryDescriptor Metrics(params string[] metrics)
     {
       MetricsValue = metrics;

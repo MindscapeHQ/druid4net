@@ -8,7 +8,7 @@
     {
       var qd = queryDescriptor as TimeseriesQueryDescriptor;
 
-      RequestData = new TimeseriesRequestData(qd.DataSourceValue, qd.DescendingValue, qd.GranularityValue, qd.IntervalsValue, qd.FilterValue, qd.AggregationSpecsValue, qd.PostAggregationSpecsValue, qd.ContextValue);
+      RequestData = new TimeseriesRequestData(qd.DataSourceValue, qd.VirtualColumnsValue, qd.DescendingValue, qd.GranularityValue, qd.IntervalsValue, qd.FilterValue, qd.AggregationSpecsValue, qd.PostAggregationSpecsValue, qd.ContextValue);
     }
   }
 }

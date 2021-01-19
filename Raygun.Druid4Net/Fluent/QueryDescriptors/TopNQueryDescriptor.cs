@@ -17,6 +17,13 @@ namespace Raygun.Druid4Net
     {
       ContextValue = new TopNContextSpec();
     }
+    
+    public ITopNQueryDescriptor VirtualColumns(IEnumerable<ExpressionVirtualColumn> virtualColumns)
+    {
+      SetVirtualColumns(virtualColumns);
+      
+      return this;
+    }
 
     public ITopNQueryDescriptor Dimension(string dimension)
     {
