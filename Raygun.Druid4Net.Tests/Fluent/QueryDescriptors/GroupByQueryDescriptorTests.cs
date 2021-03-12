@@ -15,7 +15,7 @@ namespace Raygun.Druid4Net.Tests.Fluent.QueryDescriptors
 
       Assert.That(request.RequestData.QueryType, Is.EqualTo("groupBy"));
     }
-    
+
     [Test]
     public void DimensionsAreSet_SetsDimensionsInBody()
     {
@@ -27,7 +27,7 @@ namespace Raygun.Druid4Net.Tests.Fluent.QueryDescriptors
       Assert.That(request.RequestData.Dimensions.OfType<DefaultDimension>().FirstOrDefault(d => d.Dimension == "test_dim1"), Is.Not.Null);
       Assert.That(request.RequestData.Dimensions.OfType<DefaultDimension>().FirstOrDefault(d => d.Dimension == "test_dim2"), Is.Not.Null);
     }
-    
+
     [Test]
     public void LimitIsSet_SetsLimitInBody()
     {
@@ -66,11 +66,11 @@ namespace Raygun.Druid4Net.Tests.Fluent.QueryDescriptors
     public void HavingIsSet_SetsHavingInBody()
     {
       var request = new GroupByQueryDescriptor()
-        .Having(new QueryFilterHavingSpec(new SelectorFilter("test_dim1", "test_value1")))
+        .Having(new QueryFilterHavingSpec(new OrHavingSpec(new DimensionSelectorHavingSpec("test_dim1", "test_value1"))))
         .Generate();
 
-      var having = request.RequestData.HavingSpec as QueryFilterHavingSpec;
-      
+      var having = request.RequestData.Having as QueryFilterHavingSpec;
+
       Assert.IsNotNull(having);
       Assert.That(having.Type, Is.EqualTo("filter"));
       Assert.That(having.Filter, Is.Not.Null);
@@ -85,7 +85,7 @@ namespace Raygun.Druid4Net.Tests.Fluent.QueryDescriptors
         .Generate();
 
       var datasource = request.RequestData.DataSource as GroupByRequestData;
-      
+
       Assert.IsNotNull(datasource);
       Assert.That(datasource.Dimensions.Count(), Is.EqualTo(2));
       Assert.That(datasource.Dimensions.OfType<DefaultDimension>().FirstOrDefault(d => d.Dimension == "test_dim1"), Is.Not.Null);
@@ -105,7 +105,7 @@ namespace Raygun.Druid4Net.Tests.Fluent.QueryDescriptors
       Assert.That(request.RequestData.Context.GroupByStrategy, Is.EqualTo("v2"));
       Assert.That(request.RequestData.Context.MaxOnDiskStorage, Is.EqualTo(10000));
     }
-    
+
     [Test]
     public void DataSourceIsSet_SetsDataSourceInBody()
     {
@@ -172,10 +172,10 @@ namespace Raygun.Druid4Net.Tests.Fluent.QueryDescriptors
       var request = new GroupByQueryDescriptor()
         .Granularity(granularity)
         .Generate();
- 
+
       Assert.That(request.RequestData.Granularity, Is.EqualTo(expectedGranularity));
     }
-    
+
     [Test]
     public void DurationGranularitySpecIsSet_SetsGranularityInBody()
     {
@@ -183,7 +183,7 @@ namespace Raygun.Druid4Net.Tests.Fluent.QueryDescriptors
       var request = new GroupByQueryDescriptor()
         .Granularity(new DurationGranularity(60, originDate))
         .Generate();
- 
+
       var granularity = request.RequestData.Granularity as DurationGranularity;
 
       Assert.IsNotNull(granularity);
@@ -191,7 +191,7 @@ namespace Raygun.Druid4Net.Tests.Fluent.QueryDescriptors
       Assert.That(granularity.Duration, Is.EqualTo(60));
       Assert.That(granularity.Origin, Is.EqualTo(originDate));
     }
-    
+
     [Test]
     public void PeriodGranularitySpecIsSet_SetsGranularityInBody()
     {
@@ -199,7 +199,7 @@ namespace Raygun.Druid4Net.Tests.Fluent.QueryDescriptors
       var request = new GroupByQueryDescriptor()
         .Granularity(new PeriodGranularity("PT10M", "UTC", originDate))
         .Generate();
- 
+
       var granularity = request.RequestData.Granularity as PeriodGranularity;
 
       Assert.IsNotNull(granularity);
@@ -223,7 +223,7 @@ namespace Raygun.Druid4Net.Tests.Fluent.QueryDescriptors
       Assert.That(filter.Dimension, Is.EqualTo("test_dim"));
       Assert.That(filter.Value, Is.EqualTo("test_value"));
     }
-    
+
     [Test]
     public void SumAggregationIsSet_SetsAggregationInBody()
     {
