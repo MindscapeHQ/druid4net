@@ -4,13 +4,13 @@
   {
     public string Type => "dimSelector";
 
-    public string Aggregation { get; }
+    public string Dimension { get; }
 
     public string Value { get; }
 
-    public DimensionSelectorHavingSpec(string aggregation, string value)
+    public DimensionSelectorHavingSpec(string dimension, string value)
     {
-      Aggregation = aggregation;
+      Dimension = dimension;
       Value = value;
     }
   }
