@@ -119,7 +119,8 @@ namespace Raygun.Druid4Net.Tests.Fluent.QueryDescriptors
           finalize: false,
           chunkPeriod: "PT1H",
           serializeDateTimeAsLong: true,
-          serializeDateTimeAsLongInner: false
+          serializeDateTimeAsLongInner: false,
+          strategy: SearchStrategy.CursorOnly
         ).Generate();
 
       var context = request.RequestData.Context;
@@ -136,6 +137,7 @@ namespace Raygun.Druid4Net.Tests.Fluent.QueryDescriptors
       Assert.That(context.ChunkPeriod, Is.EqualTo("PT1H"));
       Assert.That(context.SerializeDateTimeAsLong, Is.True);
       Assert.That(context.SerializeDateTimeAsLongInner, Is.False);
+      Assert.That(context.Strategy, Is.EqualTo(SearchStrategy.CursorOnly));
     }
 
     [Test]
