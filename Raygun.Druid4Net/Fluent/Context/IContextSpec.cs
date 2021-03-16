@@ -79,10 +79,5 @@
     /// </summary>
     /// <remarks>default is false</remarks>
     bool? SerializeDateTimeAsLongInner { get; set; }
-    
-    /// <summary>
-    /// Overrides the brokers search strategy when a search query is performed.
-    /// </summary>
-    SearchStrategy? Strategy { get; set; }
   }
 }

@@ -79,10 +79,5 @@
     /// </summary>
     /// <remarks>default is false</remarks>
     public bool? SerializeDateTimeAsLongInner { get; set; }
-    
-    /// <summary>
-    /// The search strategy that wil be used when performing Search Queries.
-    /// </summary>
-    public SearchStrategy? Strategy { get; set; }
   }
 }

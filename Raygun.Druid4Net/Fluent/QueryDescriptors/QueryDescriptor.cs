@@ -79,7 +79,7 @@ namespace Raygun.Druid4Net
       }
     }
 
-    protected void SetCommonContextProperties(ContextSpec context, int? timeout, long? maxScatterGatherBytes, int? priority, string queryId, bool? useCache, bool? populateCache, bool? bySegment, bool? finalize, string chunkPeriod, bool? serializeDateTimeAsLong, bool? serializeDateTimeAsLongInner, SearchStrategy? strategy = null)
+    protected void SetCommonContextProperties(ContextSpec context, int? timeout, long? maxScatterGatherBytes, int? priority, string queryId, bool? useCache, bool? populateCache, bool? bySegment, bool? finalize, string chunkPeriod, bool? serializeDateTimeAsLong, bool? serializeDateTimeAsLongInner)
     {
       context.Timeout = timeout;
       context.MaxScatterGatherBytes = maxScatterGatherBytes;
@@ -92,7 +92,6 @@ namespace Raygun.Druid4Net
       context.ChunkPeriod = chunkPeriod;
       context.SerializeDateTimeAsLong = serializeDateTimeAsLong;
       context.SerializeDateTimeAsLongInner = serializeDateTimeAsLongInner;
-      context.Strategy = strategy;
     }
   }
 }
