@@ -29,7 +29,7 @@ namespace Raygun.Druid4Net
     
     ISearchQueryDescriptor Sort(SortingOrder sort);
     
-    ISearchQueryDescriptor Context(int? timeout = null, long? maxScatterGatherBytes = null, int? priority = null, string queryId = null, bool? useCache = null, bool? populateCache = null, bool? bySegment = null, bool? finalize = null, string chunkPeriod = null, bool? serializeDateTimeAsLong = null, bool? serializeDateTimeAsLongInner = null);
+    ISearchQueryDescriptor Context(int? timeout = null, long? maxScatterGatherBytes = null, int? priority = null, string queryId = null, bool? useCache = null, bool? populateCache = null, bool? bySegment = null, bool? finalize = null, string chunkPeriod = null, bool? serializeDateTimeAsLong = null, bool? serializeDateTimeAsLongInner = null, SearchStrategy? searchStrategy = null);
 
     IDruidRequest<SearchRequestData> Generate();
   }
