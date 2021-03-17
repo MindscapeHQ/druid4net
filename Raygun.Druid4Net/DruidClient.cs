@@ -125,6 +125,20 @@ namespace Raygun.Druid4Net
 
       return result;
     }
+    
+    public IQueryResponse<SegmentMetadataResult> SegmentMetadata(Func<ISegmentMetadataQueryDescriptor, ISegmentMetadataQueryDescriptor> selector)
+    {
+      return SegmentMetadataAsync(selector).GetAwaiter().GetResult();
+    }
+
+    public async Task<IQueryResponse<SegmentMetadataResult>> SegmentMetadataAsync(Func<ISegmentMetadataQueryDescriptor, ISegmentMetadataQueryDescriptor> selector)
+    {
+      var request = selector(new SegmentMetadataQueryDescriptor()).Generate();
+
+      var result = await ExecuteQueryAsync<SegmentMetadataResult, SegmentMetadataRequestData>(_configurationOptions.QueryApiEndpoint, request);
+
+      return result;
+    }
 	
     private async Task<IQueryResponse<TResponse>> ExecuteQueryAsync<TResponse, TRequest>(string endpoint, IDruidRequest<TRequest> request) 
       where TResponse : class
