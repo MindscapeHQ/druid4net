@@ -36,7 +36,7 @@ namespace Raygun.Druid4Net.IntegrationTests.Queries.SegmentMetadata
     public void CityNameColumnIsCorrect()
     {
       Assert.True(_results.First().Columns.ContainsKey(Wikiticker.Dimensions.CityName));
-      Assert.That(_results.First().Columns[Wikiticker.Dimensions.CityName].Type, Is.EqualTo(SegmentMetadataColumnType.STRING));
+      Assert.That(_results.First().Columns[Wikiticker.Dimensions.CityName].Type, Is.EqualTo("STRING"));
     }
   }
 }

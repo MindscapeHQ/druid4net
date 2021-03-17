@@ -26,7 +26,7 @@ namespace Raygun.Druid4Net
 
   public class SegmentMetadataColumnDescriptor
   {
-    public SegmentMetadataColumnType Type { get; set; }
+    public string Type { get; set; }
     
     public bool HasMultipleValues { get; set; }
     
@@ -37,15 +37,6 @@ namespace Raygun.Druid4Net
     public int? Cardinality { get; set; }
     
     public string ErrorMessage { get; set; }
-  }
-
-  public enum SegmentMetadataColumnType
-  {
-    STRING,
-    FLOAT,
-    DOUBLE,
-    LONG,
-    COMPLEX
   }
 
   public class SegmentMetadataAggregatorDescriptor
