@@ -16,7 +16,7 @@ namespace Raygun.Druid4Net.Tests.Fluent.Having
     public void Constructor_WithValues_PropertiesAreSet()
     {
       var spec = new DimensionSelectorHavingSpec("test_agg", "test_value");
-      Assert.That(spec.Aggregation, Is.EqualTo("test_agg"));
+      Assert.That(spec.Dimension, Is.EqualTo("test_agg"));
       Assert.That(spec.Value, Is.EqualTo("test_value"));
     }
   }
