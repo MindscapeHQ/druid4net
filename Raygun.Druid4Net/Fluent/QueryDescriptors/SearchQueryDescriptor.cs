@@ -97,7 +97,10 @@ namespace Raygun.Druid4Net
     {
       SetCommonContextProperties(ContextValue, timeout, maxScatterGatherBytes, priority, queryId, useCache, populateCache, bySegment, finalize, chunkPeriod, serializeDateTimeAsLong, serializeDateTimeAsLongInner);
 
-      ContextValue.SearchStrategy = searchStrategy;
+      if (searchStrategy.HasValue)
+      {
+        ContextValue.SearchStrategy = searchStrategy.Value;
+      }
       
       return this;
     }
