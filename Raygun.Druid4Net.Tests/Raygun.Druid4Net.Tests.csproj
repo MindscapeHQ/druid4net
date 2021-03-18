@@ -82,6 +82,7 @@
     <Compile Include="Fluent\Filters\RegexFilterTests.cs" />
     <Compile Include="Fluent\Filters\SearchFilterTests.cs" />
     <Compile Include="Fluent\Filters\SelectorFilterTests.cs" />
+    <Compile Include="Fluent\Filters\TrueFilterTests.cs" />
     <Compile Include="Fluent\Granularities\DurationGranularityTests.cs" />
     <Compile Include="Fluent\Granularities\PeriodGranularityTests.cs" />
     <Compile Include="Fluent\Having\AndHavingSpecTests.cs" />
