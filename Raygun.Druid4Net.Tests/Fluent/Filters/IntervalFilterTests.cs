@@ -31,9 +31,19 @@ namespace Raygun.Druid4Net.Tests.Fluent.Filters
     }
     
     [Test]
-    public void Constructor_WithManyIntervals_PropertiesAreSet()
+    public void Constructor_WithManyParameterIntervals_PropertiesAreSet()
     {
       var filter = new IntervalFilter(TestDimension, TestIntervalA, TestIntervalB);
+      Assert.That(filter.Dimension, Is.EqualTo(TestDimension));
+      Assert.That(filter.Intervals.Count, Is.EqualTo(2));
+      Assert.That(filter.Intervals[0], Is.EqualTo(TestIntervalA.ToInterval()));
+      Assert.That(filter.Intervals[1], Is.EqualTo(TestIntervalB.ToInterval()));
+    }
+    
+    [Test]
+    public void Constructor_WithManyEnumerableIntervals_PropertiesAreSet()
+    {
+      var filter = new IntervalFilter(TestDimension, new []{ TestIntervalA, TestIntervalB });
       Assert.That(filter.Dimension, Is.EqualTo(TestDimension));
       Assert.That(filter.Intervals.Count, Is.EqualTo(2));
       Assert.That(filter.Intervals[0], Is.EqualTo(TestIntervalA.ToInterval()));
