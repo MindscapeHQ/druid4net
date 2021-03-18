@@ -75,6 +75,7 @@
     <Compile Include="Fluent\Filters\AndFilterTests.cs" />
     <Compile Include="Fluent\Filters\BoundFilterTests.cs" />
     <Compile Include="Fluent\Filters\InFilterTests.cs" />
+    <Compile Include="Fluent\Filters\IntervalFilterTests.cs" />
     <Compile Include="Fluent\Filters\JavaScriptFilterTests.cs" />
     <Compile Include="Fluent\Filters\LikeFilterTests.cs" />
     <Compile Include="Fluent\Filters\NotFilterTests.cs" />
