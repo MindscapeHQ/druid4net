@@ -75,6 +75,7 @@
     <Compile Include="Fluent\Filters\AndFilterTests.cs" />
     <Compile Include="Fluent\Filters\BoundFilterTests.cs" />
     <Compile Include="Fluent\Filters\InFilterTests.cs" />
+    <Compile Include="Fluent\Filters\IntervalFilterTests.cs" />
     <Compile Include="Fluent\Filters\JavaScriptFilterTests.cs" />
     <Compile Include="Fluent\Filters\LikeFilterTests.cs" />
     <Compile Include="Fluent\Filters\NotFilterTests.cs" />
@@ -82,6 +83,7 @@
     <Compile Include="Fluent\Filters\RegexFilterTests.cs" />
     <Compile Include="Fluent\Filters\SearchFilterTests.cs" />
     <Compile Include="Fluent\Filters\SelectorFilterTests.cs" />
+    <Compile Include="Fluent\Filters\TrueFilterTests.cs" />
     <Compile Include="Fluent\Granularities\DurationGranularityTests.cs" />
     <Compile Include="Fluent\Granularities\PeriodGranularityTests.cs" />
     <Compile Include="Fluent\Having\AndHavingSpecTests.cs" />
