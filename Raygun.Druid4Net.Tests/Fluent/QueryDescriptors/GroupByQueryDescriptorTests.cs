@@ -29,6 +29,23 @@ namespace Raygun.Druid4Net.Tests.Fluent.QueryDescriptors
     }
 
     [Test]
+    public void LimitAndOffsetAreNull_SetsNullLimitAndOffsetInBody()
+    {
+      var request = new GroupByQueryDescriptor()
+        .Limit(new DefaultLimitSpec(new OrderByColumnSpec("test_dim1")))
+        .Generate();
+
+      var limit = request.RequestData.LimitSpec as DefaultLimitSpec;
+
+      Assert.IsNotNull(limit);
+      Assert.That(limit.Type, Is.EqualTo("default"));
+      Assert.That(limit.Limit, Is.Null);
+      Assert.That(limit.Offset, Is.Null);
+      Assert.That(limit.Columns.Count(), Is.EqualTo(1));
+      Assert.That(limit.Columns.First().Dimension, Is.EqualTo("test_dim1"));
+    }
+
+    [Test]
     public void LimitIsSet_SetsLimitInBody()
     {
       var request = new GroupByQueryDescriptor()
