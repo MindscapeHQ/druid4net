@@ -8,6 +8,7 @@ namespace Raygun.Druid4Net
     {
       QueryApiBaseAddress = new Uri("http://localhost:8082");
       QueryApiEndpoint = "druid/v2";
+      JsonSerializer = new DefaultJsonSerializer();
     }
 
     public Uri QueryApiBaseAddress { get; set; }

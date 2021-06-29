@@ -14,7 +14,6 @@ namespace Raygun.Druid4Net.IntegrationTests.Queries
     {
       var options = new ConfigurationOptions()
       {
-        JsonSerializer = new JilSerializer(),
         QueryApiBaseAddress = new Uri(ConfigurationManager.AppSettings["druid.broker.host"])
       };
       DruidClient = new DruidClient(options);
