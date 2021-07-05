@@ -5,7 +5,7 @@ using NUnit.Framework;
 namespace Raygun.Druid4Net.IntegrationTests.Queries.Search
 {
   [TestFixture]
-  public class BasicSearch10Pages : TestQueryBase
+  public class BasicSearch5Pages : TestQueryBase
   {
     private IList<SearchResultItem> _results;
 
@@ -13,11 +13,11 @@ namespace Raygun.Druid4Net.IntegrationTests.Queries.Search
     public void Execute()
     {
       var response = DruidClient.Search(q => q
-        .DataSource(Wikiticker.DataSource)
+        .DataSource(Wikipedia.DataSource)
         .Granularity(Granularities.All)
-        .SearchDimensions(Wikiticker.Dimensions.Page)
+        .SearchDimensions(Wikipedia.Dimensions.Page)
         .Query(new ContainsSearchQuery("Dragon"))
-        .Limit(10)
+        .Limit(5)
         .Interval(FromDate, ToDate)
       );
 
@@ -27,22 +27,22 @@ namespace Raygun.Druid4Net.IntegrationTests.Queries.Search
     [Test]
     public void QueryHasCorrectNumberOfResults()
     {
-      Assert.That(_results.Count, Is.EqualTo(10));
+      Assert.That(_results.Count, Is.EqualTo(5));
     }
 
     [Test]
     public void FirstResultIsCorrect()
     {
-      Assert.That(_results.First().Dimension, Is.EqualTo(Wikiticker.Dimensions.Page));
-      Assert.That(_results.First().Value, Is.EqualTo("Alignment (Dungeons & Dragons)"));
+      Assert.That(_results.First().Dimension, Is.EqualTo(Wikipedia.Dimensions.Page));
+      Assert.That(_results.First().Value, Is.EqualTo("Dragon Ball Super"));
       Assert.That(_results.First().Count, Is.EqualTo(1));
     }
 
     [Test]
     public void LastResultIsCorrect()
     {
-      Assert.That(_results.Last().Dimension, Is.EqualTo(Wikiticker.Dimensions.Page));
-      Assert.That(_results.Last().Value, Is.EqualTo("Episodi di Dragon Ball Super"));
+      Assert.That(_results.Last().Dimension, Is.EqualTo(Wikipedia.Dimensions.Page));
+      Assert.That(_results.Last().Value, Is.EqualTo("Niveau 16 - Dragon City"));
       Assert.That(_results.Last().Count, Is.EqualTo(1));
     }
   }
