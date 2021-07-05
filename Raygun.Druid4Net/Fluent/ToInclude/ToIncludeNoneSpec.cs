@@ -1,4 +1,4 @@
-namespace Raygun.Druid4Net.ToInclude
+namespace Raygun.Druid4Net
 {
     public class ToIncludeNoneSpec : IToIncludeSpec
     {

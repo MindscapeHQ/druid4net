@@ -7,7 +7,7 @@ namespace Raygun.Druid4Net.IntegrationTests.Queries
     protected DateTime FromDate = new DateTime(2016, 6, 27, 0, 0, 0, DateTimeKind.Utc);
     protected DateTime ToDate = new DateTime(2016, 6, 28, 0, 0, 0, DateTimeKind.Utc);
 
-    protected IDruidClient DruidClient;
+    protected readonly IDruidClient DruidClient;
 
     protected TestQueryBase()
     {

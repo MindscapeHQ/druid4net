@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Raygun.Druid4Net.ToInclude
+namespace Raygun.Druid4Net
 {
     public class ToIncludeListSpec : IToIncludeSpec
     {
