@@ -164,4 +164,3 @@ solution that can be used by implementing the interface in a simple pass-through
 ### Not supported yet
 * Union data source
 * Extraction filter
-* Interval filter
