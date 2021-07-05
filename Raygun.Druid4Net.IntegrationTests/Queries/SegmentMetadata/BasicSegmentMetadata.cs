@@ -13,7 +13,7 @@ namespace Raygun.Druid4Net.IntegrationTests.Queries.SegmentMetadata
     public void Execute()
     {
       var response = DruidClient.SegmentMetadata(q => q
-        .DataSource(Wikiticker.DataSource)
+        .DataSource(Wikipedia.DataSource)
         .Interval(FromDate, ToDate)
       );
 
@@ -29,14 +29,14 @@ namespace Raygun.Druid4Net.IntegrationTests.Queries.SegmentMetadata
     [Test]
     public void QueryHasCorrectNumberOfRows()
     {
-      Assert.That(_results.First().NumRows, Is.EqualTo(10));
+      Assert.That(_results.First().NumRows, Is.EqualTo(24433));
     }
 
     [Test]
     public void CityNameColumnIsCorrect()
     {
-      Assert.True(_results.First().Columns.ContainsKey(Wikiticker.Dimensions.CityName));
-      Assert.That(_results.First().Columns[Wikiticker.Dimensions.CityName].Type, Is.EqualTo("STRING"));
+      Assert.True(_results.First().Columns.ContainsKey(Wikipedia.Dimensions.CityName));
+      Assert.That(_results.First().Columns[Wikipedia.Dimensions.CityName].Type, Is.EqualTo("STRING"));
     }
   }
 }
