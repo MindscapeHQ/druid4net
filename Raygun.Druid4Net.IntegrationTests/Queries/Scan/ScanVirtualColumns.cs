@@ -7,7 +7,7 @@ namespace Raygun.Druid4Net.IntegrationTests.Queries.Scan
   [TestFixture]
   public class ScanVirtualColumns : TestQueryBase
   {
-    public const string VIRTUAL_COLUMN_NAME = "CityCountry";
+    private const string VirtualColumnName = "cityCountry";
     
     private IList<QueryResult> _results;
 
@@ -17,13 +17,13 @@ namespace Raygun.Druid4Net.IntegrationTests.Queries.Scan
       var response = DruidClient.Scan<QueryResult>(q => q
         .VirtualColumns(new []{
           new ExpressionVirtualColumn(
-            VIRTUAL_COLUMN_NAME,
-           "concat(" + Wikiticker.Dimensions.CityName + " + ', ' + " + Wikiticker.Dimensions.CountryName + ")",
+            VirtualColumnName,
+           "concat(" + Wikipedia.Dimensions.CityName + " + ', ' + " + Wikipedia.Dimensions.CountryName + ")",
             ExpressionOutputType.STRING
           )
         })
-        .Filter(new SelectorFilter(Wikiticker.Dimensions.CountryCode, "US"))
-        .DataSource(Wikiticker.DataSource)
+        .Filter(new SelectorFilter(Wikipedia.Dimensions.CountryCode, "US"))
+        .DataSource(Wikipedia.DataSource)
         .Interval(FromDate, ToDate)
         .Limit(3)
       );
@@ -40,21 +40,22 @@ namespace Raygun.Druid4Net.IntegrationTests.Queries.Scan
     [Test]
     public void FirstResultIsCorrect()
     {
-      Assert.That(VIRTUAL_COLUMN_NAME, Is.EqualTo("Campbell, United States"));
+      Assert.That(_results.First().CityCountry, Is.EqualTo("Hartsville, United States"));
       Assert.That(_results.First().CountryName, Is.EqualTo("United States"));
-      Assert.That(_results.First().CityName, Is.EqualTo("Campbell"));
+      Assert.That(_results.First().CityName, Is.EqualTo("Hartsville"));
     }
 
     [Test]
     public void LastResultIsCorrect()
     {
-      Assert.That(VIRTUAL_COLUMN_NAME, Is.EqualTo("Charlotte, United States"));
+      Assert.That(_results.Last().CityCountry, Is.EqualTo("Leland, United States"));
       Assert.That(_results.Last().CountryName, Is.EqualTo("United States"));
-      Assert.That(_results.Last().CityName, Is.EqualTo("Charlotte"));
+      Assert.That(_results.Last().CityName, Is.EqualTo("Leland"));
     }
 
     private class QueryResult
     {
+      public string CityCountry { get; set; }
       public string CountryName { get; set; }
       public string CityName { get; set; }
     }
