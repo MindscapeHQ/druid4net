@@ -58,6 +58,7 @@
     <Compile Include="JilSerializer.cs" />
     <Compile Include="NewtonsoftSerializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Queries\GroupBy\CountriesWithLimitAndOrderBy.cs" />
     <Compile Include="Queries\GroupBy\PagesGroupedByCity.cs" />
     <Compile Include="Queries\Scan\ScanFilteredData.cs" />
     <Compile Include="Queries\Scan\ScanVirtualColumns.cs" />
