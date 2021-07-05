@@ -4,11 +4,11 @@ namespace Raygun.Druid4Net
   {
     public string Type => "time";
     
-    public string TimeFormat;
+    public string TimeFormat { get; }
     
-    public string ResultFormat;
+    public string ResultFormat { get; }
     
-    public bool Joda;
+    public bool Joda { get; }
 
     public TimeParsingExtractionFunction(string timeFormat, string resultFormat, bool joda = true)
     {

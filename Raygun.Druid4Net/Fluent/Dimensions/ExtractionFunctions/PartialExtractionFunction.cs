@@ -4,7 +4,7 @@ namespace Raygun.Druid4Net
   {
     public string Type => "partial";
 
-    public string Expr;
+    public string Expr { get; }
 
     public PartialExtractionFunction(string expr)
     {

@@ -4,7 +4,7 @@
   {
     public string Type => "inverted";
 
-    public ITopNMetricSpec Metric;
+    public ITopNMetricSpec Metric { get; }
 
     public InvertedTopNMetricSpec(ITopNMetricSpec metric)
     {

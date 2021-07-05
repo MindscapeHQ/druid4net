@@ -6,17 +6,17 @@ namespace Raygun.Druid4Net
   {
     public string Type => "lookup";
 
-    public string Dimension;
+    public string Dimension { get; }
     
-    public string OutputName;
+    public string OutputName { get; }
     
-    public string Name;
+    public string Name { get; }
     
-    public string ReplaceMissingValueWith;
+    public string ReplaceMissingValueWith { get; }
     
-    public bool RetainMissingValue;
+    public bool RetainMissingValue { get; }
 
-    public LookupMap Lookup;
+    public LookupMap Lookup { get; }
 
     public LookupDimension(string dimension, IDictionary<string, string> lookupMap, string outputName = null, string replaceMissingValueWith = null, bool retainMissingValue = false)
     {

@@ -4,9 +4,9 @@ namespace Raygun.Druid4Net
   {
     public string Type => "substring";
 
-    public int Index;
+    public int Index { get; }
     
-    public int? Length;
+    public int? Length { get; }
 
     public SubstringExtractionFunction(int index, int? length = null)
     {

@@ -8,7 +8,7 @@ namespace Raygun.Druid4Net
 
     public string Dimension { get; }
 
-    public IEnumerable<T> Values;
+    public IEnumerable<T> Values { get; }
 
     public InFilter(string dimension, IEnumerable<T> values)
     {

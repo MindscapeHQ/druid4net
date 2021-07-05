@@ -4,7 +4,7 @@
   {
     public string Type => "numeric";
 
-    public string Metric;
+    public string Metric { get; }
 
     public NumericTopNMetricSpec(string metric)
     {

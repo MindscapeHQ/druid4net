@@ -6,7 +6,7 @@ namespace Raygun.Druid4Net
   {
     public string Type => "cascade";
 
-    public IEnumerable<IExtractionFunction> ExtractionFns;
+    public IEnumerable<IExtractionFunction> ExtractionFns { get; }
 
     public CascadeExtractionFunction(params IExtractionFunction[] extractionFns)
     {

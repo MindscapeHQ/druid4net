@@ -6,7 +6,7 @@ namespace Raygun.Druid4Net
   {
     public string Type => "not";
 
-    public IFilterSpec Field;
+    public IFilterSpec Field { get; }
 
     public NotFilter(IFilterSpec filter)
     {

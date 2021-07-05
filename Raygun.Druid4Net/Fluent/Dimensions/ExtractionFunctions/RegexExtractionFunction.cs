@@ -4,13 +4,13 @@ namespace Raygun.Druid4Net
   {
     public string Type => "regex";
 
-    public string Expr;
+    public string Expr { get; }
 
-    public int Index;
+    public int Index { get; }
 
-    public bool ReplaceMissingValue;
+    public bool ReplaceMissingValue { get; }
     
-    public string ReplaceMissingValueWith;
+    public string ReplaceMissingValueWith { get; }
 
     public RegexExtractionFunction(string expr, int index = 1, bool replaceMissingValue = false, string replaceMissingValueWith = null)
     {

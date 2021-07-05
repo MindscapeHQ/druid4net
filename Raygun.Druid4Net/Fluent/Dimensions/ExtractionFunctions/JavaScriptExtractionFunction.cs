@@ -4,9 +4,9 @@ namespace Raygun.Druid4Net
   {
     public string Type => "javascript";
 
-    public string Function;
+    public string Function { get; }
 
-    public bool Injective;
+    public bool Injective { get; }
 
     public JavaScriptExtractionFunction(string function, bool injective = false)
     {

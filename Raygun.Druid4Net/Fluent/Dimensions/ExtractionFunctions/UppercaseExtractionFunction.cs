@@ -4,7 +4,7 @@ namespace Raygun.Druid4Net
   {
     public string Type => "upper";
 
-    public string Locale;
+    public string Locale { get; }
 
     public UppercaseExtractionFunction(string locale = null)
     {
