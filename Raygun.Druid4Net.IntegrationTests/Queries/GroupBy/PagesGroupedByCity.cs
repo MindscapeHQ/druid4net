@@ -13,10 +13,10 @@ namespace Raygun.Druid4Net.IntegrationTests.Queries.GroupBy
     public void Execute()
     {
       var response = DruidClient.GroupBy<QueryResult>(q => q
-        .Dimensions(Wikiticker.Dimensions.CountryName)
-        .Aggregations(new LongSumAggregator("totalCount", Wikiticker.Metrics.Count))
-        .DataSource(Wikiticker.DataSource)
-        .Filter(new NotFilter(new SelectorFilter(Wikiticker.Dimensions.CountryName, string.Empty)))
+        .Dimensions(Wikipedia.Dimensions.CountryName)
+        .Aggregations(new LongSumAggregator("totalCount", Wikipedia.Metrics.Count))
+        .DataSource(Wikipedia.DataSource)
+        .Filter(new NotFilter(new SelectorFilter(Wikipedia.Dimensions.CountryName, string.Empty)))
         .Interval(FromDate, ToDate)
         .Granularity(Granularities.All)
       );
@@ -27,21 +27,21 @@ namespace Raygun.Druid4Net.IntegrationTests.Queries.GroupBy
     [Test]
     public void QueryHasCorrectNumberOfResults()
     {
-      Assert.That(_results.Count, Is.EqualTo(113));
+      Assert.That(_results.Count, Is.EqualTo(105));
     }
 
     [Test]
     public void FirstResultIsCorrect()
     {
       Assert.That(_results.First().CountryName, Is.EqualTo("Albania"));
-      Assert.That(_results.First().TotalCount, Is.EqualTo(2));
+      Assert.That(_results.First().TotalCount, Is.EqualTo(1));
     }
 
     [Test]
     public void LastResultIsCorrect()
     {
-      Assert.That(_results.Last().CountryName, Is.EqualTo("Zimbabwe"));
-      Assert.That(_results.Last().TotalCount, Is.EqualTo(3));
+      Assert.That(_results.Last().CountryName, Is.EqualTo("Vietnam"));
+      Assert.That(_results.Last().TotalCount, Is.EqualTo(18));
     }
 
     private class QueryResult
