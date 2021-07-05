@@ -70,7 +70,7 @@
     <Compile Include="Queries\TopN\AsyncBasicTop10Pages.cs" />
     <Compile Include="Queries\TopN\FilteredTop5Pages.cs" />
     <Compile Include="Queries\TopN\BasicTop10Pages.cs" />
-    <Compile Include="Queries\Wikiticker.cs" />
+    <Compile Include="Queries\Wikipedia.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Raygun.Druid4Net\Raygun.Druid4Net.csproj">
@@ -81,6 +81,9 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="wikipedia-ingestion-spec.json" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
