@@ -63,7 +63,6 @@
     <Compile Include="Queries\Scan\ScanVirtualColumns.cs" />
     <Compile Include="Queries\Search\BasicSearch5Pages.cs" />
     <Compile Include="Queries\SegmentMetadata\BasicSegmentMetadata.cs" />
-    <Compile Include="Queries\Select\SelectSpecificPagedData.cs" />
     <Compile Include="Queries\TestQueryBase.cs" />
     <Compile Include="Queries\TimeBoundary\FilteredTimeBoundary.cs" />
     <Compile Include="Queries\Timeseries\PagesAddedOverTimeByHour.cs" />
