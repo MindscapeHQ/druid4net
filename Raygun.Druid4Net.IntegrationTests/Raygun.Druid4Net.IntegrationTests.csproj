@@ -83,6 +83,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="wikipedia-ingestion-spec.json" />
+    <Content Include="wikipedia.json.gz" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
