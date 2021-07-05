@@ -13,11 +13,11 @@ namespace Raygun.Druid4Net.IntegrationTests.Queries.TopN
     public void Execute()
     {
       var response = DruidClient.TopN<QueryResult>(q => q
-        .Dimension(Wikiticker.Dimensions.Page)
+        .Dimension(Wikipedia.Dimensions.Page)
         .Threshold(10)
-        .Aggregations(new LongSumAggregator("totalCount", Wikiticker.Metrics.Count))
+        .Aggregations(new LongSumAggregator("totalCount", Wikipedia.Metrics.Count))
         .Metric("totalCount")
-        .DataSource(Wikiticker.DataSource)
+        .DataSource(Wikipedia.DataSource)
         .Interval(FromDate, ToDate)
         .Granularity(Granularities.All)
       );
@@ -34,15 +34,15 @@ namespace Raygun.Druid4Net.IntegrationTests.Queries.TopN
     [Test]
     public void FirstResultIsCorrect()
     {
-      Assert.That(_results.First().Page, Is.EqualTo("Wikipedia:Vandalismusmeldung"));
-      Assert.That(_results.First().TotalCount, Is.EqualTo(33));
+      Assert.That(_results.First().Page, Is.EqualTo("Copa América Centenario"));
+      Assert.That(_results.First().TotalCount, Is.EqualTo(29));
     }
 
     [Test]
     public void LastResultIsCorrect()
     {
-      Assert.That(_results.Last().Page, Is.EqualTo("Wikipedia:Requests for page protection"));
-      Assert.That(_results.Last().TotalCount, Is.EqualTo(17));
+      Assert.That(_results.Last().Page, Is.EqualTo("Lionel Messi"));
+      Assert.That(_results.Last().TotalCount, Is.EqualTo(10));
     }
 
     internal class QueryResult

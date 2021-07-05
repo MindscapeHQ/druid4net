@@ -1,8 +1,8 @@
 ﻿namespace Raygun.Druid4Net.IntegrationTests.Queries
 {
-  public class Wikiticker
+  public class Wikipedia
   {
-    public static string DataSource = "wikiticker";
+    public static string DataSource = "wikipedia";
 
     public class Dimensions
     {

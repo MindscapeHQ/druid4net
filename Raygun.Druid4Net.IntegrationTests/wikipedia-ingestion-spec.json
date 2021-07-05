@@ -1,0 +1,81 @@
+{
+  "type": "index_parallel",
+  "spec": {
+    "ioConfig": {
+      "type": "index_parallel",
+      "inputSource": {
+        "type": "http",
+        "uris": [
+          "https://druid.apache.org/data/wikipedia.json.gz"
+        ]
+      },
+      "inputFormat": {
+        "type": "json"
+      },
+      "appendToExisting": false
+    },
+    "dataSchema": {
+      "granularitySpec": {
+        "segmentGranularity": "day",
+        "queryGranularity": "none",
+        "rollup": false
+      },
+      "dataSource": "wikipedia",
+      "timestampSpec": {
+        "column": "timestamp",
+        "format": "iso"
+      },
+      "dimensionsSpec": {
+        "dimensions": [
+          "channel",
+          "cityName",
+          "comment",
+          "countryIsoCode",
+          "countryName",
+          "isAnonymous",
+          "isMinor",
+          "isNew",
+          "isRobot",
+          "isUnpatrolled",
+          "metroCode",
+          "namespace",
+          "page",
+          "regionIsoCode",
+          "regionName"
+        ]
+      },
+      "metricsSpec": [
+        {
+          "name": "count",
+          "type": "count"
+        },
+        {
+          "name": "added",
+          "type": "longSum",
+          "fieldName": "added"
+        },
+        {
+          "name": "deleted",
+          "type": "longSum",
+          "fieldName": "deleted"
+        },
+        {
+          "name": "delta",
+          "type": "longSum",
+          "fieldName": "delta"
+        },
+        {
+          "name": "user_unique",
+          "type": "hyperUnique",
+          "fieldName": "user"
+        }
+      ]
+    },
+    "tuningConfig": {
+      "type": "index_parallel",
+      "partitionsSpec": {
+        "type": "dynamic"
+      }
+    }
+  }
+}

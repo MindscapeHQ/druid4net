@@ -61,16 +61,15 @@
     <Compile Include="Queries\GroupBy\PagesGroupedByCity.cs" />
     <Compile Include="Queries\Scan\ScanFilteredData.cs" />
     <Compile Include="Queries\Scan\ScanVirtualColumns.cs" />
-    <Compile Include="Queries\Search\BasicSearch10Pages.cs" />
+    <Compile Include="Queries\Search\BasicSearch5Pages.cs" />
     <Compile Include="Queries\SegmentMetadata\BasicSegmentMetadata.cs" />
-    <Compile Include="Queries\Select\SelectSpecificPagedData.cs" />
     <Compile Include="Queries\TestQueryBase.cs" />
     <Compile Include="Queries\TimeBoundary\FilteredTimeBoundary.cs" />
     <Compile Include="Queries\Timeseries\PagesAddedOverTimeByHour.cs" />
     <Compile Include="Queries\TopN\AsyncBasicTop10Pages.cs" />
     <Compile Include="Queries\TopN\FilteredTop5Pages.cs" />
     <Compile Include="Queries\TopN\BasicTop10Pages.cs" />
-    <Compile Include="Queries\Wikiticker.cs" />
+    <Compile Include="Queries\Wikipedia.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Raygun.Druid4Net\Raygun.Druid4Net.csproj">
@@ -81,6 +80,10 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="wikipedia-ingestion-spec.json" />
+    <Content Include="wikipedia.json.gz" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

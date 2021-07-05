@@ -14,8 +14,8 @@ namespace Raygun.Druid4Net.IntegrationTests.Queries.TimeBoundary
     public void Execute()
     {
       var response = DruidClient.TimeBoundary(q => q
-        .Filter(new SelectorFilter(Wikiticker.Dimensions.IsAnonymous, "true"))
-        .DataSource(Wikiticker.DataSource)
+        .Filter(new SelectorFilter(Wikipedia.Dimensions.IsAnonymous, "true"))
+        .DataSource(Wikipedia.DataSource)
       );
 
       _results = response.Data.ToList();
@@ -30,9 +30,9 @@ namespace Raygun.Druid4Net.IntegrationTests.Queries.TimeBoundary
     [Test]
     public void ResultHasCorrectValues()
     {
-      Assert.That(_results.First().Timestamp, Is.EqualTo(new DateTime(2015, 9, 12, 0, 47, 5, 474, DateTimeKind.Utc)));
-      Assert.That(_results.First().Result.MinTime, Is.EqualTo(new DateTime(2015, 9, 12, 0, 47, 5, 474, DateTimeKind.Utc)));
-      Assert.That(_results.First().Result.MaxTime, Is.EqualTo(new DateTime(2015, 9, 12, 23, 59, 9, 812, DateTimeKind.Utc)));
+      Assert.That(_results.First().Timestamp, Is.EqualTo(new DateTime(2016, 6, 27, 0, 0, 34, 959, DateTimeKind.Utc)));
+      Assert.That(_results.First().Result.MinTime, Is.EqualTo(new DateTime(2016, 6, 27, 0, 0, 34, 959, DateTimeKind.Utc)));
+      Assert.That(_results.First().Result.MaxTime, Is.EqualTo(new DateTime(2016, 6, 27, 21, 30, 50, 804, DateTimeKind.Utc)));
     }
   }
 }
