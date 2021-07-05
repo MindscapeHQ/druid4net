@@ -14,7 +14,7 @@ namespace Raygun.Druid4Net.IntegrationTests.Queries
     {
       var options = new ConfigurationOptions()
       {
-        QueryApiBaseAddress = new Uri(ConfigurationManager.AppSettings["druid.broker.host"])
+        QueryApiBaseAddress = new Uri("http://localhost:8082")
       };
       DruidClient = new DruidClient(options);
     }
