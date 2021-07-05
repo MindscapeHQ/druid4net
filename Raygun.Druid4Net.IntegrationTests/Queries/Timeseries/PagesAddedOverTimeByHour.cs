@@ -15,9 +15,9 @@ namespace Raygun.Druid4Net.IntegrationTests.Queries.Timeseries
     {
       var response = DruidClient.Timeseries<QueryResult>(q => q
         .Descending(true)
-        .Aggregations(new LongSumAggregator("totalAdded", Wikiticker.Metrics.Added))
-        .Filter(new SelectorFilter(Wikiticker.Dimensions.CountryCode, "US"))
-        .DataSource(Wikiticker.DataSource)
+        .Aggregations(new LongSumAggregator("totalAdded", Wikipedia.Metrics.Added))
+        .Filter(new SelectorFilter(Wikipedia.Dimensions.CountryCode, "US"))
+        .DataSource(Wikipedia.DataSource)
         .Interval(FromDate, ToDate)
         .Granularity(Granularities.Hour)
       );
@@ -28,21 +28,21 @@ namespace Raygun.Druid4Net.IntegrationTests.Queries.Timeseries
     [Test]
     public void QueryHasCorrectNumberOfResults()
     {
-      Assert.That(_results.Count, Is.EqualTo(24));
+      Assert.That(_results.Count, Is.EqualTo(22));
     }
 
     [Test]
     public void FirstResultIsCorrect()
     {
-      Assert.That(_results.First().Timestamp, Is.EqualTo(new DateTime(2015, 9, 12, 23, 0, 0,DateTimeKind.Utc)));
-      Assert.That(_results.First().Result.TotalAdded, Is.EqualTo(3913));
+      Assert.That(_results.First().Timestamp, Is.EqualTo(new DateTime(2016, 6, 27, 21, 0, 0,DateTimeKind.Utc)));
+      Assert.That(_results.First().Result.TotalAdded, Is.EqualTo(1260));
     }
 
     [Test]
     public void LastResultIsCorrect()
     {
-      Assert.That(_results.Last().Timestamp, Is.EqualTo(new DateTime(2015, 9, 12, 0, 0, 0,DateTimeKind.Utc)));
-      Assert.That(_results.Last().Result.TotalAdded, Is.EqualTo(88));
+      Assert.That(_results.Last().Timestamp, Is.EqualTo(new DateTime(2016, 6, 27, 0, 0, 0,DateTimeKind.Utc)));
+      Assert.That(_results.Last().Result.TotalAdded, Is.EqualTo(1423));
     }
 
     private class QueryResult
