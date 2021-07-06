@@ -2,13 +2,13 @@
   <PropertyGroup>
     <TargetFrameworks>net45;netstandard1.6;netstandard2.0</TargetFrameworks>
     <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
-    <PackageVersion>2.2.0</PackageVersion>
+    <PackageVersion>3.0.0</PackageVersion>
   </PropertyGroup>
   <!-- NuGet Options -->
   <PropertyGroup>
     <Authors>Raygun</Authors>
     <Company>Raygun</Company>
-    <Version>2.2.0</Version>
+    <Version>3.0.0</Version>
     <Copyright>Copyright © Raygun 2018-2021</Copyright>
     <Title>Druid4Net - A .NET Apache Druid client</Title>
     <Description>A .NET Apache Druid client written in C#</Description>
