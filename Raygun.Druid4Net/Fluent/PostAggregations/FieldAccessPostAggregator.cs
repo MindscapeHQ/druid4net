@@ -1,6 +1,6 @@
 ﻿namespace Raygun.Druid4Net
 {
-  public class FieldAccessPostAggregator : IPostAggregationSpec
+  public class FieldAccessPostAggregator : IPostAggregationSpec, IThetaSketchFieldAccessor
   {
     public virtual string Type => "fieldAccess";
 
