@@ -4,9 +4,9 @@ namespace Raygun.Druid4Net
   {
     public string Type => "stringFormat";
 
-    public string Format;
+    public string Format { get; }
     
-    public NullHandling NullHandling;
+    public NullHandling NullHandling { get; }
 
     public StringFormatExtractionFunction(string format, NullHandling nullHandling = NullHandling.nullString)
     {

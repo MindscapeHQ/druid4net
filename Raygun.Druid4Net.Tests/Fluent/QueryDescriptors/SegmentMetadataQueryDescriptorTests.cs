@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using NUnit.Framework;
-using Raygun.Druid4Net.ToInclude;
 
 namespace Raygun.Druid4Net.Tests.Fluent.QueryDescriptors
 {

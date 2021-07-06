@@ -6,7 +6,7 @@ namespace Raygun.Druid4Net
   {
     public string Type => "or";
 
-    public IEnumerable<IFilterSpec> Fields;
+    public IEnumerable<IFilterSpec> Fields { get; }
 
     public OrFilter(params IFilterSpec[] filters)
     {

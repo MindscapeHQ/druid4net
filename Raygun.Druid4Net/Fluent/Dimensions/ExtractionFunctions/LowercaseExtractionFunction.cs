@@ -4,7 +4,7 @@ namespace Raygun.Druid4Net
   {
     public string Type => "lower";
 
-    public string Locale;
+    public string Locale { get; }
 
     public LowercaseExtractionFunction(string locale = null)
     {

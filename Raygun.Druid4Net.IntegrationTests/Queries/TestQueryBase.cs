@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Configuration;
 
 namespace Raygun.Druid4Net.IntegrationTests.Queries
 {
@@ -8,14 +7,13 @@ namespace Raygun.Druid4Net.IntegrationTests.Queries
     protected DateTime FromDate = new DateTime(2016, 6, 27, 0, 0, 0, DateTimeKind.Utc);
     protected DateTime ToDate = new DateTime(2016, 6, 28, 0, 0, 0, DateTimeKind.Utc);
 
-    protected IDruidClient DruidClient;
+    protected readonly IDruidClient DruidClient;
 
     protected TestQueryBase()
     {
       var options = new ConfigurationOptions()
       {
-        JsonSerializer = new JilSerializer(),
-        QueryApiBaseAddress = new Uri(ConfigurationManager.AppSettings["druid.broker.host"])
+        QueryApiBaseAddress = new Uri("http://localhost:8082")
       };
       DruidClient = new DruidClient(options);
     }

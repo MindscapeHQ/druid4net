@@ -4,11 +4,11 @@ namespace Raygun.Druid4Net
   {
     public string Type => "default";
 
-    public string Dimension;
+    public string Dimension { get; }
     
-    public string OutputName;
+    public string OutputName { get; }
     
-    public DimensionOutputType OutputType;
+    public DimensionOutputType OutputType { get; }
 
     public DefaultDimension(string dimension, string outputName = null, DimensionOutputType outputType = DimensionOutputType.String)
     {

@@ -6,15 +6,15 @@ namespace Raygun.Druid4Net
   {
     public string Type => "lookup";
 
-    public LookupMap Lookup;
+    public LookupMap Lookup { get; }
 
-    public bool RetainMissingValue;
+    public bool RetainMissingValue { get; }
     
-    public string ReplaceMissingValueWith;
+    public string ReplaceMissingValueWith { get; }
     
-    public bool Injective;
+    public bool Injective { get; }
     
-    public bool Optimize;
+    public bool Optimize { get; }
 
     public InlineLookupExtractionFunction(IDictionary<string, string> lookupMap, bool retainMissingValue = false, string replaceMissingValueWith = null, bool injective = false, bool optimize = true)
     {

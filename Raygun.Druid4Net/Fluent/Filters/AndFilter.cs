@@ -6,7 +6,7 @@ namespace Raygun.Druid4Net
   {
     public string Type => "and";
 
-    public IEnumerable<IFilterSpec> Fields;
+    public IEnumerable<IFilterSpec> Fields { get; }
 
     public AndFilter(params IFilterSpec[] filters)
     {

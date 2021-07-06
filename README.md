@@ -1,13 +1,11 @@
 # druid4net
 A .NET [Apache Druid](https://druid.apache.org/) client written in C#
 
-Supports .NET 4.5 and above, .NET Standard 1.6 and 2.0
+Supports .NET 4.6.1 and .NET Standard 2.0
 
 ## Getting started
 1. Add a reference to druid4net from [Nuget](https://www.nuget.org/packages/Druid4Net) or download and reference the dll from [releases](https://github.com/MindscapeHQ/druid4net/releases)
-2. Add your favorite JSON parser (if you don't already have one referenced)
-3. Implement the `IJsonSerializer` interface
-4. Create a `DruidClient` and start querying
+2. Create a `DruidClient` and start querying
 
 ## Querying
 To query druid, create an instance of the `DruidClient` using code similar to the following:
@@ -15,13 +13,10 @@ To query druid, create an instance of the `DruidClient` using code similar to th
 ```csharp
 var options = new ConfigurationOptions()
 {
-  JsonSerializer = new JilSerializer(),
   QueryApiBaseAddress = new Uri("http://localhost:8082")
 };
 new DruidClient(options);
 ```
-
-_Note the [JilSerializer](https://github.com/MindscapeHQ/druid4net/blob/master/Raygun.Druid4Net.IntegrationTests/JilSerializer.cs) implementation can be found in the Integration tests project along with sample queries of all supported query types._ 
 
 ### Timeseries
 See [Apache Druid Timeseries query documentation](https://druid.apache.org/docs/latest/querying/timeseriesquery.html) for more details on this type of query.
@@ -80,23 +75,6 @@ var response = _druidClient.GroupBy<T>(q => q
 );
 ```
 
-### Select
-See [Apache Druid Select query documentation](https://druid.apache.org/docs/latest/querying/select-query.html) for more details on this type of query.
-
-The following example query is performing a select query against the sample wikiticker datasource.
-It selects the country name, city name, page, added and deleted values, filtered to anonymous users and limited to 10 records.
-
-```csharp
-var response = _druidClient.Select<T>(q => q
-  .Dimensions("countryName", "cityName", "page")
-  .Metrics("added", "deleted")
-  .Paging(new PagingSpec(10))
-  .Filter(new SelectorFilter("isAnonymous", "true"))
-  .DataSource("wikiticker")
-  .Interval(FromDate, ToDate)
-);
-```
-
 ### Search
 See [Apache Druid Search query documentation](https://druid.apache.org/docs/latest/querying/searchquery.html) for more details on this type of query.
 
@@ -142,6 +120,26 @@ var response = _druidClient.Scan<T>(q => q
 );
 ```
 
+### Select
+
+> Older versions of Apache Druid included a Select query type. Since Druid 0.17.0, it has been removed and replaced by the Scan query, which offers improved memory usage and performance. 
+
+See [Apache Druid Select query documentation](https://druid.apache.org/docs/latest/querying/select-query.html) for more details on this type of query.
+
+The following example query is performing a select query against the sample wikiticker datasource.
+It selects the country name, city name, page, added and deleted values, filtered to anonymous users and limited to 10 records.
+
+```csharp
+var response = _druidClient.Select<T>(q => q
+  .Dimensions("countryName", "cityName", "page")
+  .Metrics("added", "deleted")
+  .Paging(new PagingSpec(10))
+  .Filter(new SelectorFilter("isAnonymous", "true"))
+  .DataSource("wikiticker")
+  .Interval(FromDate, ToDate)
+);
+```
+
 ### Async queries
 All query types have both synchronous and asynchronous methods available. 
 
@@ -155,11 +153,53 @@ var response = await _druidClient.TimeseriesAsync<T>(q => q...);
 
 ## Notes
 
-### Why do I need to implement IJsonSerializer?
-The short answer is we wanted no dependencies. We also didn't want to implement
-our own JSON serialization as there are already so many good libraries
-out there that do this. Most projects already have a library included in their
-solution that can be used by implementing the interface in a simple pass-through class.
+### How to use a custom IJsonSerializer
+The `DruidClient` is configured with a default JSON serializer that uses [System.Text.Json.JsonSerializer](https://docs.microsoft.com/en-us/dotnet/api/system.text.json.jsonserializer).
+The default serializer can be replaced with another implementation by implementing the [IJsonSerializer](https://github.com/MindscapeHQ/druid4net/blob/master/Raygun.Druid4Net/Query/IJsonSerializer.cs) interface and setting the `JsonSerializer` property of the `ConfigurationOptions`.
+Two alternative implementations can be found in this repo, see [NewtonsoftSerializer](https://github.com/MindscapeHQ/druid4net/blob/master/Raygun.Druid4Net.IntegrationTests/NewtonsoftSerializer.cs) and [JilSerializer](https://github.com/MindscapeHQ/druid4net/blob/master/Raygun.Druid4Net.IntegrationTests/JilSerializer.cs).
+
+For example:
+```csharp
+var options = new ConfigurationOptions()
+{
+  JsonSerializer = new NewtonsoftSerializer(),
+  ...
+};
+```
+
+### Proxy settings
+Proxy server settings can be configured using the `ProxySettings` property on the `ConfigurationOptions` class.
+
+For example:
+```csharp
+var options = new ConfigurationOptions()
+{
+  ProxySettings = new ProxySettings
+  {
+    Address = new Uri("https://proxy.local:8888"),
+    BypassOnLocal = true,
+    Username = "druidio" //optional,
+    Password = "notapassword" //optional
+  },
+  ...
+};
+```
+
+### Basic authentication
+If your Druid instance is configured with basic authentication then then credentials can be configured using the `BasicAuthenticationCredentials` property on the `ConfigurationOptions` class.
+
+For example:
+```csharp
+var options = new ConfigurationOptions()
+{
+  BasicAuthenticationCredentials = new BasicAuthenticationCredentials
+  {
+    Username = "druidio",
+    Password = "notapassword"
+  },
+  ...
+};
+```
 
 ### Not supported yet
 * Union data source

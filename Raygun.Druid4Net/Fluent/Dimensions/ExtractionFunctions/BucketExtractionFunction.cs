@@ -4,9 +4,9 @@ namespace Raygun.Druid4Net
   {
     public string Type => "bucket";
 
-    public int Size;
+    public int Size { get; }
     
-    public int Offset;
+    public int Offset { get; }
 
     public BucketExtractionFunction(int size = 1, int offset = 0)
     {

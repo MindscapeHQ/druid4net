@@ -4,7 +4,7 @@ namespace Raygun.Druid4Net
   {
     public string Type => "searchQuery";
 
-    public ISearchQuerySpec Query;
+    public ISearchQuerySpec Query { get; }
 
     public SearchQueryExtractionFunction(ISearchQuerySpec query)
     {

@@ -4,15 +4,15 @@ namespace Raygun.Druid4Net
   {
     public string Type => "timeFormat";
     
-    public string Format;
+    public string Format { get; }
     
-    public string TimeZone;
+    public string TimeZone { get; }
     
-    public string Locale;
+    public string Locale { get; }
     
-    public IGranularitySpec Granularity;
+    public IGranularitySpec Granularity { get; }
     
-    public bool? AsMillis;
+    public bool? AsMillis { get; }
 
     public TimeFormatExtractionFunction(string format = null, string timeZone = "UTC", string locale = null, IGranularitySpec granularity = null, bool? asMillis = null)
     {

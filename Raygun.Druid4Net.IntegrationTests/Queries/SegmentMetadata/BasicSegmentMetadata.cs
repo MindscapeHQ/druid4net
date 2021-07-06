@@ -33,7 +33,7 @@ namespace Raygun.Druid4Net.IntegrationTests.Queries.SegmentMetadata
     }
 
     [Test]
-    public void CityNameColumnIsCorrect()
+    public void  CityNameColumnIsCorrect()
     {
       Assert.True(_results.First().Columns.ContainsKey(Wikipedia.Dimensions.CityName));
       Assert.That(_results.First().Columns[Wikipedia.Dimensions.CityName].Type, Is.EqualTo("STRING"));

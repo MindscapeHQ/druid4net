@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Raygun.Druid4Net.ToInclude;
 
 namespace Raygun.Druid4Net
 {
