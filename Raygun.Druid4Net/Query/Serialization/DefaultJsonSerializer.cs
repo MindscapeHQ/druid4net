@@ -16,7 +16,7 @@ namespace Raygun.Druid4Net
         PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
         Converters =
         {
-          new JsonStringEnumConverter(JsonNamingPolicy.CamelCase),
+          new JsonStringEnumConverter(),
           new GenericTypeConverter<IAggregationSpec>(),
           new GenericTypeConverter<IPostAggregationSpec>(),
           new GenericTypeConverter<ITopNMetricSpec>(),
