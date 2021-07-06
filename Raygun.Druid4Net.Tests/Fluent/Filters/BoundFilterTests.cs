@@ -9,14 +9,14 @@ namespace Raygun.Druid4Net.Tests.Fluent.Filters
     [Test]
     public void Constructor_TypeIsCorrect()
     {
-      var filter = new BoundFilter<int>("test_dimension", 10);
+      var filter = new BoundFilter<int?>("test_dimension", 10, null);
       Assert.That(filter.Type, Is.EqualTo("bound"));
     }
     
     [Test]
     public void Constructor_WithLowerValues_PropertiesAreSet()
     {
-      var filter = new BoundFilter<int>("test_dimension", 10);
+      var filter = new BoundFilter<int?>("test_dimension", 10, null);
       Assert.That(filter.Dimension, Is.EqualTo("test_dimension")); 
       Assert.That(filter.Lower, Is.EqualTo(10));
       Assert.That(filter.Upper, Is.Null);
@@ -44,6 +44,16 @@ namespace Raygun.Druid4Net.Tests.Fluent.Filters
       Assert.That(filter.Dimension, Is.EqualTo("test_dimension")); 
       Assert.That(filter.Lower, Is.EqualTo(0.1));
       Assert.That(filter.Upper, Is.EqualTo(0.2));
+    }
+    
+    [Test]
+    public void Constructor_WithStringTypeValues_PropertiesAreSet()
+    {
+      var filter = new BoundFilter<string>("test_dimension", "1", "2", ordering: SortingOrder.alphanumeric);
+      Assert.That(filter.Dimension, Is.EqualTo("test_dimension")); 
+      Assert.That(filter.Lower, Is.EqualTo("1"));
+      Assert.That(filter.Upper, Is.EqualTo("2"));
+      Assert.That(filter.Ordering, Is.EqualTo(SortingOrder.alphanumeric));
     }
   }
 }
