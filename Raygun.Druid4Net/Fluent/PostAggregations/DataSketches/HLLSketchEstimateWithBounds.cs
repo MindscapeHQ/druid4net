@@ -10,9 +10,9 @@ namespace Raygun.Druid4Net
 
     public FieldAccessPostAggregator Field { get; }
 
-    public short NumStdDev { get; }
+    public int NumStdDev { get; }
 
-    public HLLSketchEstimateWithBounds(string name, FieldAccessPostAggregator field, short numStdDev = 1)
+    public HLLSketchEstimateWithBounds(string name, FieldAccessPostAggregator field, int numStdDev = 1)
     {
       if (numStdDev is < 1 or > 3)
       {

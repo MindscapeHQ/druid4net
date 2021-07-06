@@ -4,13 +4,13 @@ namespace Raygun.Druid4Net
   {
     public override string Type => "HLLSketchBuild";
 
-    public short LgK { get; }
+    public int LgK { get; }
     
     public HLLType TgtHllType { get; }
     
     public bool Round { get; }
 
-    public HLLSketchBuild(string name, string fieldName, short lgK = 12, HLLType tgtHllType = HLLType.HLL_4, bool round = false) 
+    public HLLSketchBuild(string name, string fieldName, int lgK = 12, HLLType tgtHllType = HLLType.HLL_4, bool round = false) 
       : base(name, fieldName)
     {
       LgK = lgK;

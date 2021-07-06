@@ -13,7 +13,7 @@ namespace Raygun.Druid4Net
 
     public IEnumerable<FieldAccessPostAggregator> Fields { get; }
 
-    public short LgK { get; }
+    public int LgK { get; }
     
     public HLLType TgtHllType { get; }
 
@@ -22,7 +22,7 @@ namespace Raygun.Druid4Net
     {
     }
 
-    public HLLSketchUnion(string name, short lgK, HLLType tgtHllType, IEnumerable<FieldAccessPostAggregator> fields)
+    public HLLSketchUnion(string name, int lgK, HLLType tgtHllType, IEnumerable<FieldAccessPostAggregator> fields)
     {
       Name = name;
       Fields = fields;
@@ -35,7 +35,7 @@ namespace Raygun.Druid4Net
     {
     }
 
-    public HLLSketchUnion(string name, short lgK, HLLType tgtHllType, params FieldAccessPostAggregator[] fields)
+    public HLLSketchUnion(string name, int lgK, HLLType tgtHllType, params FieldAccessPostAggregator[] fields)
     {
       Name = name;
       Fields = fields;
