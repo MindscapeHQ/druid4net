@@ -5,6 +5,9 @@ namespace Raygun.Druid4Net
   public class TimeseriesRequestData : AggregationQueryRequestData
   {
     public string QueryType => "timeseries";
+    public object Granularity { get; }
+    public IList<string> Intervals { get; }
+    public IFilterSpec Filter { get; }
     public bool Descending { get; }
     public TimeseriesContextSpec Context { get; }
 

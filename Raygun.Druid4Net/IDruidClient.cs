@@ -30,5 +30,8 @@ namespace Raygun.Druid4Net
     
     IQueryResponse<SegmentMetadataResult> SegmentMetadata(Func<ISegmentMetadataQueryDescriptor, ISegmentMetadataQueryDescriptor> selector);
     Task<IQueryResponse<SegmentMetadataResult>> SegmentMetadataAsync(Func<ISegmentMetadataQueryDescriptor, ISegmentMetadataQueryDescriptor> selector);
+    
+    IQueryResponse<DataSourceMetadataResult> DataSourceMetadata(Func<IDataSourceMetadataQueryDescriptor, IDataSourceMetadataQueryDescriptor> selector);
+    Task<IQueryResponse<DataSourceMetadataResult>> DataSourceMetadataAsync(Func<IDataSourceMetadataQueryDescriptor, IDataSourceMetadataQueryDescriptor> selector);
   }
 }

@@ -5,6 +5,9 @@ namespace Raygun.Druid4Net
   public class GroupByRequestData : AggregationQueryRequestData
   {
     public string QueryType => "groupBy";
+    public object Granularity { get; }
+    public IList<string> Intervals { get; }
+    public IFilterSpec Filter { get; }
     public IEnumerable<IDimensionSpec> Dimensions { get; }
     public ILimitSpec LimitSpec { get; }
     public IHavingSpec Having { get; }

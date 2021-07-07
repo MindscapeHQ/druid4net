@@ -139,9 +139,23 @@ namespace Raygun.Druid4Net
 
       return result;
     }
+    
+    public IQueryResponse<DataSourceMetadataResult> DataSourceMetadata(Func<IDataSourceMetadataQueryDescriptor, IDataSourceMetadataQueryDescriptor> selector)
+    {
+      return DataSourceMetadataAsync(selector).GetAwaiter().GetResult();
+    }
+
+    public async Task<IQueryResponse<DataSourceMetadataResult>> DataSourceMetadataAsync(Func<IDataSourceMetadataQueryDescriptor, IDataSourceMetadataQueryDescriptor> selector)
+    {
+      var request = selector(new DataSourceMetadataQueryDescriptor()).Generate();
+
+      var result = await ExecuteQueryAsync<DataSourceMetadataResult, DataSourceMetadataRequestData>(_configurationOptions.QueryApiEndpoint, request);
+
+      return result;
+    }
 	
     private async Task<IQueryResponse<TResponse>> ExecuteQueryAsync<TResponse, TRequest>(string endpoint, IDruidRequest<TRequest> request) 
-      where TRequest : QueryRequestData
+      where TRequest : IQueryRequest
     {
       return await _requester.PostAsync<TResponse, TRequest>(endpoint, request);
     }

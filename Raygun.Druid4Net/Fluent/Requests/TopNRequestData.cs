@@ -5,6 +5,9 @@ namespace Raygun.Druid4Net
   public class TopNRequestData : AggregationQueryRequestData
   {
     public string QueryType => "topN";
+    public object Granularity { get; }
+    public IList<string> Intervals { get; }
+    public IFilterSpec Filter { get; }
     public IDimensionSpec Dimension { get; }
     public ITopNMetricSpec Metric { get; }
     public long Threshold { get; }

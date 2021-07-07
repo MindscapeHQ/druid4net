@@ -77,7 +77,6 @@ namespace Raygun.Druid4Net
       return this;
     }
 
-
     public IDruidRequest<SegmentMetadataRequestData> Generate()
     {
       var request = new SegmentMetadataRequest();

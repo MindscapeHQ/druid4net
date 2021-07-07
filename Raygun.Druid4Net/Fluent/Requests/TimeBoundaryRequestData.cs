@@ -1,10 +1,10 @@
-﻿
-namespace Raygun.Druid4Net
+﻿namespace Raygun.Druid4Net
 {
-  public class TimeBoundaryRequestData : QueryRequestData
+  public class TimeBoundaryRequestData : DatasourceQueryRequestData
   {
     public string QueryType => "timeBoundary";
-    public string Bound { get; internal set; }
+    public IFilterSpec Filter { get; }
+    public string Bound { get; }
     public IContextSpec Context { get; }
 
     public TimeBoundaryRequestData(string dataSource, string bound, IFilterSpec filter, IContextSpec context)

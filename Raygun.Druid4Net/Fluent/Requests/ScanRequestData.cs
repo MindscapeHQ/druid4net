@@ -5,6 +5,8 @@ namespace Raygun.Druid4Net
   public class ScanRequestData : VirtualColumnQueryRequestData
   {
     public string QueryType => "scan";
+    public IList<string> Intervals { get; }
+    public IFilterSpec Filter { get; }
     public IContextSpec Context { get; }
     public IEnumerable<string> Columns { get; }
     public int? Limit { get; }
