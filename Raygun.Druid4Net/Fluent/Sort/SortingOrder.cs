@@ -8,6 +8,8 @@ namespace Raygun.Druid4Net
 
     strlen,
 
-    numeric
+    numeric,
+    
+    version
   }
 }
