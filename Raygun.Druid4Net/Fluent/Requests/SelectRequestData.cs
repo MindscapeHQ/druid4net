@@ -14,7 +14,7 @@ namespace Raygun.Druid4Net
     public PagingSpec PagingSpec { get; }
     public bool Descending { get; }
 
-    public SelectRequestData(string dataSource, object granularity, IList<string> intervals, IFilterSpec filter, IContextSpec context, IEnumerable<string> dimensions, IEnumerable<string> metrics, PagingSpec pagingSpec, bool descending)
+    public SelectRequestData(IDataSourceSpec dataSource, object granularity, IList<string> intervals, IFilterSpec filter, IContextSpec context, IEnumerable<string> dimensions, IEnumerable<string> metrics, PagingSpec pagingSpec, bool descending)
     {
       DataSource = dataSource;
       Granularity = granularity;

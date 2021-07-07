@@ -11,7 +11,7 @@ namespace Raygun.Druid4Net
     public bool Descending { get; }
     public TimeseriesContextSpec Context { get; }
 
-    public TimeseriesRequestData(string dataSource, IEnumerable<ExpressionVirtualColumn> virtualColumns, bool descending, object granularity, IList<string> intervals, IFilterSpec filter, IEnumerable<IAggregationSpec> aggregations, IEnumerable<IPostAggregationSpec> postAggregations, TimeseriesContextSpec context)
+    public TimeseriesRequestData(IDataSourceSpec dataSource, IEnumerable<ExpressionVirtualColumn> virtualColumns, bool descending, object granularity, IList<string> intervals, IFilterSpec filter, IEnumerable<IAggregationSpec> aggregations, IEnumerable<IPostAggregationSpec> postAggregations, TimeseriesContextSpec context)
     {
       DataSource = dataSource;
       VirtualColumns = virtualColumns;

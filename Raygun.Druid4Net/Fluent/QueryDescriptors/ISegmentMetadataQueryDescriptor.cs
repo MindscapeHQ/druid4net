@@ -6,6 +6,8 @@ namespace Raygun.Druid4Net
     public interface ISegmentMetadataQueryDescriptor
     {
         ISegmentMetadataQueryDescriptor DataSource(string dataSource);
+    
+        ISegmentMetadataQueryDescriptor DataSource(IDataSourceSpec dataSource);
         
         ISegmentMetadataQueryDescriptor Interval(DateTime from, DateTime to);
         

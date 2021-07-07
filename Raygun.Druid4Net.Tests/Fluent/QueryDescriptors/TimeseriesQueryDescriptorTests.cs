@@ -69,7 +69,10 @@ namespace Raygun.Druid4Net.Tests.Fluent.QueryDescriptors
         .DataSource("test_datasource")
         .Generate();
 
-      Assert.That(request.RequestData.DataSource, Is.EqualTo("test_datasource"));
+      var dataSource = request.RequestData.DataSource as TableDataSource;
+
+      Assert.IsNotNull(dataSource);
+      Assert.That(dataSource.Name, Is.EqualTo("test_datasource"));
     }
 
     [Test]

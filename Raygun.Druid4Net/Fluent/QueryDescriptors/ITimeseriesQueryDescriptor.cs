@@ -7,6 +7,8 @@ namespace Raygun.Druid4Net
   {
     ITimeseriesQueryDescriptor DataSource(string dataSource);
     
+    ITimeseriesQueryDescriptor DataSource(IDataSourceSpec dataSource);
+    
     ITimeseriesQueryDescriptor VirtualColumns(IEnumerable<ExpressionVirtualColumn> virtualColumns);
 
     ITimeseriesQueryDescriptor Interval(DateTime from, DateTime to);

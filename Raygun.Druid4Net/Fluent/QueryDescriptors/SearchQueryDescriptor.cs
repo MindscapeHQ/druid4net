@@ -71,6 +71,12 @@ namespace Raygun.Druid4Net
     
     public ISearchQueryDescriptor DataSource(string dataSource)
     {
+      DataSourceValue = new TableDataSource(dataSource);
+      return this;
+    }
+    
+    public ISearchQueryDescriptor DataSource(IDataSourceSpec dataSource)
+    {
       DataSourceValue = dataSource;
       return this;
     }

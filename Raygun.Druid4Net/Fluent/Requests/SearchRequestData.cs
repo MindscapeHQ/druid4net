@@ -14,7 +14,7 @@ namespace Raygun.Druid4Net
     public ISearchQuerySpec Query { get; }
     public SortSpec Sort { get; }
 
-    public SearchRequestData(string dataSource, object granularity, IList<string> intervals, IFilterSpec filter, SearchContextSpec context, IEnumerable<string> searchDimensions, int limit, ISearchQuerySpec query, SortSpec sort)
+    public SearchRequestData(IDataSourceSpec dataSource, object granularity, IList<string> intervals, IFilterSpec filter, SearchContextSpec context, IEnumerable<string> searchDimensions, int limit, ISearchQuerySpec query, SortSpec sort)
     {
       DataSource = dataSource;
       Granularity = granularity;

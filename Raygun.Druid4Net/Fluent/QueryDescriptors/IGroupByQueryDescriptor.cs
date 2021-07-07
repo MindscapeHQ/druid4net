@@ -7,6 +7,8 @@ namespace Raygun.Druid4Net
   {
     IGroupByQueryDescriptor DataSource(string dataSource);
     
+    IGroupByQueryDescriptor DataSource(IDataSourceSpec dataSource);
+    
     IGroupByQueryDescriptor VirtualColumns(IEnumerable<ExpressionVirtualColumn> virtualColumns);
 
     IGroupByQueryDescriptor Interval(DateTime from, DateTime to);
@@ -21,8 +23,6 @@ namespace Raygun.Druid4Net
 
     IGroupByQueryDescriptor Filter(IFilterSpec filterSpec);
     
-    IGroupByQueryDescriptor DataSource(Func<IGroupByQueryDescriptor, IGroupByQueryDescriptor> innerGroupByQueryDescriptor);
-
     IGroupByQueryDescriptor Having(IHavingSpec havingSpec);
 
     IGroupByQueryDescriptor Dimensions(params string[] dimensions);

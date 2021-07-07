@@ -22,6 +22,12 @@ namespace Raygun.Druid4Net
     
     public ISegmentMetadataQueryDescriptor DataSource(string dataSource)
     {
+      DataSourceValue = new TableDataSource(dataSource);
+      return this;
+    }
+    
+    public ISegmentMetadataQueryDescriptor DataSource(IDataSourceSpec dataSource)
+    {
       DataSourceValue = dataSource;
       return this;
     }
@@ -29,21 +35,18 @@ namespace Raygun.Druid4Net
     public ISegmentMetadataQueryDescriptor Interval(DateTime from, DateTime to)
     {
       SetInterval(from, to);      
-
       return this;
     }
     
     public ISegmentMetadataQueryDescriptor Intervals(params Interval[] intervals)
     {
       SetIntervals(intervals);
-
       return this;
     }
 
     public ISegmentMetadataQueryDescriptor Intervals(IEnumerable<Interval> intervals)
     {
       SetIntervals(intervals);
-
       return this;
     }
 

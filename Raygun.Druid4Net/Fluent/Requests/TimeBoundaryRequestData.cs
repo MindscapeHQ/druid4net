@@ -7,7 +7,7 @@
     public string Bound { get; }
     public IContextSpec Context { get; }
 
-    public TimeBoundaryRequestData(string dataSource, string bound, IFilterSpec filter, IContextSpec context)
+    public TimeBoundaryRequestData(IDataSourceSpec dataSource, string bound, IFilterSpec filter, IContextSpec context)
     {
       DataSource = dataSource;
       Bound = bound;

@@ -94,25 +94,6 @@ namespace Raygun.Druid4Net.Tests.Fluent.QueryDescriptors
     }
 
     [Test]
-    public void QueryDataSourceIsSet_SetsDataSourceInBody()
-    {
-      var request = new GroupByQueryDescriptor()
-        .DataSource(descriptor => descriptor.Dimensions("test_dim1", "test_dim2"))
-        .Dimensions("test_dim1")
-        .Generate();
-
-      var datasource = request.RequestData.DataSource as GroupByRequestData;
-
-      Assert.IsNotNull(datasource);
-      Assert.That(datasource.Dimensions.Count(), Is.EqualTo(2));
-      Assert.That(datasource.Dimensions.OfType<DefaultDimension>().FirstOrDefault(d => d.Dimension == "test_dim1"), Is.Not.Null);
-      Assert.That(datasource.Dimensions.OfType<DefaultDimension>().FirstOrDefault(d => d.Dimension == "test_dim2"), Is.Not.Null);
-
-      Assert.That(request.RequestData.Dimensions.Count(), Is.EqualTo(1));
-      Assert.That(request.RequestData.Dimensions.OfType<DefaultDimension>().FirstOrDefault(d => d.Dimension == "test_dim1"), Is.Not.Null);
-    }
-
-    [Test]
     public void ContextIsSet_SetsContextValuesInBody()
     {
       var request = new GroupByQueryDescriptor()
@@ -130,7 +111,10 @@ namespace Raygun.Druid4Net.Tests.Fluent.QueryDescriptors
         .DataSource("test_datasource")
         .Generate();
 
-      Assert.That(request.RequestData.DataSource, Is.EqualTo("test_datasource"));
+      var dataSource = request.RequestData.DataSource as TableDataSource;
+
+      Assert.IsNotNull(dataSource);
+      Assert.That(dataSource.Name, Is.EqualTo("test_datasource"));
     }
 
     [Test]

@@ -15,6 +15,12 @@ namespace Raygun.Druid4Net
     
     public ITimeBoundaryQueryDescriptor DataSource(string dataSource)
     {
+      DataSourceValue = new TableDataSource(dataSource);
+      return this;
+    }
+    
+    public ITimeBoundaryQueryDescriptor DataSource(IDataSourceSpec dataSource)
+    {
       DataSourceValue = dataSource;
       return this;
     }

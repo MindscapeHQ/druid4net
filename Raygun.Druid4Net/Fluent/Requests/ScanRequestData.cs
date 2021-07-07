@@ -15,7 +15,7 @@ namespace Raygun.Druid4Net
     public int? BatchSize { get; }
     public string ResultFormat { get; }
 
-    public ScanRequestData(string dataSource, IEnumerable<ExpressionVirtualColumn> virtualColumns, IList<string> intervals, IFilterSpec filter, IContextSpec context,
+    public ScanRequestData(IDataSourceSpec dataSource, IEnumerable<ExpressionVirtualColumn> virtualColumns, IList<string> intervals, IFilterSpec filter, IContextSpec context,
         IEnumerable<string> columns, string resultFormat, int? limit, int? offset, OrderByDirection? order, int? batchSize)
     {
       DataSource = dataSource;

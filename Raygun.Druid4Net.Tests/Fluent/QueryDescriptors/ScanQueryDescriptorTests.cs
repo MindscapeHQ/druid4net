@@ -22,8 +22,11 @@ namespace Raygun.Druid4Net.Tests.Fluent.QueryDescriptors
       var request = new ScanQueryDescriptor()
         .DataSource("test_datasource")
         .Generate();
+      
+      var dataSource = request.RequestData.DataSource as TableDataSource;
 
-      Assert.That(request.RequestData.DataSource, Is.EqualTo("test_datasource"));
+      Assert.IsNotNull(dataSource);
+      Assert.That(dataSource.Name, Is.EqualTo("test_datasource"));
     }
     
     [Test]

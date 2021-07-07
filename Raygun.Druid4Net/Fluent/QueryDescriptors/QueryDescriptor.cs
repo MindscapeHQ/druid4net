@@ -7,7 +7,7 @@ namespace Raygun.Druid4Net
   {
     internal List<string> IntervalsValue;
 
-    internal string DataSourceValue;
+    internal IDataSourceSpec DataSourceValue;
 
     internal object GranularityValue = "all";
 

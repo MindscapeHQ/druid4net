@@ -12,7 +12,7 @@ namespace Raygun.Druid4Net
     public IEnumerable<AnalysisType> AnalysisTypes { get; }
     public bool LenientAggregatorMerge { get; }
 
-    public SegmentMetadataRequestData(string dataSource, IList<string> intervals, IToIncludeSpec toInclude, bool merge, IContextSpec context, IEnumerable<AnalysisType> analysisTypes, bool lenientAggregatorMerge)
+    public SegmentMetadataRequestData(IDataSourceSpec dataSource, IList<string> intervals, IToIncludeSpec toInclude, bool merge, IContextSpec context, IEnumerable<AnalysisType> analysisTypes, bool lenientAggregatorMerge)
     {
       DataSource = dataSource;
       Intervals = intervals;

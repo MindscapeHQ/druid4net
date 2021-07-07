@@ -17,6 +17,7 @@ namespace Raygun.Druid4Net
         Converters =
         {
           new JsonStringEnumConverter(),
+          new GenericTypeConverter<IDataSourceSpec>(),
           new GenericTypeConverter<IAggregationSpec>(),
           new GenericTypeConverter<IPostAggregationSpec>(),
           new GenericTypeConverter<ITopNMetricSpec>(),

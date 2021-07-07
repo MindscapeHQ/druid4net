@@ -4,7 +4,7 @@
   {
     public string QueryType => "dataSourceMetadata";
 
-    public DataSourceMetadataRequestData(string dataSource)
+    public DataSourceMetadataRequestData(IDataSourceSpec dataSource)
     {
       DataSource = dataSource;
     }

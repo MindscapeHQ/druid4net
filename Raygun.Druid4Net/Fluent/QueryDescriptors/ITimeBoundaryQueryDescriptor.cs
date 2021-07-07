@@ -6,6 +6,8 @@ namespace Raygun.Druid4Net
   {
     ITimeBoundaryQueryDescriptor DataSource(string dataSource);
     
+    ITimeBoundaryQueryDescriptor DataSource(IDataSourceSpec dataSource);
+    
     ITimeBoundaryQueryDescriptor Bound(TimeBoundary boundary);
     
     ITimeBoundaryQueryDescriptor Filter(IFilterSpec filterSpec);
