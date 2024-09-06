@@ -20,17 +20,5 @@
 
             RequestData = new GroupByRequestData(datasource, qd.VirtualColumnsValue, qd.GranularityValue, qd.IntervalsValue, qd.FilterValue, qd.ContextValue, qd.DimensionsValue, qd.AggregationSpecsValue, qd.PostAggregationSpecsValue, qd.LimitSpecValue, qd.HavingSpecValue);
         }
-
-        private class InnerGroupByQueryRequestData
-        {
-            public string Type => "query";
-
-            public GroupByRequestData Query;
-
-            public InnerGroupByQueryRequestData(GroupByRequestData query)
-            {
-                Query = query;
-            }
-        }
     }
 }
