@@ -1,22 +1,36 @@
 ﻿namespace Raygun.Druid4Net
 {
-  internal class GroupByRequest : IDruidRequest<GroupByRequestData>
-  {
-    public GroupByRequestData RequestData { get; private set; }
-
-    public void Build<T>(T queryDescriptor) where T : IGroupByQueryDescriptor
+    internal class GroupByRequest : IDruidRequest<GroupByRequestData>
     {
-      var qd = queryDescriptor as GroupByQueryDescriptor;
+        public GroupByRequestData RequestData { get; private set; }
 
-      object datasource = qd.DataSourceValue;
+        public void Build<T>(T queryDescriptor) where T : IGroupByQueryDescriptor
+        {
+            var qd = queryDescriptor as GroupByQueryDescriptor;
 
-      if (qd.InnerDataSourceValue != null)
-      {
-        var innerQd = qd.InnerDataSourceValue as GroupByQueryDescriptor;
-        datasource = new GroupByRequestData(innerQd.DataSourceValue, innerQd.VirtualColumnsValue, innerQd.GranularityValue, innerQd.IntervalsValue, innerQd.FilterValue, innerQd.ContextValue, innerQd.DimensionsValue, innerQd.AggregationSpecsValue, innerQd.PostAggregationSpecsValue, innerQd.LimitSpecValue, innerQd.HavingSpecValue);
-      }
+            object datasource = qd.DataSourceValue;
 
-      RequestData = new GroupByRequestData(datasource, qd.VirtualColumnsValue, qd.GranularityValue, qd.IntervalsValue, qd.FilterValue, qd.ContextValue, qd.DimensionsValue, qd.AggregationSpecsValue, qd.PostAggregationSpecsValue, qd.LimitSpecValue, qd.HavingSpecValue);
+            if (qd.InnerDataSourceValue != null)
+            {
+                var innerQd = qd.InnerDataSourceValue as GroupByQueryDescriptor;
+                var innerQdRequest = new GroupByRequestData(innerQd.DataSourceValue, innerQd.VirtualColumnsValue, innerQd.GranularityValue, innerQd.IntervalsValue, innerQd.FilterValue, innerQd.ContextValue, innerQd.DimensionsValue, innerQd.AggregationSpecsValue, innerQd.PostAggregationSpecsValue, innerQd.LimitSpecValue, innerQd.HavingSpecValue);
+
+                datasource = new InnerGroupByQueryRequestData(innerQdRequest);
+            }
+
+            RequestData = new GroupByRequestData(datasource, qd.VirtualColumnsValue, qd.GranularityValue, qd.IntervalsValue, qd.FilterValue, qd.ContextValue, qd.DimensionsValue, qd.AggregationSpecsValue, qd.PostAggregationSpecsValue, qd.LimitSpecValue, qd.HavingSpecValue);
+        }
+
+        private class InnerGroupByQueryRequestData
+        {
+            public string Type => "query";
+
+            public GroupByRequestData Query;
+
+            public InnerGroupByQueryRequestData(GroupByRequestData query)
+            {
+                Query = query;
+            }
+        }
     }
-  }
 }
