@@ -1,14 +1,14 @@
 ﻿namespace Raygun.Druid4Net
 {
-    public class InnerGroupByQueryRequestData
+  public class InnerGroupByQueryRequestData
+  {
+    public string Type => "query";
+
+    public GroupByRequestData Query;
+
+    public InnerGroupByQueryRequestData(GroupByRequestData query)
     {
-        public string Type => "query";
-
-        public GroupByRequestData Query;
-
-        public InnerGroupByQueryRequestData(GroupByRequestData query)
-        {
-            Query = query;
-        }
+      Query = query;
     }
+  }
 }
