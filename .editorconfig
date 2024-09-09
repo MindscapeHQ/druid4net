@@ -1,0 +1,9 @@
+
+[*.cs]
+indent_style = space
+indent_size = 2
+
+[*]
+
+# ReSharper properties
+resharper_csharp_indent_size = 2
