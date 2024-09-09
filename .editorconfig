@@ -6,4 +6,5 @@ indent_size = 2
 [*]
 
 # ReSharper properties
+resharper_csharp_align_multiline_calls_chain = false
 resharper_csharp_indent_size = 2
