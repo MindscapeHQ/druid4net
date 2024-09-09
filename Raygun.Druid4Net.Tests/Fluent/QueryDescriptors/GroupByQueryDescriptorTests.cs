@@ -101,12 +101,13 @@ namespace Raygun.Druid4Net.Tests.Fluent.QueryDescriptors
         .Dimensions("test_dim1")
         .Generate();
 
-      var datasource = request.RequestData.DataSource as GroupByRequestData;
+      var datasource = request.RequestData.DataSource as InnerGroupByQueryRequestData;
+      var query = datasource!.Query;
 
-      Assert.IsNotNull(datasource);
-      Assert.That(datasource.Dimensions.Count(), Is.EqualTo(2));
-      Assert.That(datasource.Dimensions.OfType<DefaultDimension>().FirstOrDefault(d => d.Dimension == "test_dim1"), Is.Not.Null);
-      Assert.That(datasource.Dimensions.OfType<DefaultDimension>().FirstOrDefault(d => d.Dimension == "test_dim2"), Is.Not.Null);
+      Assert.IsNotNull(query);
+      Assert.That(query.Dimensions.Count(), Is.EqualTo(2));
+      Assert.That(query.Dimensions.OfType<DefaultDimension>().FirstOrDefault(d => d.Dimension == "test_dim1"), Is.Not.Null);
+      Assert.That(query.Dimensions.OfType<DefaultDimension>().FirstOrDefault(d => d.Dimension == "test_dim2"), Is.Not.Null);
 
       Assert.That(request.RequestData.Dimensions.Count(), Is.EqualTo(1));
       Assert.That(request.RequestData.Dimensions.OfType<DefaultDimension>().FirstOrDefault(d => d.Dimension == "test_dim1"), Is.Not.Null);

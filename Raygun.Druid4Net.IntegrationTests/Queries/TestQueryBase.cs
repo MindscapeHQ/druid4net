@@ -1,23 +1,29 @@
 ﻿using System;
-using System.Configuration;
+using System.IO;
+using Microsoft.Extensions.Configuration;
 
-namespace Raygun.Druid4Net.IntegrationTests.Queries
+namespace Raygun.Druid4Net.IntegrationTests.Queries;
+
+public abstract class TestQueryBase
 {
-  public abstract class TestQueryBase
+  private static readonly IConfigurationRoot Configuration = new ConfigurationBuilder()
+                                                             .SetBasePath(Directory.GetCurrentDirectory())
+                                                             .AddJsonFile("appsettings.json")
+                                                             .Build();
+
+  protected readonly IDruidClient DruidClient;
+
+  protected DateTime FromDate = new(2016, 6, 27, 0, 0, 0, DateTimeKind.Utc);
+  protected DateTime ToDate = new(2016, 6, 28, 0, 0, 0, DateTimeKind.Utc);
+
+  protected TestQueryBase()
   {
-    protected DateTime FromDate = new DateTime(2016, 6, 27, 0, 0, 0, DateTimeKind.Utc);
-    protected DateTime ToDate = new DateTime(2016, 6, 28, 0, 0, 0, DateTimeKind.Utc);
-
-    protected IDruidClient DruidClient;
-
-    protected TestQueryBase()
+    var options = new ConfigurationOptions
     {
-      var options = new ConfigurationOptions()
-      {
-        JsonSerializer = new JilSerializer(),
-        QueryApiBaseAddress = new Uri(ConfigurationManager.AppSettings["druid.broker.host"])
-      };
-      DruidClient = new DruidClient(options);
-    }
+      JsonSerializer = new NewtonsoftSerializer(),
+      QueryApiBaseAddress = new Uri(Configuration["DruidBroker:Host"])
+    };
+
+    DruidClient = new DruidClient(options);
   }
 }

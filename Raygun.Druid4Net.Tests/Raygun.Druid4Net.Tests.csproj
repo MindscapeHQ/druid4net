@@ -1,147 +1,19 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{9FE9173A-4124-4E68-B179-E19DCBCB94A1}</ProjectGuid>
+    <TargetFramework>net6.0</TargetFramework>
     <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Raygun.Druid4Net.Tests</RootNamespace>
-    <AssemblyName>Raygun.Druid4Net.Tests</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <AssemblyTitle>Raygun.Druid4Net.Tests</AssemblyTitle>
+    <Product>Raygun.Druid4Net.Tests</Product>
+    <Copyright>Copyright ©  2018</Copyright>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="nunit.framework, Version=3.9.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
-      <HintPath>..\packages\NUnit.3.9.0\lib\net45\nunit.framework.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
+    <ProjectReference Include="..\Raygun.Druid4Net\Raygun.Druid4Net.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Fluent\Aggregations\AggregatorTestsBase.cs" />
-    <Compile Include="Fluent\Aggregations\CardinalityAggregatorTests.cs" />
-    <Compile Include="Fluent\Aggregations\CountAggregatorTests.cs" />
-    <Compile Include="Fluent\Aggregations\DoubleFirstAggregatorTests.cs" />
-    <Compile Include="Fluent\Aggregations\DoubleLastAggregatorTests.cs" />
-    <Compile Include="Fluent\Aggregations\DoubleMaxAggregatorTests.cs" />
-    <Compile Include="Fluent\Aggregations\DoubleMinAggregatorTests.cs" />
-    <Compile Include="Fluent\Aggregations\DoubleSumAggregatorTests.cs" />
-    <Compile Include="Fluent\Aggregations\FilteredAggregatorTests.cs" />
-    <Compile Include="Fluent\Aggregations\FloatFirstAggregatorTests.cs" />
-    <Compile Include="Fluent\Aggregations\FloatLastAggregatorTests.cs" />
-    <Compile Include="Fluent\Aggregations\FloatMaxAggregatorTests.cs" />
-    <Compile Include="Fluent\Aggregations\FloatMinAggregatorTests.cs" />
-    <Compile Include="Fluent\Aggregations\FloatSumAggregatorTests.cs" />
-    <Compile Include="Fluent\Aggregations\HyperUniqueAggregatorTests.cs" />
-    <Compile Include="Fluent\Aggregations\JavaScriptAggregatorTests.cs" />
-    <Compile Include="Fluent\Aggregations\LongFirstAggregatorTests.cs" />
-    <Compile Include="Fluent\Aggregations\LongLastAggregatorTests.cs" />
-    <Compile Include="Fluent\Aggregations\LongMaxAggregatorTests.cs" />
-    <Compile Include="Fluent\Aggregations\LongMinAggregatorTests.cs" />
-    <Compile Include="Fluent\Aggregations\LongSumAggregatorTests.cs" />
-    <Compile Include="Fluent\Aggregations\StringFirstAggregatorTests.cs" />
-    <Compile Include="Fluent\Aggregations\StringLastAggregatorTests.cs" />
-    <Compile Include="Fluent\Dimensions\DefaultDimensionTests.cs" />
-    <Compile Include="Fluent\Dimensions\ExtractionDimensionTests.cs" />
-    <Compile Include="Fluent\Dimensions\ExtractionFunctions\BucketExtractionFunctionTests.cs" />
-    <Compile Include="Fluent\Filters\AndFilterTests.cs" />
-    <Compile Include="Fluent\Filters\BoundFilterTests.cs" />
-    <Compile Include="Fluent\Filters\InFilterTests.cs" />
-    <Compile Include="Fluent\Filters\IntervalFilterTests.cs" />
-    <Compile Include="Fluent\Filters\JavaScriptFilterTests.cs" />
-    <Compile Include="Fluent\Filters\LikeFilterTests.cs" />
-    <Compile Include="Fluent\Filters\NotFilterTests.cs" />
-    <Compile Include="Fluent\Filters\OrFilterTests.cs" />
-    <Compile Include="Fluent\Filters\RegexFilterTests.cs" />
-    <Compile Include="Fluent\Filters\SearchFilterTests.cs" />
-    <Compile Include="Fluent\Filters\SelectorFilterTests.cs" />
-    <Compile Include="Fluent\Filters\TrueFilterTests.cs" />
-    <Compile Include="Fluent\Granularities\DurationGranularityTests.cs" />
-    <Compile Include="Fluent\Granularities\PeriodGranularityTests.cs" />
-    <Compile Include="Fluent\Having\AndHavingSpecTests.cs" />
-    <Compile Include="Fluent\Having\DimensionSelectorHavingSpecTests.cs" />
-    <Compile Include="Fluent\Having\EqualToHavingSpecTests.cs" />
-    <Compile Include="Fluent\Having\GreaterThanHavingSpecTests.cs" />
-    <Compile Include="Fluent\Having\LessThanHavingSpecTests.cs" />
-    <Compile Include="Fluent\Having\NotHavingSpecTests.cs" />
-    <Compile Include="Fluent\Having\OrHavingSpecTests.cs" />
-    <Compile Include="Fluent\Having\QueryFilterHavingSpecTests.cs" />
-    <Compile Include="Fluent\Intervals\IntervalTests.cs" />
-    <Compile Include="Fluent\Limits\DefaultLimitSpecTests.cs" />
-    <Compile Include="Fluent\Limits\OrderByColumnSpecTests.cs" />
-    <Compile Include="Fluent\Metrics\DimensionTopNMetricSpecTests.cs" />
-    <Compile Include="Fluent\Metrics\InvertedTopNMetricSpecTests.cs" />
-    <Compile Include="Fluent\Metrics\NumericTopNMetricSpecTests.cs" />
-    <Compile Include="Fluent\PostAggregations\ArithmeticPostAggregatorTests.cs" />
-    <Compile Include="Fluent\PostAggregations\ConstantPostAggregatorTests.cs" />
-    <Compile Include="Fluent\PostAggregations\DoubleGreatestPostAggregatorTests.cs" />
-    <Compile Include="Fluent\PostAggregations\DoubleLeastPostAggregatorTests.cs" />
-    <Compile Include="Fluent\PostAggregations\FieldAccessPostAggregatorTests.cs" />
-    <Compile Include="Fluent\PostAggregations\FinalizingFieldAccessPostAggregatorTests.cs" />
-    <Compile Include="Fluent\PostAggregations\HyperUniqueCardinalityPostAggregatorTests.cs" />
-    <Compile Include="Fluent\PostAggregations\JavaScriptPostAggregatorTests.cs" />
-    <Compile Include="Fluent\PostAggregations\LongGreatestPostAggregatorTests.cs" />
-    <Compile Include="Fluent\PostAggregations\LongLeastPostAggregatorTests.cs" />
-    <Compile Include="Fluent\PostAggregations\PostAggregatorTestBase.cs" />
-    <Compile Include="Fluent\QueryDescriptors\GroupByQueryDescriptorTests.cs" />
-    <Compile Include="Fluent\QueryDescriptors\ScanQueryDescriptorTests.cs" />
-    <Compile Include="Fluent\QueryDescriptors\SearchQueryDescriptorTests.cs" />
-    <Compile Include="Fluent\QueryDescriptors\SegmentMetadataQueryDescriptorTests.cs" />
-    <Compile Include="Fluent\QueryDescriptors\SelectQueryDescriptorTests.cs" />
-    <Compile Include="Fluent\QueryDescriptors\TimeBoundaryQueryDescriptorTests.cs" />
-    <Compile Include="Fluent\QueryDescriptors\TimeseriesQueryDescriptorTests.cs" />
-    <Compile Include="Fluent\QueryDescriptors\TopNQueryDescriptorTests.cs" />
-    <Compile Include="Fluent\SearchQueries\ContainsSearchQueryTests.cs" />
-    <Compile Include="Fluent\SearchQueries\FragmentSearchQueryTests.cs" />
-    <Compile Include="Fluent\SearchQueries\InsensitiveContainsSearchQueryTests.cs" />
-    <Compile Include="Fluent\SearchQueries\RegexSearchQueryTests.cs" />
-    <Compile Include="Fluent\Sort\SortSpecTests.cs" />
-    <Compile Include="Fluent\VirtualColumns\ExpressionVirtualColumnTests.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.11.1" />
+    <PackageReference Include="NUnit" Version="3.9.0" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Raygun.Druid4Net\Raygun.Druid4Net.csproj">
-      <Project>{a0971ac2-69bd-4e48-882a-9cf6a9253d3a}</Project>
-      <Name>Raygun.Druid4Net</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>
