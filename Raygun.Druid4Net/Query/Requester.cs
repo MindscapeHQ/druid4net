@@ -38,12 +38,6 @@ namespace Raygun.Druid4Net
 
     private HttpClient CreateClientWithProxyServer(ConfigurationOptions options)
     {
-#if (NETSTANDARD1_6) 
-      var httpClientHandler = new HttpClientHandler
-      {
-        UseProxy = true
-      };
-#else
       var webProxy = new WebProxy
       {
         Address = options.ProxySettings.Address,
@@ -61,8 +55,7 @@ namespace Raygun.Druid4Net
         UseProxy = true,
         Proxy = webProxy
       };
-#endif
-      
+
       return new HttpClient(httpClientHandler, true);
     }
 
